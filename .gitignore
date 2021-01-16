@@ -1,0 +1,16 @@
+# Generated/Packaged Code Folder/File Exclusions
+/.vs
+/node_modules
+/packages
+/package-lock.json
+bin
+obj
+
+# User File Exclusions
+*.user
+
+# TypeScript-Generated JS and MAP File Exclusions
+/*/ClientApp/src/app/**/*.js
+/*/ClientApp/src/app/**/*.js.map
+/*/ClientApp/src/environments/**/*.js
+/*/ClientApp/src/environments/**/*.js.map

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Portfolio.API</name>
+    </assembly>
+    <members>
+        <member name="M:Portfolio.Api.Controllers.HealthController.Health">
+            <summary>
+            Returns a result indicating the health status of basic API connectivity
+            </summary>
+            <returns>A result status</returns>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.HealthController.Resources">
+            <summary>
+            Returns a result indicating the health status of all back-end resources that the API depends upon (e.g., database connections)
+            </summary>
+            <returns>A result status</returns>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.PortfolioController.Get">
+            <summary>
+            Gets information about the API, including documentation sources and navigable routes (synonym: Info)
+            </summary>
+            <returns>An API summary</returns>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.PortfolioController.GetInfo">
+            <summary>
+            Gets information about the API, including documentation sources and navigable routes
+            </summary>
+            <returns>An API summary</returns>
+        </member>
+        <member name="M:Portfolio.API.Controllers.v1.ExhibitsController.Get">
+            <summary>
+            Gets a list of active exhibits
+            </summary>
+            <returns>A list of exhibits</returns>
+        </member>
+    </members>
+</doc>

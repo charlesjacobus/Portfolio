@@ -1,0 +1,5 @@
+<div class="copyright">
+  <div>Copyright &copy; {{ this.getCurrentYear() }}</div>
+  <div *ngIf="!!this.aboutLinkActive"><a routerLink="/about" fragment="me">Charles Jacobus</a></div>
+  <div *ngIf="!this.aboutLinkActive">Charles Jacobus</div>
+</div>

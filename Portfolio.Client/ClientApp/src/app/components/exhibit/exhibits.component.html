@@ -1,0 +1,7 @@
+<div class="exhibitsContainer">
+  <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries()"
+           [exhibitSummary]="exhibitSummary"></exhibit>
+  <footer>
+    <copyright [aboutLinkActive]="true"></copyright>
+  </footer>
+</div>

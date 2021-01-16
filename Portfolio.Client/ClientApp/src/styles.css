@@ -1,0 +1,75 @@
+/*
+  background: #39393E
+  scroll: #515154
+  text: whitesmoke
+  text (dark): dimgray
+  link: #247D3C
+*/
+
+body {
+  background: #39393E;
+  color: whitesmoke;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-top: 50px; /* Required for the navbar fixed positioning */
+}
+
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.indexContainer {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 800px;
+}
+
+/* anchor */
+a:link {
+  color: #247D3C;
+}
+
+a:visited {
+  color: #247D3C;
+}
+
+a:hover {
+  color: #247D3C;
+  text-decoration: none;
+}
+
+a:active {
+  color: #247D3C;
+}
+
+/* media */
+@media only screen and (max-width: 800px) {
+  .content {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .content {
+    width: 200px;
+  }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #515154;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #515154;
+}

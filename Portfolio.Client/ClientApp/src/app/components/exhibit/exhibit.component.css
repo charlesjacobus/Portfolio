@@ -1,0 +1,86 @@
+.currentWorkOfLabel {
+  color: dimgray;
+  float: right;
+  font-size: smaller;
+}
+
+.exhibitContainer {
+  display: block;
+  height: 550px;
+}
+
+.exhibitDescriptionContainer {
+  display: block;
+  height: 400px;
+  padding-right: 5px;
+  text-align: left;
+  overflow: hidden scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.exhibitTabs {
+  float: left;
+}
+
+.exhibitTitle {
+  font-size: x-large;
+}
+
+.tabActive {
+  color: #247D3C;
+}
+
+.tabInactive {
+  color: whitesmoke;
+}
+
+.tabSpacer {
+  color: whitesmoke;
+}
+
+.tabPointer {
+  cursor: pointer;
+}
+
+.work-image {
+  max-width: 800px;
+}
+
+@media only screen and (max-width: 800px) {
+  .exhibitContainer {
+    height: 400px;
+  }
+
+  .exhibitDescriptionContainer {
+    font-size: smaller;
+    height: 300px;
+  }
+
+  .exhibitTitle {
+    font-size: large;
+  }
+
+  .work-image {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .exhibitContainer {
+    height: 200px;
+  }
+
+  .exhibitDescriptionContainer {
+    font-size: x-small;
+    height: 125px;
+  }
+
+  .exhibitTitle {
+    font-size: small;
+  }
+
+  .work-image {
+    width: 200px;
+  }
+}

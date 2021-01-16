@@ -1,0 +1,29 @@
+.about {
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.aboutContainer {
+  margin-bottom: 50px;
+}
+
+.aboutParagraph {
+  padding-top: 20px;
+}
+
+.aboutQuote {
+  font-style: italic;
+}
+
+.aboutSectionTitle {
+  font-size:26px;
+}
+
+.aboutSite {
+  font-size: 14px;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: justify;
+}

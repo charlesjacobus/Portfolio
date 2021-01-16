@@ -1,0 +1,6 @@
+<body [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <app-nav-menu></app-nav-menu>
+  <div>
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
+</body>

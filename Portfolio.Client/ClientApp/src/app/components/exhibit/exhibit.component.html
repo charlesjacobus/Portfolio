@@ -1,0 +1,45 @@
+<a name="{{this.getExhibitAnchor()}}"></a>
+<div [ngClass]="{'exhibitContainer': true}">
+  <div [ngClass]="{'exhibitTitle': true}">{{this.getExhibitName()}}</div>
+  <!-- Work : Text tabs -->
+  <div>
+    <div [ngClass]="{'exhibitTabs': true}">
+      <div *ngIf="!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()">
+        <label (click)="this.visibleTab = 'work'"
+               [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}"><small>Work</small></label>
+        &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
+        <label (click)="this.visibleTab = 'text'"
+               [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}"><small>Text</small></label>
+      </div>
+      <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
+      <div *ngIf="!this.getExhibitDescription() && !this.getExhibitDescriptionUrl()"><label>&nbsp;</label></div>
+    </div>
+    <div [ngClass]="{'currentWorkOfLabel': true}">{{this.getCurrentWorkOfLabel()}}</div>
+    <div [ngStyle]="{'clear': 'both'}"></div>
+  </div>
+  <!-- Work : Text views -->
+  <!-- Work -->
+  <div [style.display]="this.visibleTab === 'work' ? 'block' : 'none'">
+    <div *ngIf="this.isGalleryExhibit()">
+      <ngx-gallery #NgxGalleryComponent
+                   [options]="this.galleryOptions"
+                   [images]="this.galleryImages"></ngx-gallery>
+    </div>
+    <div *ngIf="!this.isGalleryExhibit()">
+      <prose-gallery #ProseGalleryComponent
+                     [exhibitSummary]="this.exhibitSummary"></prose-gallery>
+    </div>
+  </div>
+  <!-- Text -->
+  <div [ngClass]="{'exhibitDescriptionContainer': true}" [style.display]="this.visibleTab === 'text' ? 'block' : 'none'">
+    <markdown *ngIf="!!this.getExhibitDescription() && !this.getExhibitDescriptionUrl()"
+              ngPreserveWhitespaces>
+      {{this.getExhibitDescription()}}
+    </markdown>
+    <markdown *ngIf="!this.getExhibitDescription() && !!this.getExhibitDescriptionUrl()"
+              [src]="this.getExhibitDescriptionUrl()"
+              ngPreserveWhitespaces>
+      {{this.getExhibitDescription()}}
+    </markdown>
+  </div>
+</div>

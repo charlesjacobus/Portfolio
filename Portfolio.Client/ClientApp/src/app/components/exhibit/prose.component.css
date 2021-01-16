@@ -1,0 +1,37 @@
+.currentWorkName {
+  float: left;
+  font-weight:bold;
+}
+
+.currentWorkOfLabel {
+  color: dimgray;
+  float: right;
+  font-size: smaller;
+}
+
+.clickableProseContainer {
+  cursor: pointer;
+}
+
+.proseContainer {
+  display: block;
+  height: 400px;
+  overflow: hidden scroll;
+  overflow-y: scroll;
+  text-align: left;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media only screen and (max-width: 800px) {
+  .proseContainer {
+    font-size: smaller;
+    height: 300px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .proseContainer {
+    font-size: x-small;
+    height: 125px;
+  }
+}

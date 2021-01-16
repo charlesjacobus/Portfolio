@@ -1,0 +1,9 @@
+{
+  "apiInfoPath": "/api/v1/Portfolio/Info",
+  "apiUseSsl": false,
+  "explicitPerEnvironmentConfiguration": false,
+  "hostApi": "api.charlesjacobus.com",
+  "hostWeb": "charlesjacobus.com",
+  "localhostApiPort": 64523,
+  "localhostWebPort": 58195
+}
