@@ -4,6 +4,9 @@ using Portfolio.Business.Services.Health;
 
 namespace Portfolio.Api.Controllers
 {
+    /// <summary>
+    /// Supports operations related to portfolio health checks
+    /// </summary>
     [Route("api/v1/Portfolio/[controller]"), FormatFilter]
     [ApiController]
     public class HealthController

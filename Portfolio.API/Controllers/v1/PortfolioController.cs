@@ -6,6 +6,9 @@ using Portfolio.Api.Representations;
 
 namespace Portfolio.Api.Controllers
 {
+    /// <summary>
+    /// Supports operations related to the portfolio
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class PortfolioController

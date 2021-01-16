@@ -9,6 +9,9 @@ using Portfolio.Business.Services;
 
 namespace Portfolio.API.Controllers.v1
 {
+    /// <summary>
+    /// Supports operations related to portfolio exhibits
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class ExhibitsController
@@ -24,7 +27,7 @@ namespace Portfolio.API.Controllers.v1
         }
 
         /// <summary>
-        /// Gets a list of active exhibits
+        /// Gets a list of active exhibits 
         /// </summary>
         /// <returns>A list of exhibit summaries</returns>
         [HttpGet]
