@@ -52,6 +52,10 @@ export class AppConfigService {
         let hostName = document.location.origin;
 
         if (hostName.indexOf('localhost') !== -1) {
+            // Scully app and static ports
+            // hostName = replace(hostName, '1668', AppConfigService.configuration.localhostWebPort);
+            // hostName = replace(hostName, '1864', AppConfigService.configuration.localhostWebPort);
+
             hostName = replace(hostName, AppConfigService.configuration.localhostWebPort.toString(),
                 AppConfigService.configuration.localhostApiPort.toString());
 
