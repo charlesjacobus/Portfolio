@@ -14,13 +14,14 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "lodash",
-              "url-join"
+                "hammer",
+                "lodash",
+                "url-join"
             ],
             "aot": true,
             "progress": false,
             "extractCss": true,
-            "outputPath": "dist",
+            "outputPath": "dist/ng",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

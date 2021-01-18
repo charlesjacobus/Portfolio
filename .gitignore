@@ -14,3 +14,5 @@ obj
 /*/ClientApp/src/app/**/*.js.map
 /*/ClientApp/src/environments/**/*.js
 /*/ClientApp/src/environments/**/*.js.map
+
+debug.log

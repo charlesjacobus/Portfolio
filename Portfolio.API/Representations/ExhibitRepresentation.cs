@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Portfolio.Business.Models;
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Portfolio.API.Representations
@@ -17,9 +19,26 @@ namespace Portfolio.API.Representations
 
         public WorkRepresentation Promo { get; set; }
 
-        public static ExhibitSummaryRepresentation Create(int id, string name, string description, string anchor, WorkRepresentation promo)
+        public static ExhibitSummaryRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, WorkRepresentation promo)
         {
-            return new ExhibitSummaryRepresentation { ID = id, Name = name, Description = description, Anchor = anchor, Promo = promo };
+            return new ExhibitSummaryRepresentation { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo };
+        }
+
+        public static IEnumerable<ExhibitSummaryRepresentation> Create(IEnumerable<ExhibitSummary> exhibitSummaries)
+        {
+            if (exhibitSummaries == null)
+            {
+                return null;
+            }
+
+            var result = new List<ExhibitSummaryRepresentation>();
+
+            foreach (var exhibitSummary in exhibitSummaries)
+            {
+                result.Add(Create(exhibitSummary.ID, exhibitSummary.Name, exhibitSummary.Description, exhibitSummary.DescriptionFileName, exhibitSummary.Anchor, WorkRepresentation.Create(exhibitSummary.Promo)));
+            }
+
+            return result;
         }
     }
 
@@ -28,9 +47,33 @@ namespace Portfolio.API.Representations
     {
         public IEnumerable<WorkRepresentation> Works { get; set; }
 
-        public static ExhibitRepresentation Create(int id, string name, string description, string anchor, IEnumerable<WorkRepresentation> works)
+        public static ExhibitRepresentation Create(Exhibit exhibit)
         {
-            return new ExhibitRepresentation { ID = id, Name = name, Description = description, Anchor = anchor, Promo = works.FirstOrDefault(), Works = works };
+            if (exhibit == null)
+            {
+                return null;
+            }
+
+            var works = new List<WorkRepresentation>();
+            foreach (var work in exhibit.Works)
+            {
+                works.Add(WorkRepresentation.Create(work));
+            }
+
+            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works);
+        }
+
+        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works)
+        {
+            return new ExhibitRepresentation {
+                ID = id,
+                Name = name,
+                Description = description,
+                DescriptionFileName = descriptionFileName,
+                Anchor = anchor,
+                Promo = works.FirstOrDefault(),
+                Works = works
+            };
         }
     }
 }

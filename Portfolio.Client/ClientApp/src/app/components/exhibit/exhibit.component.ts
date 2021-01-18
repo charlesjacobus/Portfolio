@@ -23,6 +23,14 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         super(exhibitService);
     }
 
+    public showWorkText(): boolean {
+        return !!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl();
+    }
+
+    public showNoWorkText(): boolean {
+        return !this.getExhibitDescription() && !this.getExhibitDescriptionUrl();
+    }
+
     protected getAssetsFolderName(): string {
         return 'images';
     }
@@ -72,6 +80,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 previewFullscreen: true,
                 previewKeyboardNavigation: true,
                 previewInfinityMove: true,
+                previewSwipe: true,
                 previewZoom: true,
                 thumbnails: false
             },

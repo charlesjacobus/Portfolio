@@ -9,8 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-using AutoMapper;
-
 using Portfolio.Api.Builders;
 using Portfolio.Business.Services;
 using Portfolio.Business.Services.Health;
@@ -54,11 +52,8 @@ namespace Portfolio.Api
                     });
             });
 
-            services.AddAutoMapper(typeof(Startup));
-
             services.AddScoped<IExhibitService, ExhibitService>();
             services.AddScoped<IHealthServices, HealthServices>();
-            services.AddScoped<IMapper, Mapper>();
             services.AddSingleton<PortfolioRepresentationBuilder, PortfolioRepresentationBuilder>();
 
             services.AddSwaggerGen(c =>

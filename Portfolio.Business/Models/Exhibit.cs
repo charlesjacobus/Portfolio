@@ -17,9 +17,11 @@ namespace Portfolio.Business.Models
 
         public Work Promo { get; set; }
 
-        public static Exhibit Create(int id, string name, string description, string descriptionFileName, string anchor, Work promo)
+        public string Status { get; set; }
+
+        public static Exhibit Create(int id, string name, string description, string descriptionFileName, string anchor, Work promo, string status = "Active")
         {
-            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo };
+            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo, Status = status };
         }
     }
 

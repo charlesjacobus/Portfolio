@@ -2,8 +2,6 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using AutoMapper;
-
 using Portfolio.API.Representations;
 using Portfolio.Business.Services;
 
@@ -18,12 +16,10 @@ namespace Portfolio.API.Controllers.v1
         : ControllerBase
     {
         private readonly IExhibitService _exhibitService;
-        private readonly IMapper _mapper;
 
-        public ExhibitsController(IExhibitService exhibitService, IMapper mapper)
+        public ExhibitsController(IExhibitService exhibitService)
         {
             _exhibitService = exhibitService;
-            _mapper = mapper;
         }
 
         /// <summary>
@@ -36,7 +32,7 @@ namespace Portfolio.API.Controllers.v1
         {
             var summaries = _exhibitService.GetExhibitsSummary();
 
-            var mapped = _mapper.Map<IEnumerable<ExhibitSummaryRepresentation>>(summaries);
+            var mapped = ExhibitSummaryRepresentation.Create(summaries);
 
             return mapped;
         }
@@ -51,7 +47,7 @@ namespace Portfolio.API.Controllers.v1
         {
             var exhibit = _exhibitService.GetExhibit(id);
 
-            var mapped = _mapper.Map<ExhibitRepresentation>(exhibit);
+            var mapped = ExhibitRepresentation.Create(exhibit);
 
             return mapped;
         }

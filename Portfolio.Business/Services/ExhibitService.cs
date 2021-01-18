@@ -62,7 +62,9 @@ namespace Portfolio.Business.Services
                 return Models.Portfolio.Error().Exhibits;
             }
 
-            return Portfolio.Exhibits.Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Anchor, e.Promo ?? e.Works.First()));
+            return Portfolio.Exhibits
+                .Where(e => !string.Equals(e.Status, "Archived", System.StringComparison.OrdinalIgnoreCase))
+                .Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Anchor, e.Promo ?? e.Works.First()));
         }
     }
 }

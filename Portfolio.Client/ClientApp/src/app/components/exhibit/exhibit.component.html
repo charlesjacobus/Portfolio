@@ -4,7 +4,7 @@
   <!-- Work : Text tabs -->
   <div>
     <div [ngClass]="{'exhibitTabs': true}">
-      <div *ngIf="!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()">
+      <div *ngIf="this.showWorkText()">
         <label (click)="this.visibleTab = 'work'"
                [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}"><small>Work</small></label>
         &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
@@ -12,7 +12,7 @@
                [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}"><small>Text</small></label>
       </div>
       <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
-      <div *ngIf="!this.getExhibitDescription() && !this.getExhibitDescriptionUrl()"><label>&nbsp;</label></div>
+      <div *ngIf="this.showNoWorkText()"><label>&nbsp;</label></div>
     </div>
     <div [ngClass]="{'currentWorkOfLabel': true}">{{this.getCurrentWorkOfLabel()}}</div>
     <div [ngStyle]="{'clear': 'both'}"></div>

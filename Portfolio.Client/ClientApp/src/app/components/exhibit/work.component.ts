@@ -82,7 +82,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
 
     protected getFileFullName(fileName: string): string {
         if (isNil(fileName)) {
-            null;
+            return null;
         }
 
         return ''.concat('assets/', this.getAssetsFolderName(), '/', this.getExhibitAnchor(), '/', fileName)
