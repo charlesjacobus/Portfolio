@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Version>2.0.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Projects\Scratch\Portfolio\Portfolio.API\Portfolio.API.xml</DocumentationFile>
     <NoWarn>1591;1701;1702</NoWarn>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,6 +23,22 @@
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Business\Portfolio.Business.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="web.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="web.Debug.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="web.Release.config">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y $(ProjectDir)\web.$(ConfigurationName).config $(OutDir)\web.config" />
+  </Target>
 
 
 </Project>

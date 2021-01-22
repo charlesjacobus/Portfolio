@@ -25,9 +25,9 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return this.summary;
     }
 
-    ngAfterViewInit(): void { }
+    public ngAfterViewInit(): void { }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.initialize();
     }
 

@@ -1,5 +1,11 @@
 <div class="copyright">
-  <div>Copyright &copy; {{ this.getCurrentYear() }}</div>
-  <div *ngIf="!!this.aboutLinkActive"><a routerLink="/about" fragment="me">Charles Jacobus</a></div>
-  <div *ngIf="!this.aboutLinkActive">Charles Jacobus</div>
+    <div *ngIf="this.aboutLinkActive">
+        <div>Copyright &copy; {{ this.getCurrentYear() }}</div>
+        <a routerLink="/about" fragment="me">{{ this.getApplicationName() }}</a>
+    </div>
+    <div *ngIf="!this.aboutLinkActive" class="copyrightBlock">
+        <div>Copyright &copy; {{ this.getCurrentYear() }}</div>
+        {{ this.getApplicationName() }}
+    </div>
+  <div class="informationalVersion">Version {{ this.getInformationalVersion() }}</div>
 </div>

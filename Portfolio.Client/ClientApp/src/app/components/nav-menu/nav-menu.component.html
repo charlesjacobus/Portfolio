@@ -1,7 +1,8 @@
 <header>
   <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" role="navigation">
     <div class="container">
-      <a class="nav-link navbar-text" [routerLink]="['/']"><h1 class="nav-link nav-bar-text" style="font-size:18px; margin:0px !important; padding:0px !important">Charles Jacobus</h1></a>
+      <!-- H1, for SEO -->
+      <h1 class="nav-link nav-bar-text" style="font-size:18px; margin:0px !important; padding:0px !important"><a class="nav-link navbar-text" [routerLink]="['/']">{{ this.getApplicationName() }}</a></h1>
       <button
         class="navbar-toggler"
         type="button"

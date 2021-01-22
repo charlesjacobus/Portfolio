@@ -1,5 +1,12 @@
 .copyright {
   text-align: center;
   font-size: small;
-  margin: 100px auto 10px auto;
+}
+
+.copyrightBlock {
+    margin: 100px auto 10px auto;
+}
+
+.informationalVersion {
+  color: #39393E;
 }
