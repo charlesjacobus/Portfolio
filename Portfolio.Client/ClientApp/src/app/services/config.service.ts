@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { IConfig } from '../models/config';
 import { IPortfolioInfo } from '../models/portfolioInfo';
@@ -10,8 +10,12 @@ import { DataService } from './data.service';
 import { isNil, replace } from 'lodash';
 import * as urljoin from 'url-join';
 
+export interface IAppConfigService {
+    load(): Promise<void | Observable<never>>;
+}
+
 @Injectable()
-export class AppConfigService {
+export class AppConfigService implements IAppConfigService {
     private static configuration: IConfig;
 
     public static api = '';
@@ -20,7 +24,7 @@ export class AppConfigService {
 
     constructor(private http: HttpClient, private dataService: DataService) { }
 
-    public load() {
+    public load(): Promise<void | Observable<never>> {
         const rootConfigurationFile = `assets/config.json`;
 
         return this.http.get<IConfig>(rootConfigurationFile)

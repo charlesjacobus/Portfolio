@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 
-import { isNil } from 'lodash';
+import { isEmpty, isNil } from 'lodash';
 
 import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery-9';
 
@@ -62,7 +62,8 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 // This avoids unnecessarily loading main/medium images that will never be seen
                 medium: this.getFileFullName(this.exhibitSummary.promo.fileName),
                 big: this.getFileFullName(work.fileNameLarge),
-                description: !isNil(work.description) ? work.description : work.name
+                description: !isEmpty(work.name) && !isEmpty(work.description) ? ''.concat(work.name, ' : ', work.description) : !isEmpty(work.description) ? work.description : work.name,
+                label: !isEmpty(work.name) ? work.name : work.fileName
             });
         });
     }
