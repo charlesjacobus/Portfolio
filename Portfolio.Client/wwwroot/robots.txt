@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.charlesjacobus.com/Sitemap.txt
+Sitemap: https://charlesjacobus.com/sitemap.txt
