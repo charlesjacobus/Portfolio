@@ -51,6 +51,9 @@ export class ExhibitService implements IExhibitService {
 
                 this.dataService.get(url)
                     .subscribe((result: IExhibit) => {
+                        // Exhibits are essentially static anyway, and a simple full page reload will refresh them
+                        this.exhibits.push(result);
+
                         observer.next(result);
                         observer.complete();
                     });
