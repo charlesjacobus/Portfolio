@@ -52,7 +52,7 @@ namespace Portfolio.Api
                     });
             });
 
-            services.AddScoped<IExhibitService, ExhibitService>();
+            services.AddSingleton<IExhibitService, ExhibitService>();
             services.AddScoped<IHealthServices, HealthServices>();
             services.AddSingleton<PortfolioRepresentationBuilder, PortfolioRepresentationBuilder>();
 

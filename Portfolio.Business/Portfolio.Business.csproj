@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Configurations>Debug;Release;Test</Configurations>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

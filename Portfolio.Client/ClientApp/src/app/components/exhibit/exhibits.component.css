@@ -1,3 +1,10 @@
+.errorMessage {
+    color: orangered;
+    text-align: center;
+    font-size: larger;
+    padding-bottom: 2em;
+}
+
 .exhibitsContainer {
   text-align: center;
   margin-left: auto;

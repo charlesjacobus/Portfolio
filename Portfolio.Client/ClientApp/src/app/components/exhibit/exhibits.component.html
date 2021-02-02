@@ -1,7 +1,13 @@
 <div class="exhibitsContainer">
-  <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries()"
-           [exhibitSummary]="exhibitSummary"></exhibit>
-  <footer>
-    <copyright [aboutLinkActive]="true"></copyright>
-  </footer>
+    <div *ngIf="!errorFetchingExhibitSummaries">
+        <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries()"
+                 [exhibitSummary]="exhibitSummary"></exhibit>
+    </div>
+    <div *ngIf="errorFetchingExhibitSummaries">
+        <div class="errorMessage">Sorry! There was an error attempting to load current exhibits. :(</div>
+        <div class="errorMessage">We're looking into it, so please try again later.</div>
+    </div>
+    <footer>
+        <copyright [aboutLinkActive]="true"></copyright>
+    </footer>
 </div>

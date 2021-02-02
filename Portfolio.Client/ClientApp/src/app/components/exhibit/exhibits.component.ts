@@ -9,13 +9,17 @@ import { ExhibitService } from '../../services/exhibit.service';
     styleUrls: ['./exhibits.component.css']
 })
 export class ExhibitsComponent implements AfterViewInit, OnInit {
+    public errorFetchingExhibitSummaries = false;
+
     constructor(private exhibitService: ExhibitService) { }
 
     public ngAfterViewInit(): void { }
 
     public ngOnInit(): void {
         this.exhibitService.fetchExhibitSummaries()
-            .subscribe((result: Array<IExhibitSummary>) => { });
+            .subscribe(
+                (result: Array<IExhibitSummary>) => { },
+                () => { this.errorFetchingExhibitSummaries = true; });
     }
 
     public getExhibitSummaries(): Array<IExhibitSummary> {

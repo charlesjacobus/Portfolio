@@ -7,7 +7,7 @@ import { IConfig } from '../models/config';
 import { IPortfolioInfo } from '../models/portfolioInfo';
 import { DataService } from './data.service';
 
-import { isNil, replace } from 'lodash';
+import { replace } from 'lodash';
 import * as urljoin from 'url-join';
 
 export interface IAppConfigService {
@@ -32,18 +32,13 @@ export class AppConfigService implements IAppConfigService {
             .then((response) => {
                 AppConfigService.configuration = response;
 
-                if (!this.useExplicitPerEnvironmentConfiguration(response)) {
-                    AppConfigService.api = this.getApiHostName();
-                    AppConfigService.apiInfo = urljoin(AppConfigService.api, response.apiInfoPath);
-                }
+                AppConfigService.api = this.getApiHostName();
+                AppConfigService.apiInfo = urljoin(AppConfigService.api, response.apiInfoPath);
 
                 return AppConfigService.configuration;
             })
-            .then((config: IConfig) => {
-                return AppConfigService.apiInfo;
-            })
-            .then((url: string) => {
-                return this.dataService.get<IPortfolioInfo>(url)
+            .then(() => {
+                return this.dataService.get<IPortfolioInfo>(AppConfigService.apiInfo)
                     .toPromise()
                     .then((info) => {
                         AppConfigService.portfolioInfo = info;
@@ -85,9 +80,5 @@ export class AppConfigService implements IAppConfigService {
         }
         return throwError(
             'Could not load config file; please try again later.');
-    }
-
-    private useExplicitPerEnvironmentConfiguration(config: IConfig): boolean {
-        return (!isNil(config) && !isNil(config.explicitPerEnvironmentConfiguration) && !!config.explicitPerEnvironmentConfiguration);
     }
 }

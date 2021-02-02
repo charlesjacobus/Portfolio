@@ -31,8 +31,6 @@ namespace Portfolio.Client
                     .PersistKeysToFileSystem(new DirectoryInfo(keyStorageFolderFullName));
             }
 
-            //services.AddControllersWithViews();
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -43,14 +41,7 @@ namespace Portfolio.Client
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-                app.UseDeveloperExceptionPage();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Error");
-            //}
+            app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -59,13 +50,6 @@ namespace Portfolio.Client
             }
 
             app.UseRouting();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller}/{action=Index}/{id?}");
-            //});
 
             app.UseSpa(spa =>
             {
