@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 import { find, isArray, isNil } from 'lodash';
 
 import { IExhibit, IExhibitSummary } from '../models/exhibit';
+import { ILeet } from '../models/leet';
 import { AppConfigService } from './config.service';
 import { DataService } from './data.service';
 
 export interface IExhibitService {
     fetchExhibit(id: number): Observable<IExhibit>;
     fetchExhibitSummaries(): Observable<Array<IExhibitSummary>>;
+    fetchLeet(code: string): Observable<ILeet>;
 }
 
 @Injectable()
@@ -61,6 +63,21 @@ export class ExhibitService implements IExhibitService {
         });
     }
 
+    public fetchLeet(code: string): Observable<ILeet> {
+        let url: string = AppConfigService.portfolioInfo.hrefGetLeet;
+        if (!isNil(code)) {
+            url = url.concat('?code='.concat(code));
+        }
+
+        return new Observable(observer => {
+            return this.dataService.get<ILeet>(url)
+                .subscribe((response: ILeet) => {
+                    observer.next(response);
+                    observer.complete();
+                });
+        });
+    }
+
     public static createExhibit(exhibitSummary: IExhibitSummary): IExhibit {
         if (isNil(exhibitSummary)) {
             return null;
@@ -73,7 +90,8 @@ export class ExhibitService implements IExhibitService {
             descriptionFileName: exhibitSummary.descriptionFileName,
             anchor: exhibitSummary.anchor,
             promo: exhibitSummary.promo,
-            works: [exhibitSummary.promo]
+            works: [exhibitSummary.promo],
+            special: exhibitSummary.special
         };
 
         return exhibit;

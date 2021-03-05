@@ -56,6 +56,10 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return isNil(this.exhibit) ? null : this.exhibit.name;
     }
 
+    public getExhibitSpecialTabName(): string {
+        return isNil(this.exhibit) || isNil(this.exhibit.special) ? null : this.exhibit.special.tabName;
+    }
+
     public getExhibitWorks(): Array<IWork> {
         return isNil(this.exhibit) ? [] : this.exhibit.works;
     }

@@ -1,23 +1,33 @@
 <a name="{{this.getExhibitAnchor()}}"></a>
 <div [ngClass]="{'exhibitContainer': true}">
   <h2 [ngClass]="{'exhibitTitle': true}">{{this.getExhibitName()}}</h2>
-  <!-- Work : Text tabs -->
+  <!-- Work : Text : Special tabs -->
   <div>
-    <div [ngClass]="{'exhibitTabs': true}">
-      <div *ngIf="this.showWorkText()">
-        <label (click)="this.visibleTab = 'work'"
-               [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}"><small>Work</small></label>
-        &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
-        <label (click)="this.visibleTab = 'text'"
-               [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}"><small>Text</small></label>
+      <div [ngClass]="{'exhibitTabs': true}">
+          <div *ngIf="this.showWorkTextSpecial()">
+              <label (click)="this.visibleTab = 'work'"
+                     [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}"><small>Work</small></label>
+              &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
+              <label (click)="this.visibleTab = 'text'"
+                     [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}"><small>Text</small></label>
+              &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
+              <label (click)="this.visibleTab = 'special'"
+                     [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'special', 'tabInactive': this.visibleTab === 'special'}"><small>{{this.getExhibitSpecialTabName()}}</small></label>
+          </div>
+          <div *ngIf="this.showWorkText()">
+              <label (click)="this.visibleTab = 'work'"
+                     [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}"><small>Work</small></label>
+              &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
+              <label (click)="this.visibleTab = 'text'"
+                     [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}"><small>Text</small></label>
+          </div>
+          <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
+          <div *ngIf="this.showNoWorkText()"><label>&nbsp;</label></div>
       </div>
-      <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
-      <div *ngIf="this.showNoWorkText()"><label>&nbsp;</label></div>
-    </div>
     <div [ngClass]="{'currentWorkOfLabel': true}">{{this.getCurrentWorkOfLabel()}}</div>
     <div [ngStyle]="{'clear': 'both'}"></div>
   </div>
-  <!-- Work : Text views -->
+  <!-- Work : Text : Special views -->
   <!-- Work -->
   <div [style.display]="this.visibleTab === 'work' ? 'block' : 'none'">
     <div *ngIf="this.isGalleryExhibit()">
@@ -41,5 +51,9 @@
               ngPreserveWhitespaces>
       {{this.getExhibitDescription()}}
     </markdown>
+  </div>
+  <!-- Special -->
+  <div *ngIf="this.getExhibitName() === 'Leet'" [ngClass]="{'exhibitDescriptionContainer': true}" [style.display]="this.visibleTab === 'special' ? 'block' : 'none'">
+      <leets-gallery></leets-gallery>
   </div>
 </div>

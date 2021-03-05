@@ -24,7 +24,11 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
     }
 
     public showWorkText(): boolean {
-        return !!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl();
+        return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()) && !this.getExhibitSpecialTabName();
+    }
+
+    public showWorkTextSpecial(): boolean {
+        return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()) && !!this.getExhibitSpecialTabName();
     }
 
     public showNoWorkText(): boolean {

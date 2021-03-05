@@ -19,9 +19,11 @@ namespace Portfolio.Business.Models
 
         public string Status { get; set; }
 
-        public static Exhibit Create(int id, string name, string description, string descriptionFileName, string anchor, Work promo, string status = "Active")
+        public Special Special { get; set; }
+
+        public static Exhibit Create(int id, string name, string description, string descriptionFileName, string anchor, Work promo, Special special, string status = "Active")
         {
-            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo, Status = status };
+            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo, Special = special, Status = status };
         }
     }
 
@@ -29,11 +31,6 @@ namespace Portfolio.Business.Models
         : ExhibitSummary
     {
         public IEnumerable<Work> Works { get; set; }
-
-        //public static Exhibit Create(int id, string name, string description, string anchor, IEnumerable<Work> works)
-        //{
-        //    return new Exhibit { ID = id, Name = name, Description = description, Anchor = anchor, Promo = works.FirstOrDefault(), Works = works };
-        //}
 
         public static Exhibit Error()
         {

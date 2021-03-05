@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,9 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 using Portfolio.Api.Builders;
+using Portfolio.Business.Models;
 using Portfolio.Business.Services;
 using Portfolio.Business.Services.Health;
-using Microsoft.AspNetCore.DataProtection;
+using Portfolio.Business.Serializers;
+
 
 namespace Portfolio.Api
 {
@@ -52,8 +55,11 @@ namespace Portfolio.Api
                     });
             });
 
+            services.AddSingleton<ILeetService, LeetService>();
             services.AddSingleton<IExhibitService, ExhibitService>();
             services.AddScoped<IHealthServices, HealthServices>();
+            services.AddSingleton<ISerializer<Leet>, LeetSerializer>();
+            services.AddSingleton<ISerializer<Shape>, ShapeSerializer>();
             services.AddSingleton<PortfolioRepresentationBuilder, PortfolioRepresentationBuilder>();
 
             services.AddSwaggerGen(c =>

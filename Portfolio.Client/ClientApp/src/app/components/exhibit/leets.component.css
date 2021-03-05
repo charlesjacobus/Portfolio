@@ -1,0 +1,65 @@
+.leetActions {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.leetFormOptionBlock {
+    display: block;
+    font-size: smaller;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100%);
+}
+
+.leetFormOption {
+    cursor: pointer;
+}
+
+.leetFormOptionSelected {
+    background-color: #247D3C;
+    color: whitesmoke;
+}
+
+.leetImage {
+    max-height: 400px;
+    width: auto;
+}
+
+@media only screen and (max-width: 800px) {
+    .leetImage {
+        max-height: 300px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .leetImage {
+        max-height: 200px;
+        width: auto;
+    }
+}
+
+.leetsContainer {
+    border: solid thin;
+    display: block;
+    height: 100px;
+    overflow: hidden scroll;
+    overflow-y: scroll;
+    text-align: left;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media only screen and (max-width: 400px) {
+    .leetsContainer {
+        height: 50px;
+    }
+}
+
+.tabSpacer {
+    color: whitesmoke;
+}

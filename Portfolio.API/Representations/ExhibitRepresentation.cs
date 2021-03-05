@@ -1,7 +1,7 @@
-﻿using Portfolio.Business.Models;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+
+using Portfolio.Business.Models;
 
 namespace Portfolio.API.Representations
 {
@@ -18,6 +18,8 @@ namespace Portfolio.API.Representations
         public string Anchor { get; set; }
 
         public WorkRepresentation Promo { get; set; }
+
+        public SpecialRepresentation Special { get; set; }
 
         public static ExhibitSummaryRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, WorkRepresentation promo)
         {
@@ -60,10 +62,12 @@ namespace Portfolio.API.Representations
                 works.Add(WorkRepresentation.Create(work));
             }
 
-            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works);
+            var special = SpecialRepresentation.Create(exhibit.Special);
+
+            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works, special);
         }
 
-        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works)
+        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works, SpecialRepresentation special)
         {
             return new ExhibitRepresentation {
                 ID = id,
@@ -72,7 +76,8 @@ namespace Portfolio.API.Representations
                 DescriptionFileName = descriptionFileName,
                 Anchor = anchor,
                 Promo = works.FirstOrDefault(),
-                Works = works
+                Works = works,
+                Special = special
             };
         }
     }

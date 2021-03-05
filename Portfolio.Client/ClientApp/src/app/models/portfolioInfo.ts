@@ -4,4 +4,5 @@ export interface IPortfolioInfo {
     settings: IApplicationSettings;
     hrefGetActiveExhibits: string;
     hrefGetExhibit: string;
+    hrefGetLeet: string;
 }

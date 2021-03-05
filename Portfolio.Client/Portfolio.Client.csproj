@@ -32,7 +32,10 @@
     <None Remove="ClientApp\src\app\animations.ts" />
     <None Remove="ClientApp\src\app\components\exhibit\work.component.ts" />
     <None Remove="ClientApp\src\app\models\exhibit.ts" />
+    <None Remove="ClientApp\src\app\models\leet.ts" />
+    <None Remove="ClientApp\src\app\models\special.ts" />
     <None Remove="ClientApp\src\app\models\work.ts" />
+    <None Remove="ClientApp\src\app\pipes\safeHtml.ts" />
     <None Remove="ClientApp\src\app\services\config.service.ts" />
     <None Remove="ClientApp\src\app\services\data.service.ts" />
     <None Remove="ClientApp\src\assets\images\highchair\highchair.md" />
@@ -44,8 +47,11 @@
     <TypeScriptCompile Include="ClientApp\src\app\components\exhibit\work.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\applicationSettings.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\exhibit.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\leet.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\portfolioInfo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\special.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\work.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\safeHtml.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\config.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\data.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\assets\images\highchair\Highchair.md" />

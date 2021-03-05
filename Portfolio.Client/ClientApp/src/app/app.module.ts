@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 
@@ -17,6 +18,7 @@ import { CopyrightComponent } from './components/copyright/copyright.component';
 import { ExhibitComponent } from './components/exhibit/exhibit.component';
 import { ExhibitsComponent } from './components/exhibit/exhibits.component';
 import { HomeComponent } from './components/home/home.component';
+import { LeetsComponent } from './components/exhibit/leets.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { ProseComponent } from './components/exhibit/prose.component';
 
@@ -36,12 +38,14 @@ export function initConfig(configService: AppConfigService) {
         ExhibitComponent,
         ExhibitsComponent,
         HomeComponent,
+        LeetsComponent,
         NavMenuComponent,
         ProseComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         BrowserAnimationsModule,
+        ClipboardModule,
         HammerModule,
         HttpClientModule,
         FormsModule,
