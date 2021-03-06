@@ -52,7 +52,7 @@ export function initConfig(configService: AppConfigService) {
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'about', component: AboutComponent }
-        ], { scrollPositionRestoration: 'enabled' }),
+        ], { scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' }),
         MarkdownModule.forRoot({
             loader: HttpClient,
             markedOptions: {
