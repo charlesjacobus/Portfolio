@@ -8,7 +8,7 @@ import { ILeet } from '../../models/leet';
 import { ExhibitService } from '../../services/exhibit.service';
 
 @Component({
-    selector: 'leets-gallery',
+    selector: 'leet-game',
     templateUrl: './leets.component.html',
     styleUrls: ['./leets.component.css']
 })
@@ -17,7 +17,6 @@ export class LeetsComponent implements OnInit {
 
     public leet: ILeet;
     public leets: Array<ILeet>;
-    public loading: boolean = false;
 
     constructor(private exhibitService: ExhibitService, private sanitizer: DomSanitizer) { }
 
@@ -37,16 +36,11 @@ export class LeetsComponent implements OnInit {
     }
 
     public getLeet(code: string = null): void {
-        this.clipboardContent = null;
-        this.loading = true;
-
         // If a code is being supplied, then consider that it may be a leet we've already created
         if (!isNil(code)) {
             let match: ILeet = find(this.leets, function (l: ILeet) { return l.code === code; });
             if (!isNil(match)) {
                 this.leet = match;
-
-                this.loading = false;
 
                 return;
             }
@@ -65,10 +59,9 @@ export class LeetsComponent implements OnInit {
                         this.leets.unshift(leet);
                         this.scrollToBottom();
                     }
+
                     this.leet = leet;
                 }
-
-                this.loading = false;
             });
     }
 
@@ -76,16 +69,16 @@ export class LeetsComponent implements OnInit {
         return isNil(this.leet) ? null : this.leet.code;
     }
 
-    public getLeetIdentifier(): string {
-        return isNil(this.leet) ? null : this.leet.identifier;
-    }
-
-    public isCurrentLeetOnClipboard(): boolean {
-        return isNil(this.leet) ? false : this.leet.code === this.clipboardContent;
-    }
-
     public isSelectedLeet(code: string): boolean {
         return isNil(this.leet) || isNil(code) ? false : this.leet.code === code;
+    }
+
+    public leetIsCaptured(): boolean {
+        if (isNil(this.leet) || isNil(this.clipboardContent)) {
+            return false;
+        }
+
+        return this.leet.code === this.clipboardContent;
     }
 
     public sendEmail(): void {

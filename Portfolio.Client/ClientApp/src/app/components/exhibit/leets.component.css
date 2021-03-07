@@ -1,9 +1,30 @@
+.leetAction {
+    padding-top: 5px;
+}
+
 .leetActions {
     margin-left: auto;
     margin-right: auto;
     padding-top: 10px;
     text-align: center;
     white-space: nowrap;
+}
+
+.leetCartoon { }
+
+.leetContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: start;
+    align-items: flex-start;
+    align-content: start
+}
+
+.leetController {
+    flex: 1 auto;
+    margin-right: 10px;
+    width: 150px;
 }
 
 .leetFormOptionBlock {
@@ -29,24 +50,10 @@
     width: auto;
 }
 
-@media only screen and (max-width: 800px) {
-    .leetImage {
-        max-height: 300px;
-        width: auto;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .leetImage {
-        max-height: 200px;
-        width: auto;
-    }
-}
-
 .leetsContainer {
     border: solid thin;
     display: block;
-    height: 100px;
+    height: 225px;
     overflow: hidden scroll;
     overflow-y: scroll;
     text-align: left;
@@ -54,12 +61,37 @@
     -webkit-overflow-scrolling: touch;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 800px) {
     .leetsContainer {
-        height: 50px;
+        height: 150px;
+    }
+
+    .leetImage {
+        max-height: 300px;
+        width: auto;
     }
 }
 
-.tabSpacer {
-    color: whitesmoke;
+@media only screen and (max-width: 400px) {
+    .leetAction {
+        margin: 0px;
+        padding: 2px;
+    }
+
+    .leetActions {
+        padding-top: 5px;
+    }
+
+    .leetsContainer {
+        height: 50px;
+    }
+
+    .leetController {
+        width: 30px;
+    }
+
+    .leetImage {
+        max-height: 125px;
+        width: auto;
+    }
 }

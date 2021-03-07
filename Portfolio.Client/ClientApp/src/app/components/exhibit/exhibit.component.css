@@ -1,7 +1,8 @@
 .currentWorkOfLabel {
   color: dimgray;
   float: right;
-  font-size: smaller;
+  margin: 0px;
+  padding: 0px;
 }
 
 .exhibitContainer {
@@ -25,6 +26,12 @@
 
 .exhibitTitle {
   font-size: x-large;
+}
+
+.noScrollContainer {
+  overflow: hidden hidden;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: auto;
 }
 
 .tabActive {
@@ -67,6 +74,10 @@
 }
 
 @media only screen and (max-width: 400px) {
+  .currentWorkOfLabel {
+    font-size: smaller;
+  }
+
   .exhibitContainer {
     height: 200px;
   }
@@ -78,6 +89,18 @@
 
   .exhibitTitle {
     font-size: small;
+  }
+
+  .tabActive {
+    font-size: smaller;
+  }
+
+  .tabInactive {
+    font-size: smaller;
+  }
+
+  .tabSpacer {
+    font-size: smaller;
   }
 
   .work-image {

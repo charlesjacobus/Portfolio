@@ -1,18 +1,17 @@
-<div class="row">
-    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-        <div><span><label><small>Leets</small></label></span><span>&nbsp;<label><small>({{this.leets.length}})</small></label></span></div>
+<div class="leetContainer">
+    <div class="leetController">
         <div #leetsContainer [ngClass]="{'leetsContainer': true}">
             <div *ngFor="let leet of this.leets" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
         </div>
-        <div [ngClass]="{'leetActions': true}">
-            <label><small><a [routerLink]="" title="Create Leet" (click)="this.getLeet()">Create</a></small></label>
-            &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
-            <label><small><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order</a></small></label>
-            &nbsp;<label [ngClass]="{'tabSpacer': true}"><small>:</small></label>&nbsp;
-            <label><small><a [routerLink]="" title="Capture Leet Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture</a></small></label>
+        <div class="leetActions">
+            <label class="leetAction"><small><a [routerLink]="" title="Create Cartoon" (click)="this.getLeet()">Create Cartoon</a></small></label><br/>
+            <label class="leetAction"><small><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order Leet</a></small></label><br/>
+            <!-- Capture is reflected by the state of the link -->
+            <label class="leetAction" *ngIf="!this.leetIsCaptured()"><small><a [routerLink]="" title="Capture Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture Code</a></small></label>
+            <label class="leetAction" *ngIf="this.leetIsCaptured()"><small><span>Capture Code</span></small></label>
         </div>
     </div>
-    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-        <img [src]="leet.safeUrl" alt="Leet" [ngClass]="{'leetImage': true}" *ngIf="!this.loading;">
+    <div class="leetCartoon">
+        <img [src]="leet.safeUrl" alt="Leet" class="leetImage" *ngIf="this.leets.length > 0">
     </div>
 </div>
