@@ -8,7 +8,7 @@ The game involves a commission, in the form of a commercial transaction - an oil
 
 Once I begin a leet, I will complete it. But multiple commission requests are priority queued, by price paid over materials, packing, and shipping costs. This means the lower your price point, the longer you may have to wait. Of course, it also means that if your price point is low and you don't wait long, then I'm likely pwned.  
 
-**To participate**, click **Create Cartoon** until you find a leet you like, and then click **Order Leet**. If that doesn't work, click **Capture Code** to put the leet code on your clipboard, which you can email me.  
+To participate: Under **Game**, click **Create Cartoon** until you find a leet you like. Then click **Order Leet**. If that doesn't work, click **Capture Code** to put the leet code on your clipboard, which you can email me.  
 
 We'll discuss payment terms once you place your order.  
 

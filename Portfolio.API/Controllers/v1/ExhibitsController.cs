@@ -11,7 +11,7 @@ namespace Portfolio.API.Controllers.v1
     /// Supports operations related to portfolio exhibits
     /// </summary>
     [ApiController]
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/Portfolio/[controller]")]
     public class ExhibitsController
         : ControllerBase
     {

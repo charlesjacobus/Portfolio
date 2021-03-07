@@ -14,7 +14,7 @@ namespace Portfolio.Api.Controllers
     /// Supports operations related to leets
     /// </summary>
     [ApiController]
-    [Route("api/v1/Portfolio/[controller]"), FormatFilter]
+    [Route("api/v1/Portfolio/Exhibits/[controller]"), FormatFilter]
     public class LeetsController
         : ControllerBase
     {
