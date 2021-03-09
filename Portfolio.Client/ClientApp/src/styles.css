@@ -4,6 +4,7 @@
   text: whitesmoke
   text (dark): dimgray
   link: #247D3C
+  visited: #34B255
 */
 
 body {
@@ -32,11 +33,11 @@ a:link {
 }
 
 a:visited {
-  color: #247D3C;
+    color: #247D3C;
 }
 
 a:hover {
-  color: #247D3C;
+  color: #34B255;
   text-decoration: none;
 }
 

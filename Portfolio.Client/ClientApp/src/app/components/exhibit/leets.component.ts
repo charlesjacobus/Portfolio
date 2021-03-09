@@ -14,6 +14,7 @@ import { ExhibitService } from '../../services/exhibit.service';
 })
 export class LeetsComponent implements OnInit {
     private clipboardContent: string;
+    private prefetch: ILeet;
 
     public leet: ILeet;
     public leets: Array<ILeet>;
@@ -36,6 +37,10 @@ export class LeetsComponent implements OnInit {
     }
 
     public getLeet(code: string = null): void {
+        // If a code is supplied, which it is as the user clicks through the list of leets already created, then the existing leet (if found) is returned
+        // Leets are prefetched one at a time, to improve the UX when clicking Create Cartoon
+        // This means that the prefetched leet is unshifted to the collection and a new leet is fetched in reserve
+        
         // If a code is being supplied, then consider that it may be a leet we've already created
         if (!isNil(code)) {
             let match: ILeet = find(this.leets, function (l: ILeet) { return l.code === code; });
@@ -46,7 +51,17 @@ export class LeetsComponent implements OnInit {
             }
         }
 
-        // Otherwise, create the leet
+        // If there's a prefetch, use it
+        let refetch = isNil(this.prefetch);
+        if (!isNil(this.prefetch)) {
+            this.leets.unshift(this.prefetch);
+            this.scrollToTop();
+
+            this.leet = this.prefetch;
+            this.prefetch = null;
+        }
+
+        // Otherwise, create a leet and reset the prefetch
         this.exhibitService.fetchLeet(code)
             .subscribe((leet: ILeet) => {
                 if (leet && leet.file) {
@@ -55,12 +70,11 @@ export class LeetsComponent implements OnInit {
 
                     leet.identifier = leet.code.substring(0, 9);
 
-                    if (isNil(code)) {
-                        this.leets.unshift(leet);
-                        this.scrollToBottom();
-                    }
+                    this.prefetch = leet;
 
-                    this.leet = leet;
+                    if (refetch) {
+                        this.getLeet();
+                    }
                 }
             });
     }
@@ -95,7 +109,7 @@ export class LeetsComponent implements OnInit {
         return 'mailto:charleshenryjacobus@gmail.com?subject=Leet&body='.concat(body);
     }
 
-    private scrollToBottom(): void {
+    private scrollToTop(): void {
         var scrollOptions = {
             top: 0,
             behavior: 'smooth'

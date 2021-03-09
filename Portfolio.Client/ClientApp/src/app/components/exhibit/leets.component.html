@@ -4,11 +4,11 @@
             <div *ngFor="let leet of this.leets" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
         </div>
         <div class="leetActions">
-            <label class="leetAction"><small><a [routerLink]="" title="Create Cartoon" (click)="this.getLeet()">Create Cartoon</a></small></label><br/>
-            <label class="leetAction"><small><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order Leet</a></small></label><br/>
+            <label class="leetAction"><a [routerLink]="" title="Create Cartoon" (click)="this.getLeet()">Create Cartoon</a></label><br/>
+            <label class="leetAction"><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order Leet</a></label><br/>
             <!-- Capture is reflected by the state of the link -->
-            <label class="leetAction" *ngIf="!this.leetIsCaptured()"><small><a [routerLink]="" title="Capture Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture Code</a></small></label>
-            <label class="leetAction" *ngIf="this.leetIsCaptured()"><small><span>Capture Code</span></small></label>
+            <label class="leetAction" *ngIf="!this.leetIsCaptured()"><a [routerLink]="" title="Capture Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture Code</a></label>
+            <label class="leetAction" *ngIf="this.leetIsCaptured()"><span>Capture Code</span></label>
         </div>
     </div>
     <div class="leetCartoon">

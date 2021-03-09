@@ -38,6 +38,10 @@
   color: #247D3C;
 }
 
+.tabActive:hover {
+  color: #34B255;
+}
+
 .tabInactive {
   color: whitesmoke;
 }
