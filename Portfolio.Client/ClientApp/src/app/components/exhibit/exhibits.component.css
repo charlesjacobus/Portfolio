@@ -14,12 +14,14 @@
 
 @media only screen and (max-width: 800px) {
   .exhibitsContainer {
+    min-width: 450px;
     width: 80%;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .exhibitsContainer {
+    min-width: 225px;
     width: 80%;
   }
 }
