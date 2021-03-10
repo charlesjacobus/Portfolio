@@ -1,6 +1,6 @@
 <div class="leetContainer">
     <div class="leetController">
-        <div #leetsContainer [ngClass]="{'leetsContainer': true}">
+        <div #leetsContainer class="leetsContainer">
             <div *ngFor="let leet of this.leets" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
         </div>
         <div class="leetActions">

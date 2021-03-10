@@ -4,7 +4,7 @@
   text: whitesmoke
   text (dark): dimgray
   link: #247D3C
-  visited: #34B255
+  hover: #34B255
 */
 
 body {
@@ -43,19 +43,6 @@ a:hover {
 
 a:active {
   color: #247D3C;
-}
-
-/* media */
-@media only screen and (max-width: 800px) {
-  .content {
-    width: 400px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .content {
-    width: 200px;
-  }
 }
 
 /* scrollbar */

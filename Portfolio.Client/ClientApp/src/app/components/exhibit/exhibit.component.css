@@ -28,6 +28,10 @@
   font-size: x-large;
 }
 
+.firstExhibit {
+  margin-top: 0px !important;
+}
+
 .noScrollContainer {
   overflow: hidden hidden;
   overflow-y: hidden;
@@ -54,10 +58,6 @@
   cursor: pointer;
 }
 
-.work-image {
-  max-width: 800px;
-}
-
 @media only screen and (max-width: 800px) {
   .exhibitContainer {
     height: 400px;
@@ -72,9 +72,6 @@
     font-size: large;
   }
 
-  .work-image {
-    width: 400px;
-  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -106,8 +103,5 @@
   .tabSpacer {
     font-size: smaller;
   }
-
-  .work-image {
-    width: 200px;
-  }
 }
+

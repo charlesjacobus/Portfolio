@@ -1,6 +1,7 @@
 <div class="exhibitsContainer">
     <div *ngIf="!errorFetchingExhibitSummaries">
-        <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries()"
+        <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries(); let i = index"
+                 [exhibitIndex]="i"
                  [exhibitSummary]="exhibitSummary"></exhibit>
     </div>
     <div *ngIf="errorFetchingExhibitSummaries">

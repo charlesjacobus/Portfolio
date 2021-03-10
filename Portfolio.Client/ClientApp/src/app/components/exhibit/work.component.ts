@@ -16,6 +16,8 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
 
     constructor(protected exhibitService: ExhibitService) { }
 
+    @Input() public exhibitIndex: number; // A zero-based index for the exhibit
+
     @Input()
     set exhibitSummary(value: IExhibitSummary) {
         this.summary = value;
