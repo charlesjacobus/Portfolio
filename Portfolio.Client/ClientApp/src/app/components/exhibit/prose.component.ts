@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { isNil } from 'lodash';
 
@@ -17,9 +18,9 @@ export class ProseComponent extends WorkComponent implements AfterViewInit, OnIn
     // Reference: https://marked.js.org/#/README.md#specifications
     // Reference: https://spec.commonmark.org/dingus/
     
-    constructor(protected exhibitService: ExhibitService)
+    constructor(protected exhibitService: ExhibitService, protected router: Router)
     {
-        super(exhibitService);
+        super(exhibitService, router);
     }
 
     public getCurrentWorkName(): string {

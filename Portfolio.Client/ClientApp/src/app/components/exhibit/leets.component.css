@@ -1,9 +1,26 @@
+.instructionsContainer {
+    display: block;
+    height: 350px;
+    padding-right: 5px;
+    text-align: left;
+    overflow: hidden scroll;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.leet {
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%; /* Compare to the layout of About and the exhibits container below 800 */
+}
+
+/* Create Cartoon, Order Leet, and Capture Code button links and the button link group */
 .leetAction {
-    border: 1px solid #247D3C;
     margin-bottom: 5px;
     margin-top: 5px;
     padding: 5px;
-    width: 200px;
+    width: 100%;
 }
 
 .leetActions {
@@ -14,20 +31,20 @@
     white-space: nowrap;
 }
 
-.leetCartoon { }
+.leetCartoon {
+}
 
+/* Groups the controller and cartoon */
 .leetContainer {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start
+    flex-wrap: wrap-reverse;
+    justify-content: center;
 }
 
 .leetController {
     flex: 1 auto;
-    margin-right: 10px;
+    margin-right: 10px; /* So than when side-by-side there's a margin between the controller and the leet image */
     width: 150px;
 }
 
@@ -35,6 +52,7 @@
     display: block;
     font-size: smaller;
     overflow: hidden;
+    padding: 2px;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: calc(100%);
@@ -50,61 +68,85 @@
 }
 
 .leetImage {
-    max-height: 400px;
+    max-height: 500px;
     width: auto;
 }
 
+/* The list of leet codes */
 .leetsContainer {
     border: solid thin;
     display: block;
     height: 225px;
     overflow: hidden scroll;
     overflow-y: scroll;
-    text-align: left;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
 
 @media only screen and (max-width: 800px) {
-    .leetAction {
-        margin-bottom: 3px;
-        margin-top: 3px;
-        padding: 3px;
-        width: 150px;
+    .instructionsContainer {
+        font-size: smaller;
     }
 
     .leetsContainer {
         height: 150px;
     }
+}
 
+@media only screen and (max-width: 700px) {
+    .leetController {
+        margin-right: 0px;
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 550px) {
     .leetImage {
-        max-height: 300px;
+        max-height: 450px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .leetImage {
+        max-height: 350px;
         width: auto;
     }
 }
 
 @media only screen and (max-width: 400px) {
-    .leetAction {
-        margin-bottom: 1px;
-        margin-top: 1px;    
-        padding: 1px;
-        width: 100%;
-    }
-
-    .leetActions {
-        padding-top: 5px;
+    .instructionsContainer {
+        font-size: x-small;
     }
 
     .leetsContainer {
-        height: 50px;
+        height: 100px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .leetAction {
+        font-size: smaller;
     }
 
-    .leetController {
-        width: 30px;
+    .leetCodes {
+        font-size: smaller;
+    }
+
+    .leetFormOptionBlock {
+        font-size: x-small;
     }
 
     .leetImage {
-        max-height: 125px;
+        max-height: 250px;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 250px) {
+    .leetImage {
+        max-height: 200px;
         width: auto;
     }
 }

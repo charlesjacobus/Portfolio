@@ -1,25 +1,32 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 import { find, isNil } from 'lodash';
 
 import { ILeet } from '../../models/leet';
-
+import { DataService } from '../../services/data.service';
 import { ExhibitService } from '../../services/exhibit.service';
+import { WorkComponent } from './work.component';
 
 @Component({
     selector: 'leet-game',
     templateUrl: './leets.component.html',
     styleUrls: ['./leets.component.css']
 })
-export class LeetsComponent implements OnInit {
+export class LeetsComponent extends WorkComponent implements OnInit {
+    private static readonly LeetName = 'Leet';
+
     private clipboardContent: string;
+    private fetchingInstructions = true;
     private prefetch: ILeet;
 
     public leet: ILeet;
     public leets: Array<ILeet>;
 
-    constructor(private exhibitService: ExhibitService, private sanitizer: DomSanitizer) { }
+    constructor(private dataService: DataService, protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer) {
+        super(exhibitService, router);
+    }
 
     @ViewChild('leetsContainer') private leetsContainer: ElementRef;
 
@@ -27,6 +34,9 @@ export class LeetsComponent implements OnInit {
         this.leets = [];
 
         this.getLeet();
+
+        super.ngOnInit();
+        this.getExhibitDescription();
     }
 
     public copiedToClipboard(event: any): void {
@@ -34,6 +44,37 @@ export class LeetsComponent implements OnInit {
         if (!isNil(event) && !isNil(event.content)) {
             this.clipboardContent = event.content;
         }
+    }
+
+    public getAssetsFolderName(): string {
+        return 'images';
+    }
+
+    public getCurrentLeet(): ILeet {
+        return this.leet;
+    }
+
+    public getExhibitDescription(): string {
+        if (!isNil(this.exhibit) && !isNil(this.exhibit.description) && !this.fetchingInstructions) {
+            return this.exhibit.description;
+        }
+
+        if (!isNil(this.exhibit.descriptionFileName) && this.fetchingInstructions) {
+            this.fetchingInstructions = false;
+
+            let fileFullName: string = this.getFileFullName(this.exhibit.descriptionFileName);
+
+            this.dataService.getBlob(fileFullName)
+                .subscribe((response: Blob) => {
+                    response.text().then((content: string) => {
+                        this.exhibit.description = content;
+
+                        return content;
+                    });
+                });
+        }
+
+        return null;
     }
 
     public getLeet(code: string = null): void {
@@ -83,6 +124,10 @@ export class LeetsComponent implements OnInit {
         return isNil(this.leet) ? null : this.leet.code;
     }
 
+    public getLeets(): Array<ILeet> {
+        return this.leets;
+    }
+
     public isSelectedLeet(code: string): boolean {
         return isNil(this.leet) || isNil(code) ? false : this.leet.code === code;
     }
@@ -99,17 +144,34 @@ export class LeetsComponent implements OnInit {
         window.location.href = this.getEmailHref();
     }
 
+    protected initialize(): void {
+        this.exhibitSummary = {
+            id: 11,
+            anchor: LeetsComponent.LeetName.toLowerCase(),
+            description: null,
+            descriptionFileName: LeetsComponent.LeetName.concat('.md'),
+            name: LeetsComponent.LeetName,
+            promo: null,
+            textLabel: null,
+            textRoute: null
+        };
+    }
+
     private getEmailHref(): string {
         if (isNil(this.leet)) {
             return null;
         }
 
-        let body: string = 'I\'d like to order this leet: '.concat(this.leet.code);
+        let body: string = 'I\'d like to order this leet! '.concat(this.leet.code);
 
         return 'mailto:charleshenryjacobus@gmail.com?subject=Leet&body='.concat(body);
     }
 
     private scrollToTop(): void {
+        if (isNil(this.leetsContainer) || isNil(this.leetsContainer.nativeElement)) {
+            return;
+        }
+
         var scrollOptions = {
             top: 0,
             behavior: 'smooth'

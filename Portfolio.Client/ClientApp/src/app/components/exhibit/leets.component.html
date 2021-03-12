@@ -1,17 +1,38 @@
-<div class="leetContainer">
-    <div class="leetController">
-        <div #leetsContainer class="leetsContainer">
-            <div *ngFor="let leet of this.leets" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
-        </div>
-        <div class="leetActions">
-            <label class="leetAction"><a [routerLink]="" title="Create Cartoon" (click)="this.getLeet()">Create Cartoon</a></label><br/>
-            <label class="leetAction"><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order Leet</a></label><br/>
-            <!-- Capture is reflected by the state of the link -->
-            <label class="leetAction" *ngIf="!this.leetIsCaptured()"><a [routerLink]="" title="Capture Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture Code</a></label>
-            <label class="leetAction" *ngIf="this.leetIsCaptured()"><span>Capture Code</span></label>
-        </div>
-    </div>
-    <div class="leetCartoon">
-        <img [src]="leet.safeUrl" alt="Leet" class="leetImage" *ngIf="this.leets.length > 0">
-    </div>
+<div class="leet">
+    <ngb-accordion #acc="ngbAccordion" [closeOthers]="false" activeIds="game">
+        <ngb-panel id="instructions" title="Instructions" [disabled]="this.getExhibitDescription() === null">
+            <ng-template ngbPanelContent>
+                <div class="instructionsContainer">
+                    <markdown ngPreserveWhitespaces>
+                        {{this.getExhibitDescription()}}
+                    </markdown>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel id="game" title="Game">
+            <ng-template ngbPanelContent>
+                <div class="leetContainer">
+                    <div class="leetController">
+                        <div class="leetCodes"><small><strong>Leet Codes</strong> ({{this.getLeets.length}})</small></div>
+                        <div #leetsContainer class="leetsContainer">
+                            <div *ngFor="let leet of this.getLeets()" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
+                        </div>
+                        <div class="leetActions">
+                            <label class="leetAction"><a [routerLink]="" title="Create Cartoon" (click)="this.getLeet()">Create Cartoon</a></label><br />
+                            <label class="leetAction"><a [routerLink]="" title="Order Leet" (click)="this.sendEmail()">Order Leet</a></label><br />
+                            <!-- Capture is reflected by the state of the link -->
+                            <label class="leetAction" *ngIf="!this.leetIsCaptured()"><a [routerLink]="" title="Capture Code" (cbOnSuccess)="this.copiedToClipboard($event)" ngxClipboard [cbContent]="this.getLeetCode()">Capture Code</a></label>
+                            <label class="leetAction" *ngIf="this.leetIsCaptured()"><span>Capture Code</span></label>
+                        </div>
+                    </div>
+                    <div class="leetCartoon">
+                        <img [src]="this.getCurrentLeet().safeUrl" alt="Leet" class="leetImage" *ngIf="this.getLeets().length > 0">
+                    </div>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
 </div>
+<footer>
+    <copyright [aboutLinkActive]="true"></copyright>
+</footer>

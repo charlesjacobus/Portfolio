@@ -61,3 +61,20 @@ a:active {
 ::-webkit-scrollbar-thumb:hover {
   background: #515154;
 }
+
+/* ng-bootstrap style overrides */
+.btn-link, .btn-link:active, .btn-link:focus, .btn-link:hover, .btn-link:link, .btn-link:visited {
+  color: #247D3C;
+  text-decoration: none;
+}
+
+.card {
+  background: #39393E;
+  color: whitesmoke;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.card_header {
+  background-color: #39393E;
+  text-decoration: none;
+}

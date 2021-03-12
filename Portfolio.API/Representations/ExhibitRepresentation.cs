@@ -19,7 +19,9 @@ namespace Portfolio.API.Representations
 
         public WorkRepresentation Promo { get; set; }
 
-        public SpecialRepresentation Special { get; set; }
+        public string TextLabel { get; set; }
+
+        public string TextRoute { get; set; }
 
         public static ExhibitSummaryRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, WorkRepresentation promo)
         {
@@ -62,12 +64,10 @@ namespace Portfolio.API.Representations
                 works.Add(WorkRepresentation.Create(work));
             }
 
-            var special = SpecialRepresentation.Create(exhibit.Special);
-
-            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works, special);
+            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works, exhibit.TextLabel, exhibit.TextRoute);
         }
 
-        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works, SpecialRepresentation special)
+        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works, string textLabel, string textRoute)
         {
             return new ExhibitRepresentation {
                 ID = id,
@@ -77,7 +77,8 @@ namespace Portfolio.API.Representations
                 Anchor = anchor,
                 Promo = works.FirstOrDefault(),
                 Works = works,
-                Special = special
+                TextLabel = textLabel,
+                TextRoute = textRoute
             };
         }
     }

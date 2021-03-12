@@ -1,4 +1,3 @@
-import { ISpecial } from "./special";
 import { IWork } from "./work";
 
 export interface IExhibitSummary {
@@ -8,7 +7,8 @@ export interface IExhibitSummary {
     descriptionFileName: string;
     anchor: string;
     promo: IWork;
-    special: ISpecial;
+    textLabel: string;
+    textRoute: string;
 }
 
 export interface IExhibit extends IExhibitSummary {

@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 
 import { ScullyLibModule } from '@scullyio/ng-lib';
@@ -51,6 +52,7 @@ export function initConfig(configService: AppConfigService) {
         FormsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'leets', component: LeetsComponent },
             { path: 'about', component: AboutComponent }
         ], { scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' }),
         MarkdownModule.forRoot({
@@ -62,6 +64,7 @@ export function initConfig(configService: AppConfigService) {
                 }
             }
         }),
+        NgbModule,
         NgxGalleryModule,
         ScullyLibModule
     ],

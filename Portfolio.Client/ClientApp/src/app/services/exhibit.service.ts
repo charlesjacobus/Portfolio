@@ -91,7 +91,8 @@ export class ExhibitService implements IExhibitService {
             anchor: exhibitSummary.anchor,
             promo: exhibitSummary.promo,
             works: [exhibitSummary.promo],
-            special: exhibitSummary.special
+            textLabel: exhibitSummary.textLabel,
+            textRoute: exhibitSummary.textRoute
         };
 
         return exhibit;

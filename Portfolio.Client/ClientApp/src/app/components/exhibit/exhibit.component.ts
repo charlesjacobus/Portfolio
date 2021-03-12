@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { isEmpty, isNil } from 'lodash';
 
@@ -19,16 +20,12 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
     public galleryImages: NgxGalleryImage[];
     public visibleTab: string = 'work';
 
-    constructor(protected exhibitService: ExhibitService) {
-        super(exhibitService);
+    constructor(protected exhibitService: ExhibitService, protected router: Router) {
+        super(exhibitService, router);
     }
 
     public showWorkText(): boolean {
-        return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()) && !this.getExhibitSpecialTabName();
-    }
-
-    public showWorkTextSpecial(): boolean {
-        return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl()) && !!this.getExhibitSpecialTabName();
+        return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl());
     }
 
     public showNoWorkText(): boolean {
