@@ -8,28 +8,28 @@
 */
 
 body {
-  background: #39393E;
-  color: whitesmoke;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding-top: 100px; /* Required for the navbar fixed positioning */
+    background: #39393E;
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 100px; /* Required for the navbar fixed positioning */
 }
 
 router-outlet ~ * {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .indexContainer {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 800px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
 }
 
 /* anchor */
 a:link {
-  color: #247D3C;
+    color: #247D3C;
 }
 
 a:visited {
@@ -37,44 +37,44 @@ a:visited {
 }
 
 a:hover {
-  color: #247D3C;
-  text-decoration: none;
+    color: #34B255;
+    text-decoration: none;
 }
 
 a:active {
-  color: #247D3C;
+    color: #247D3C;
 }
 
 /* scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
+    width: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: whitesmoke;
+    background: whitesmoke;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #515154;
+    background: #515154;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #515154;
+    background: #515154;
 }
 
 /* ng-bootstrap style overrides */
 .btn-link, .btn-link:active, .btn-link:focus, .btn-link:hover, .btn-link:link, .btn-link:visited {
-  color: #247D3C;
-  text-decoration: none;
+    color: #247D3C;
+    text-decoration: none;
 }
 
 .card {
-  background: #39393E;
-  color: whitesmoke;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: #39393E;
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .card_header {
-  background-color: #39393E;
-  text-decoration: none;
+    background-color: #39393E;
+    text-decoration: none;
 }

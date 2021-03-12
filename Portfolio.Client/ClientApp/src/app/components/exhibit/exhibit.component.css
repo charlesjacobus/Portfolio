@@ -1,104 +1,103 @@
 .currentWorkOfLabel {
-    color: dimgray;
-    float: right;
-    font-size: small;
-    margin: 0px;
-    padding: 0px;
+  color: dimgray;
+  float: right;
+  font-size: small;
+  margin: 0px;
+  padding: 0px;
 }
 
-.exhibit {
-}
+.exhibit {}
 
 .exhibitContainer {
-    display: block;
-    margin-top: 50px;
-    min-height: 200px;
+  display: block;
+  margin-top: 50px;
+  min-height: 200px;
 }
 
 .exhibitDescriptionContainer {
-    display: block;
-    height: 405px;
-    padding-right: 5px;
-    text-align: left;
-    overflow: hidden scroll;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+  display: block;
+  height: 405px;
+  padding-right: 5px;
+  text-align: left;
+  overflow: hidden scroll;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .exhibitTabs {
-    float: left;
-    font-size: small;
+  float: left;
+  font-size: small;
 }
 
 .exhibitTitle {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 .firstExhibit {
-    margin-top: 0px !important;
+  margin-top: 0px !important;
 }
 
 .noScrollContainer {
-    overflow: hidden hidden;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: auto;
+  overflow: hidden hidden;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: auto;
 }
 
 .tabActive {
-    color: #247D3C;
+  color: #247D3C;
 }
 
-    .tabActive:hover {
-        color: #34B255;
-    }
+.tabActive:hover {
+  color: #34B255;
+}
 
 .tabInactive {
-    color: whitesmoke;
+  color: whitesmoke;
 }
 
 .tabSpacer {
-    color: whitesmoke;
-    font-size: small;
+  color: whitesmoke;
+  font-size: small;
 }
 
 .tabPointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 800px) {
-    .exhibitDescriptionContainer {
-        font-size: smaller;
-        height: 255px;
-    }
+  .exhibitDescriptionContainer {
+    font-size: smaller;
+    height: 255px;
+  }
 
-    .exhibitTitle {
-        font-size: large;
-    }
+  .exhibitTitle {
+    font-size: large;
+  }
 }
 
 @media only screen and (max-width: 400px) {
-    .exhibitContainer {
-        margin-top: 35px;
-    }
+  .exhibitContainer {
+    margin-top:35px;
+  }
 
-    .exhibitDescriptionContainer {
-        font-size: small;
-        height: 125px;
-    }
+  .exhibitDescriptionContainer {
+    font-size: small;
+    height: 125px;
+  }
 
-    .exhibitTitle {
-        font-size: small;
-    }
+  .exhibitTitle {
+    font-size: small;
+  }
 
-    .tabActive {
-        font-size: smaller;
-    }
+  .tabActive {
+    font-size: smaller;
+  }
 
-    .tabInactive {
-        font-size: smaller;
-    }
+  .tabInactive {
+    font-size: smaller;
+  }
 
-    .tabSpacer {
-        font-size: smaller;
-    }
+  .tabSpacer {
+    font-size: smaller;
+  }
 }

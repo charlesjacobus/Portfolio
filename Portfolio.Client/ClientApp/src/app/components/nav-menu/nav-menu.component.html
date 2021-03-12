@@ -17,13 +17,13 @@
         class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link navbar-text" [routerLink]="['/']">Selected Works</a>
+            <a class="nav-link navbar-text" [routerLink]="['/']" (click)="toggle()">Selected Works</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link navbar-text" [routerLink]="['/leets']">Leets</a>
+              <a class="nav-link navbar-text" [routerLink]="['/leets']" (click)="toggle()">Leets</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link navbar-text" [routerLink]="['/about']">About</a>
+            <a class="nav-link navbar-text" [routerLink]="['/about']" (click)="toggle()">About</a>
           </li>
         </ul>
       </div>
