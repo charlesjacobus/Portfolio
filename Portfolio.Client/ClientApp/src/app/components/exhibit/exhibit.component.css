@@ -64,6 +64,8 @@
   cursor: pointer;
 }
 
+/* For exhibitDescriptionContainer size properties, see also ngx-gallery configuration in exhibit.component.ts, with slight height adjustment of 5px for Chrome bug (?) */
+
 @media only screen and (max-width: 800px) {
   .exhibitDescriptionContainer {
     font-size: smaller;

@@ -77,6 +77,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 arrowPrevIcon: 'fa fa-chevron-left',
                 imageArrows: false,
                 previewArrowsAutoHide: true,
+                previewCloseOnClick: true,
                 previewCloseOnEsc: true,
                 previewDescription: true,
                 previewFullscreen: true,
