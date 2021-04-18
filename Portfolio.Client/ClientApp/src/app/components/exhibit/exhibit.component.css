@@ -10,7 +10,7 @@
 
 .exhibitContainer {
   display: block;
-  margin-top: 50px;
+  margin-top: 75px;
   min-height: 200px;
 }
 
@@ -79,7 +79,7 @@
 
 @media only screen and (max-width: 400px) {
   .exhibitContainer {
-    margin-top:35px;
+    margin-top:50px;
   }
 
   .exhibitDescriptionContainer {

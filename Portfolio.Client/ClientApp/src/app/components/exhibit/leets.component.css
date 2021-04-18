@@ -32,6 +32,7 @@
 }
 
 .leetCartoon {
+    margin-bottom: 10px; /* So that when top-to-bottom there's a margin between the leet image and controller */
 }
 
 /* Groups the controller and cartoon */
@@ -44,7 +45,7 @@
 
 .leetController {
     flex: 1 auto;
-    margin-right: 10px; /* So than when side-by-side there's a margin between the controller and the leet image */
+    margin-right: 10px; /* So that when side-by-side there's a margin between the controller and the leet image */
     width: 150px;
 }
 
