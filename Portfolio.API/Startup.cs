@@ -68,7 +68,7 @@ namespace Portfolio.Api
                 {
                     Version = "v1",
                     Title = "Portfolio API",
-                    Description = "Charles Jacobus Selected Works",
+                    Description = "Charles Jacobus Selected Work",
                     TermsOfService = null,
                     Contact = new OpenApiContact
                     {

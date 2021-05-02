@@ -52,7 +52,7 @@ export function initConfig(configService: AppConfigService) {
         FormsModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'leets', component: LeetsComponent },
+            { path: 'leet', component: LeetsComponent },
             { path: 'about', component: AboutComponent }
         ], { scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' }),
         MarkdownModule.forRoot({
