@@ -13,7 +13,7 @@
             <ng-template ngbPanelContent>
                 <div class="leetContainer">
                     <div class="leetController">
-                        <div class="leetCodes"><small><strong>Leet Codes</strong> ({{this.getLeets.length}})</small></div>
+                        <div class="leetCodes"><small><strong>Leet Codes</strong> ({{this.getLeets().length}})</small></div>
                         <div #leetsContainer class="leetsContainer">
                             <div *ngFor="let leet of this.getLeets()" (click)="this.getLeet(leet.code)" [ngClass]="['leetFormOptionBlock', this.isSelectedLeet(leet.code) ? 'leetFormOptionSelected' : 'leetFormOption']">&nbsp;{{leet.code}}</div>
                         </div>
