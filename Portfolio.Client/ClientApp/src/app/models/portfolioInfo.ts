@@ -5,4 +5,5 @@ export interface IPortfolioInfo {
     hrefGetActiveExhibits: string;
     hrefGetExhibit: string;
     hrefGetLeet: string;
+    hrefGetPhoto: string;
 }

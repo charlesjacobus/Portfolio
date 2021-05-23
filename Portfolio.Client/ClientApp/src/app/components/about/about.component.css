@@ -13,6 +13,8 @@
     padding-top: 20px;
 }
 
+.aboutPhoto { }
+
 .aboutQuote {
     font-style: italic;
 }
@@ -23,7 +25,11 @@
 
 .aboutSite {
     font-size: 14px;
-    padding-left: 50px;
-    padding-right: 50px;
     text-align: justify;
+}
+
+@media only screen and (max-width: 800px) {
+    .aboutPhoto {
+        max-width: 90%;
+    }
 }

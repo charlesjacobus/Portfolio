@@ -26,6 +26,7 @@ namespace Portfolio.Api.Builders
 
             var augmented = RouteMapAugmenter.AugmentRoutes(urlHelper, instance);
             augmented = RouteMapAugmenter.AugmentRoute(urlHelper, augmented, "GetExhibit", new { id = "{id}" });
+            augmented = RouteMapAugmenter.AugmentRoute(urlHelper, augmented, "GetPhoto", new { id = "{id}" });
 
             return augmented;
         }

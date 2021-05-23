@@ -55,6 +55,7 @@ namespace Portfolio.Api
                     });
             });
 
+            services.AddSingleton<IPortfolioService, PortfolioService>();
             services.AddSingleton<ILeetService, LeetService>();
             services.AddSingleton<IExhibitService, ExhibitService>();
             services.AddScoped<IHealthServices, HealthServices>();

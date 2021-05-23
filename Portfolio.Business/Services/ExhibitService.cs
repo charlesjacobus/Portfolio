@@ -9,6 +9,8 @@ namespace Portfolio.Business.Services
 {
     public interface IExhibitService
     {
+        Models.Portfolio Portfolio { get; }
+
         Exhibit GetExhibit(int id);
 
         IEnumerable<ExhibitSummary> GetExhibitsSummary();

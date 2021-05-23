@@ -4,6 +4,8 @@ namespace Portfolio.Business.Models
 {
     public class Portfolio
     {
+        public About About { get; set; }
+
         public IEnumerable<Exhibit> Exhibits { get; set; }
 
         public static Portfolio Create()
@@ -15,6 +17,7 @@ namespace Portfolio.Business.Models
         {
             return new Portfolio
             {
+                About = About.Default(),
                 Exhibits = new List<Exhibit>
                 {
                     Exhibit.Error()

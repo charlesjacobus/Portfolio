@@ -15,6 +15,9 @@ namespace Portfolio.Api.Representations
         [RouteMap("GetLeet")]
         public string HrefGetLeet { get; set; }
 
+        [RouteMap("GetPhoto")]
+        public string HrefGetPhoto { get; set; }
+
         public static PortfolioRepresentation Create()
         {
             return new PortfolioRepresentation();
