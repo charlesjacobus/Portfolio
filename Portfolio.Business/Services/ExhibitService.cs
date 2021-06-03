@@ -66,7 +66,8 @@ namespace Portfolio.Business.Services
 
             return Portfolio.Exhibits
                 .Where(e => !string.Equals(e.Status, "Archived", System.StringComparison.OrdinalIgnoreCase))
-                .Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Anchor, e.Promo ?? e.Works.First(), e.TextLabel, e.TextRoute));
+                .Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Order, e.Anchor, e.Promo ?? e.Works.First(), e.TextLabel, e.TextRoute))
+                .OrderBy(e => e.Order).ThenBy(e => e.Name);
         }
     }
 }

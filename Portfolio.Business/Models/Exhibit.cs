@@ -23,9 +23,11 @@ namespace Portfolio.Business.Models
 
         public string TextRoute { get; set; }
 
-        public static Exhibit Create(int id, string name, string description, string descriptionFileName, string anchor, Work promo, string textLabel, string textRoute, string status = "Active")
+        public int Order { get; set; }
+
+        public static Exhibit Create(int id, string name, string description, string descriptionFileName, int order, string anchor, Work promo, string textLabel, string textRoute, string status = "Active")
         {
-            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo, TextLabel = textLabel, TextRoute = textRoute, Status = status };
+            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Order = order, Anchor = anchor, Promo = promo, TextLabel = textLabel, TextRoute = textRoute, Status = status };
         }
     }
 
