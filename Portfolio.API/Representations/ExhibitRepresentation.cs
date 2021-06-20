@@ -19,13 +19,15 @@ namespace Portfolio.API.Representations
 
         public WorkRepresentation Promo { get; set; }
 
+        public bool TextIsDefault { get; set; }
+
         public string TextLabel { get; set; }
 
         public string TextRoute { get; set; }
 
-        public static ExhibitSummaryRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, WorkRepresentation promo)
+        public static ExhibitSummaryRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, WorkRepresentation promo, bool textIsDefault)
         {
-            return new ExhibitSummaryRepresentation { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo };
+            return new ExhibitSummaryRepresentation { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Anchor = anchor, Promo = promo, TextIsDefault = textIsDefault };
         }
 
         public static IEnumerable<ExhibitSummaryRepresentation> Create(IEnumerable<ExhibitSummary> exhibitSummaries)
@@ -39,7 +41,7 @@ namespace Portfolio.API.Representations
 
             foreach (var exhibitSummary in exhibitSummaries)
             {
-                result.Add(Create(exhibitSummary.ID, exhibitSummary.Name, exhibitSummary.Description, exhibitSummary.DescriptionFileName, exhibitSummary.Anchor, WorkRepresentation.Create(exhibitSummary.Promo)));
+                result.Add(Create(exhibitSummary.ID, exhibitSummary.Name, exhibitSummary.Description, exhibitSummary.DescriptionFileName, exhibitSummary.Anchor, WorkRepresentation.Create(exhibitSummary.Promo), exhibitSummary.TextIsDefault));
             }
 
             return result;
@@ -64,10 +66,10 @@ namespace Portfolio.API.Representations
                 works.Add(WorkRepresentation.Create(work));
             }
 
-            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works, exhibit.TextLabel, exhibit.TextRoute);
+            return Create(exhibit.ID, exhibit.Name, exhibit.Description, exhibit.DescriptionFileName, exhibit.Anchor, works, exhibit.TextIsDefault, exhibit.TextLabel, exhibit.TextRoute);
         }
 
-        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works, string textLabel, string textRoute)
+        public static ExhibitRepresentation Create(int id, string name, string description, string descriptionFileName, string anchor, IEnumerable<WorkRepresentation> works, bool textIsDefault, string textLabel, string textRoute)
         {
             return new ExhibitRepresentation {
                 ID = id,
@@ -77,6 +79,7 @@ namespace Portfolio.API.Representations
                 Anchor = anchor,
                 Promo = works.FirstOrDefault(),
                 Works = works,
+                TextIsDefault = textIsDefault,
                 TextLabel = textLabel,
                 TextRoute = textRoute
             };

@@ -19,15 +19,17 @@ namespace Portfolio.Business.Models
 
         public string Status { get; set; }
 
+        public bool TextIsDefault { get; set; }
+
         public string TextLabel { get; set; }
 
         public string TextRoute { get; set; }
 
         public int Order { get; set; }
 
-        public static Exhibit Create(int id, string name, string description, string descriptionFileName, int order, string anchor, Work promo, string textLabel, string textRoute, string status = "Active")
+        public static Exhibit Create(int id, string name, string description, string descriptionFileName, int order, string anchor, Work promo, bool textIsDefault, string textLabel, string textRoute, string status = "Active")
         {
-            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Order = order, Anchor = anchor, Promo = promo, TextLabel = textLabel, TextRoute = textRoute, Status = status };
+            return new Exhibit { ID = id, Name = name, Description = description, DescriptionFileName = descriptionFileName, Order = order, Anchor = anchor, Promo = promo, TextIsDefault = textIsDefault, TextLabel = textLabel, TextRoute = textRoute, Status = status };
         }
     }
 

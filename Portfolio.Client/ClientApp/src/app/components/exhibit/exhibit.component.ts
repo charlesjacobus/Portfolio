@@ -24,6 +24,12 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         super(exhibitService, router);
     }
 
+    public ngAfterViewInit(): void {
+        super.ngAfterViewInit();
+
+        this.initializeTabOptions();
+    }
+
     public showWorkText(): boolean {
         return (!!this.getExhibitDescription() || !!this.getExhibitDescriptionUrl());
     }
@@ -100,5 +106,16 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 imagePercent: 80
             }
         ];
+    }
+
+    private initializeTabOptions(): void {
+        // Cheating a little bit here, because this probably wouldn't be the best UX for exhibits above the fold
+        // But this simply allows us to pre-load the exhibit promo image and default to the "text" tab, without Angular complaining about it
+        const that = this;
+        setTimeout(function () {
+            if (that.exhibit.textIsDefault) {
+                that.visibleTab = 'text';
+            }
+        }, 1000);
     }
 }

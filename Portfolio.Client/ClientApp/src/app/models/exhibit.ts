@@ -7,6 +7,7 @@ export interface IExhibitSummary {
     descriptionFileName: string;
     anchor: string;
     promo: IWork;
+    textIsDefault: boolean;
     textLabel: string;
     textRoute: string;
 }
