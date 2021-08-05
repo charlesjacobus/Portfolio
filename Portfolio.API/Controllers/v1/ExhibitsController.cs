@@ -40,6 +40,7 @@ namespace Portfolio.API.Controllers.v1
         /// <summary>
         /// Gets details for a specified exhibit
         /// </summary>
+        /// <param name="id">The ID that uniquely identifies the exhibit</param>
         /// <returns>An exhibit</returns>
         [HttpGet]
         [Route("{id}", Name = "GetExhibit")]

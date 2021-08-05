@@ -40,7 +40,7 @@ namespace Portfolio.Api.Controllers
         /// <summary>
         /// Gets information about a photo of the artist
         /// </summary>
-        /// <param name="id">An optional photo identifier</param>
+        /// <param name="id">The ID that uniquely identifies the photo</param>
         /// <returns>Photo information</returns>
         /// <remarks>If the identifier is out of range, then information for a random photo is returned</remarks>
         [HttpGet]
