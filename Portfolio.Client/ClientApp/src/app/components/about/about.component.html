@@ -8,9 +8,9 @@
         </div>
         <div class="aboutParagraph">Tactility and touch; quietude, slowness, recall; tonality and atonality; permanence and impermanence; the general and the specific &mdash; all qualities that I feel define a moral basis for aesthetic and political value.</div>
         <div class="aboutParagraph">My work is deliberately small and a project for a lifetime.</div>
-        <div class="aboutParagraph" *ngIf="this.photoIsAvailable()">
-            <img src="{{this.getPhotoImageSource()}}" title="{{this.getPhotoImageTitle()}}" class="aboutPhoto" width="{{this.getPhotoImageWidth()}}" /><br />
-            <sub><sup><span [innerHtml]="this.getPhotoCaptionHtml()"></span></sup></sub>
+        <div class="aboutParagraph" *ngIf="photoIsAvailable()">
+            <img src="{{getPhotoImageSource()}}" title="{{getPhotoImageTitle()}}" class="aboutPhoto" width="{{getPhotoImageWidth()}}" /><br />
+            <sub><sup><span [innerHtml]="getPhotoCaptionHtml()"></span></sup></sub>
         </div>
         <div class="aboutParagraph">
             For more goodness, visit my brother Frank's site at <a href="https://www.frankjacobus.com" target="_blank">frankjacobus.com</a>

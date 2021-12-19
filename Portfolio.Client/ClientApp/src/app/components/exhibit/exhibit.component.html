@@ -1,47 +1,50 @@
-<a name="{{this.getExhibitAnchor()}}"></a>
-<div [ngClass]="{'exhibitContainer': true, 'firstExhibit': this.exhibitIndex === 0}">
-  <h2 class="exhibitTitle">{{this.getExhibitName()}}</h2>
+<a name="{{getExhibitAnchor()}}"></a>
+<div [ngClass]="{'exhibitContainer': true, 'firstExhibit': exhibitIndex === 0}">
+  <h2 class="exhibitTitle">{{getExhibitName()}}</h2>
   <!-- Work : Text tabs -->
   <div>
     <div class="exhibitTabs">
-        <div *ngIf="this.showWorkText()">
-            <label (click)="this.visibleTab = 'work'"
-                   [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'work', 'tabInactive': this.visibleTab === 'work'}">Work</label>
+        <div *ngIf="showWorkText()">
+            <label (click)="visibleTab = 'work'"
+                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
             &nbsp;<label class="tabSpacer">:</label>&nbsp;
-            <label *ngIf="this.getExhibitTextRoute()" (click)="this.visitExhibitTextRoute()"
-                   [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}">{{this.getExhibitTextLabel()}}</label>
-            <label *ngIf="!this.getExhibitTextRoute()" (click)="this.visibleTab = 'text'"
-                   [ngClass]="{'tabPointer': true, 'tabActive': this.visibleTab !== 'text', 'tabInactive': this.visibleTab === 'text'}">{{this.getExhibitTextLabel()}}</label>
+            <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
+                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+            <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
+                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
         </div>
         <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
-        <div *ngIf="this.showNoWorkText()"><label>&nbsp;</label></div>
+        <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
     </div>
-    <label class="currentWorkOfLabel">{{this.getCurrentWorkOfLabel()}}</label>
+    <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
     <div [ngStyle]="{'clear': 'both'}"></div>
   </div>
   <!-- Work : Text views -->
   <!-- Work -->
-  <div class="exhibit" [style.display]="this.visibleTab === 'work' ? 'block' : 'none'">
-    <div *ngIf="this.isGalleryExhibit()">
+  <div class="exhibit" [style.display]="visibleTab === 'work' ? 'block' : 'none'">
+    <div *ngIf="isGalleryExhibit()">
       <ngx-gallery #NgxGalleryComponent
-                   [options]="this.galleryOptions"
-                   [images]="this.galleryImages"></ngx-gallery>
+                   [options]="galleryOptions"
+                   [images]="galleryImages"
+                   (previewChange)="handleImagePreviewChange($event)"
+                   (previewClose)="handleImagePreviewClose()"></ngx-gallery>
+        <img *ngIf="prefetchImageSource" src="{{prefetchImageSource}}" style="display:none"/>
     </div>
-    <div *ngIf="!this.isGalleryExhibit()">
+    <div *ngIf="!isGalleryExhibit()">
       <prose-gallery #ProseGalleryComponent
-                     [exhibitSummary]="this.exhibitSummary"></prose-gallery>
+                     [exhibitSummary]="exhibitSummary"></prose-gallery>
     </div>
   </div>
   <!-- Text -->
-  <div class="exhibitDescriptionContainer" [style.display]="this.visibleTab === 'text' ? 'block' : 'none'">
-    <markdown *ngIf="!!this.getExhibitDescription() && !this.getExhibitDescriptionUrl()"
+  <div class="exhibitDescriptionContainer" [style.display]="visibleTab === 'text' ? 'block' : 'none'">
+    <markdown *ngIf="!!getExhibitDescription() && !getExhibitDescriptionUrl()"
               ngPreserveWhitespaces>
-      {{this.getExhibitDescription()}}
+      {{getExhibitDescription()}}
     </markdown>
-    <markdown *ngIf="!this.getExhibitDescription() && !!this.getExhibitDescriptionUrl()"
-              [src]="this.getExhibitDescriptionUrl()"
+    <markdown *ngIf="!getExhibitDescription() && !!getExhibitDescriptionUrl()"
+              [src]="getExhibitDescriptionUrl()"
               ngPreserveWhitespaces>
-      {{this.getExhibitDescription()}}
+      {{getExhibitDescription()}}
     </markdown>
   </div>
 </div>

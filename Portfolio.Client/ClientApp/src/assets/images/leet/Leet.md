@@ -1,4 +1,4 @@
-Leet is a lifetime series and now a game.  
+**Leet** is a lifetime series and now a game.  
 
 The series consists of three compositions (G, M and F). For purposes of this game, the composition is randomly chosen with colors that are randomly generated.  
 

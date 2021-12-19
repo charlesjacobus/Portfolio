@@ -1,6 +1,6 @@
-Boardwalk Zoetrope uses an extended haiku form consisting of paired couplet and quatrain stanzas (4 2 4 4 4 4 2 4 4 2 4 4 4 4 2 4), under a conventional syllabic meter (5 7 5).  
+**Boardwalk Zoetrope** uses an extended haiku form consisting of paired couplet and quatrain stanzas (4 2 4 4 4 4 2 4 4 2 4 4 4 4 2 4), under a conventional syllabic meter (5 7 5).  
 
-The poem is a bookend for the *New York Haiku*, a collection of traditional haiku, haibun, and haiga about New York City.
+The poem is a bookend for the **New York Haiku**, a collection of traditional haiku, haibun, and haiga about New York City.
 
 ...
 

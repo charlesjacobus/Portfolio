@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { find, isNil } from 'lodash';
 
 import { ILeet } from '../../models/leet';
-import { DataService } from '../../services/data.service';
 import { ExhibitService } from '../../services/exhibit.service';
 import { WorkComponent } from './work.component';
 
@@ -18,13 +17,12 @@ export class LeetsComponent extends WorkComponent implements OnInit {
     private static readonly LeetName = 'Leet';
 
     private clipboardContent: string;
-    private fetchingInstructions = true;
     private prefetch: ILeet;
 
     public leet: ILeet;
     public leets: Array<ILeet>;
 
-    constructor(private dataService: DataService, protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer) {
+    constructor(protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer) {
         super(exhibitService, router);
     }
 
@@ -35,8 +33,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
 
         this.getLeet();
 
-        super.ngOnInit();
-        this.getExhibitDescription();
+        this.initialize();
     }
 
     public copiedToClipboard(event: any): void {
@@ -52,29 +49,6 @@ export class LeetsComponent extends WorkComponent implements OnInit {
 
     public getCurrentLeet(): ILeet {
         return this.leet;
-    }
-
-    public getExhibitDescription(): string {
-        if (!isNil(this.exhibit) && !isNil(this.exhibit.description) && !this.fetchingInstructions) {
-            return this.exhibit.description;
-        }
-
-        if (!isNil(this.exhibit.descriptionFileName) && this.fetchingInstructions) {
-            this.fetchingInstructions = false;
-
-            let fileFullName: string = this.getFileFullName(this.exhibit.descriptionFileName);
-
-            this.dataService.getBlob(fileFullName)
-                .subscribe((response: Blob) => {
-                    response.text().then((content: string) => {
-                        this.exhibit.description = content;
-
-                        return content;
-                    });
-                });
-        }
-
-        return null;
     }
 
     public getLeet(code: string = null): void {

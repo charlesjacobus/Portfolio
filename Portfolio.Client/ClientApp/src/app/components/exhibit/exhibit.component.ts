@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { isEmpty, isNil } from 'lodash';
+import { find, isArray, isEmpty, isNil, split } from 'lodash';
 
 import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery-9';
 
-import { IExhibit } from '../../models/exhibit';
+import { IExhibit, IExhibitSummary } from '../../models/exhibit';
 import { IWork } from '../../models/work';
 import { ExhibitService } from '../../services/exhibit.service';
 import { WorkComponent } from './work.component';
@@ -16,9 +16,14 @@ import { WorkComponent } from './work.component';
     styleUrls: ['./exhibit.component.css']
 })
 export class ExhibitComponent extends WorkComponent implements AfterViewInit, OnInit {
+    private static readonly DefaultPrefetchImageIndex: number = -1;
+
     public galleryOptions: NgxGalleryOptions[];
     public galleryImages: NgxGalleryImage[];
+    public prefetchImageSource: string;
     public visibleTab: string = 'work';
+
+    private prefetchImageIndex: number = ExhibitComponent.DefaultPrefetchImageIndex;
 
     constructor(protected exhibitService: ExhibitService, protected router: Router) {
         super(exhibitService, router);
@@ -28,6 +33,50 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         super.ngAfterViewInit();
 
         this.initializeTabOptions();
+    }
+
+    public handleImagePreviewChange(event: any): void {
+        // Improves the image gallery experience by pre-fetching images
+        // event.index is the 0-base index of the image just displayed
+        // event.image.big is the relative URL of the image just displayed, without the host name or scheme
+
+        if (isNil(event) || isNil(event.image) || isNil(event.image.big)) {
+            return;
+        }
+
+        const imagePathParts = split(event.image.big, '/');
+        if (imagePathParts.length < 3) {
+            return;
+        }
+
+        this.exhibitService.fetchExhibitSummaries().subscribe((exhibitSummaries: Array<IExhibitSummary>) => {
+            const exhibitSummary: IExhibitSummary = find(exhibitSummaries, ['anchor', imagePathParts[2]]);
+            if (!isNil(exhibitSummary)) {
+                this.exhibitService.fetchExhibit(exhibitSummary.id).subscribe((exhibit: IExhibit) => {
+                    if (!isNil(exhibit) && isArray(exhibit.works)) {
+                        this.prefetchImageIndex =
+                            (
+                                this.prefetchImageIndex === ExhibitComponent.DefaultPrefetchImageIndex ||   // Preview image displayed
+                                event.index === this.prefetchImageIndex + 1 ||                              // Next image
+                                event.index === 0 && this.prefetchImageIndex === exhibit.works.length - 1   // Last-to-first image
+                            ) ?
+                            event.index + 1 <= exhibit.works.length - 1 ? event.index + 1 : 0 :             // Forward
+                            event.index - 1 >= 0 ? event.index - 1 : exhibit.works.length - 1;              // Backward
+
+                        const work: IWork = exhibit.works[this.prefetchImageIndex];
+                        if (!isNil(work)) {
+                            this.prefetchImageSource = this.getFileFullName(work.fileNameLarge);
+                        }
+
+                        this.prefetchImageIndex = event.index;
+                    }
+                });
+            }
+        });
+    }
+
+    public handleImagePreviewClose(): void {
+        this.prefetchImageIndex = ExhibitComponent.DefaultPrefetchImageIndex;
     }
 
     public showWorkText(): boolean {
@@ -82,6 +131,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 arrowNextIcon: 'fa fa-chevron-right',
                 arrowPrevIcon: 'fa fa-chevron-left',
                 imageArrows: false,
+                lazyLoading: false,
                 previewArrowsAutoHide: true,
                 previewCloseOnClick: true,
                 previewCloseOnEsc: true,
