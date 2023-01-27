@@ -32,7 +32,7 @@ export class ProseComponent extends WorkComponent implements AfterViewInit, OnIn
             return null;
         }
 
-        return this.exhibit.works.length === 1 ? null : ''.concat((this.currentWorkIndex + 1).toLocaleString(), ' of ', this.exhibit.works.length.toLocaleString());
+        return this.exhibit.works.length === 1 ? null : `${(this.currentWorkIndex + 1).toLocaleString()} of ${this.exhibit.works.length.toLocaleString()}`;
     }
 
     public getCurrentWorkUrl(): string {

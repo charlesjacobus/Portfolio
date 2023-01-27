@@ -40,7 +40,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
             return null;
         }
 
-        return isNil(this.exhibit) ? null : ''.concat('1 of ', this.exhibit.works.length.toLocaleString());
+        return isNil(this.exhibit) ? null : `1 of ${this.exhibit.works.length.toLocaleString()}`;
     }
 
     public getExhibitAnchor(): string {
@@ -109,7 +109,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
             return null;
         }
 
-        return ''.concat('assets/', this.getAssetsFolderName(), '/', this.getExhibitAnchor(), '/', fileName)
+        return `assets/${this.getAssetsFolderName()}/${this.getExhibitAnchor()}/${fileName}`;
     }
 
     protected abstract initialize(): void;
