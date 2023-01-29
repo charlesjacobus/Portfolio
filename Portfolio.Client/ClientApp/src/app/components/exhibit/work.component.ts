@@ -34,6 +34,10 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         this.initialize();
     }
 
+    public getAssetsFolderName(): string {
+        return 'images';
+    }
+
     public getCurrentWorkOfLabel(): string {
         // If there's only 1 work in the exhibit, the label isn't that useful
         if (this.exhibit.works.length === 1) {
@@ -87,8 +91,6 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
 
         this.router.navigateByUrl(textRoute);
     }
-
-    protected abstract getAssetsFolderName(): string;
 
     protected getExhibitWorkPropertyValue(index: number, propertyName: string): string {
         let works: Array<IWork> = this.getExhibitWorks();

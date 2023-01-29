@@ -13,7 +13,7 @@ import { NgxGalleryModule } from 'ngx-gallery-9';
 
 import { ScullyLibModule } from '@scullyio/ng-lib';
 
-import { AboutComponent } from './components/about/about.component'
+import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
 import { ExhibitComponent } from './components/exhibit/exhibit.component';

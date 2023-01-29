@@ -8,7 +8,6 @@ import { IPortfolioInfo } from '../models/portfolioInfo';
 import { DataService } from './data.service';
 
 import { replace } from 'lodash';
-import * as urljoin from 'url-join';
 
 export interface IAppConfigService {
     load(): Promise<void | Observable<never>>;
@@ -33,7 +32,7 @@ export class AppConfigService implements IAppConfigService {
                 AppConfigService.configuration = response;
 
                 AppConfigService.api = this.getApiHostName();
-                AppConfigService.apiInfo = urljoin(AppConfigService.api, response.apiInfoPath);
+                AppConfigService.apiInfo = new URL(response.apiInfoPath, AppConfigService.api).href;
 
                 return AppConfigService.configuration;
             })

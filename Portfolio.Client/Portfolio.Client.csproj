@@ -68,7 +68,6 @@
     <Content Include="ClientApp\src\tsconfig.app.json" />
     <Content Include="ClientApp\tsconfig.base.json" />
     <Content Include="ClientApp\src\tsconfig.server.json" />
-    <Content Include="ClientApp\src\tsconfig.spec.json" />
   </ItemGroup>
 
   <ItemGroup>

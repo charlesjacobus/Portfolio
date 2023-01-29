@@ -87,10 +87,6 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         return !this.getExhibitDescription() && !this.getExhibitDescriptionUrl();
     }
 
-    protected getAssetsFolderName(): string {
-        return 'images';
-    }
-
     protected initialize(): void {
         if (!this.isGalleryExhibit()) {
             return;

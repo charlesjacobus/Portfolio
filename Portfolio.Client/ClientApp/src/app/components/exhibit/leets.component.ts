@@ -19,6 +19,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
     private clipboardContent: string;
     private prefetch: ILeet;
 
+    public instructions: boolean = false;
     public leet: ILeet;
     public leets: Array<ILeet>;
 
@@ -41,10 +42,6 @@ export class LeetsComponent extends WorkComponent implements OnInit {
         if (!isNil(event) && !isNil(event.content)) {
             this.clipboardContent = event.content;
         }
-    }
-
-    public getAssetsFolderName(): string {
-        return 'images';
     }
 
     public getCurrentLeet(): ILeet {
@@ -112,6 +109,10 @@ export class LeetsComponent extends WorkComponent implements OnInit {
         }
 
         return this.leet.code === this.clipboardContent;
+    }
+
+    public toggleInstructions(): void {
+        this.instructions = !this.instructions;
     }
 
     public sendEmail(): void {

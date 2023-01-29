@@ -23,6 +23,10 @@ export class ProseComponent extends WorkComponent implements AfterViewInit, OnIn
         super(exhibitService, router);
     }
 
+    public getAssetsFolderName(): string {
+        return 'texts';
+    }
+
     public getCurrentWorkName(): string {
         return this.getExhibitWorkPropertyValue(this.currentWorkIndex, 'name');
     }
@@ -52,10 +56,6 @@ export class ProseComponent extends WorkComponent implements AfterViewInit, OnIn
         if (this.currentWorkIndex > this.exhibit.works.length - 1) {
             this.currentWorkIndex = 0;
         }
-    }
-
-    protected getAssetsFolderName(): string {
-        return 'texts';
     }
 
     protected initialize(): void {
