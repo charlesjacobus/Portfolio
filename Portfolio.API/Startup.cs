@@ -16,7 +16,6 @@ using Portfolio.Business.Services;
 using Portfolio.Business.Services.Health;
 using Portfolio.Business.Serializers;
 
-
 namespace Portfolio.Api
 {
     public class Startup
