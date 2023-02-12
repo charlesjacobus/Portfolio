@@ -54,7 +54,7 @@ export function initConfig(configService: AppConfigService) {
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'leet', component: LeetsComponent },
             { path: 'about', component: AboutComponent }
-        ], { scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' }),
+        ], { scrollPositionRestoration: 'enabled' }),
         MarkdownModule.forRoot({
             loader: HttpClient,
             markedOptions: {
