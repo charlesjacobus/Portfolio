@@ -16,3 +16,6 @@ obj
 /*/ClientApp/src/environments/**/*.js.map
 
 debug.log
+/_info.txt
+/charlesjacobus.com.publishsettings
+/api.charlesjacobus.com.publishsettings
