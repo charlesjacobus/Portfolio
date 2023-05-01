@@ -3,9 +3,9 @@ Along with several haibun, these haiga accompany the New York Haiku, which is a 
 This work conveys the seasonal (_kigo_) characteristics of traditional haiku, as a seasonal period in one’s life. For the New York Haiku, that period was the six years I lived in New York City.  
 
 The following is a selection of the poems from the New York Haiku.  
-  
-...  
-  
+
+---
+
 said the skyscraper,  
 “I spy for dead empires”  
 to the cloud, passing  

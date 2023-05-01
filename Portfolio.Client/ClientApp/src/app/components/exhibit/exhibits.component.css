@@ -14,6 +14,11 @@
     width: 80%
 }
 
+.exhibitsLoadingContainer {
+    color: gray;
+    font-size: x-large;
+}
+
 @media only screen and (max-width: 800px) {
     .exhibitsContainer {
         width: 80%;

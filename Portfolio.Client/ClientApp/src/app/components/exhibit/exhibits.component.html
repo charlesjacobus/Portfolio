@@ -1,5 +1,9 @@
 <div class="exhibitsContainer">
-    <div *ngIf="!errorFetchingExhibitSummaries">
+    <!-- When hosted, exhibit resources and thumbnails load more slowly (too slow?) so provide a simple hint of progress -->
+    <div *ngIf="!exhibitsLoaded && !errorFetchingExhibitSummaries">
+        <div class="exhibitsLoadingContainer">Loading exhibits...</div>
+    </div>
+    <div *ngIf="exhibitsLoaded && !errorFetchingExhibitSummaries">
         <exhibit *ngFor="let exhibitSummary of this.getExhibitSummaries(); let i = index"
                  [exhibitIndex]="i"
                  [exhibitSummary]="exhibitSummary"></exhibit>

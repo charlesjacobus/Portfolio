@@ -2,7 +2,7 @@
 
 The poem is a bookend for the **New York Haiku**, a collection of traditional haiku, haibun, and haiga about New York City.
 
-...
+---
 
 sipping sweet Coney Island  
 fog through my white teeth  
