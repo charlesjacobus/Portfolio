@@ -11,7 +11,8 @@
                 <label class="leetAction"><a [routerLink]="" title="Order Leet" (click)="sendEmail()">Order Leet</a></label><br />
                 <!-- Capture is reflected by the state of the link -->
                 <label class="leetAction" *ngIf="!leetIsCaptured()"><a [routerLink]="" title="Capture Code" (cbOnSuccess)="copiedToClipboard($event)" ngxClipboard [cbContent]="getLeetCode()">Capture Code</a></label>
-                <label class="leetAction" *ngIf="leetIsCaptured()"><span>Code Captured</span></label>
+                <label class="leetAction" *ngIf="leetIsCaptured()"><span>Code Captured</span></label><br/>
+                <label class="leetAction"><a [routerLink]="['/exhibits']" fragment="leet" title="Paintings">Paintings</a></label>
             </div>
         </div>
         <div class="leetCartoon">

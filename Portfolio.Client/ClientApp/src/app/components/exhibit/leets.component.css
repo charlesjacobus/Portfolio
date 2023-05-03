@@ -15,17 +15,14 @@
 .leetAction a {
     color: #247D3C;
     cursor: pointer;
+    text-decoration: none;
 }
-
 .leetAction a:visited {
     color: #247D3C;
 }
-
 .leetAction a:hover {
     color: #34B255;
-    text-decoration: none;
 }
-
 .leetAction a:active {
     color: #247D3C;
 }

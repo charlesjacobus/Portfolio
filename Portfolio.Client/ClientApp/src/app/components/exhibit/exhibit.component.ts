@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { find, isArray, isEmpty, isNil, split } from 'lodash';
 
-import { NgxGalleryOptions, NgxGalleryImage } from 'ngx-gallery-9';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery-9';
 
 import { IExhibit, IExhibitSummary } from '../../models/exhibit';
 import { IWork } from '../../models/work';
@@ -23,9 +23,12 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
     public prefetchImageSource: string;
     public visibleTab: string = 'work';
 
+    private autoDisplayExhibitName: string = null;
     private prefetchImageIndex: number = ExhibitComponent.DefaultPrefetchImageIndex;
 
-    constructor(protected exhibitService: ExhibitService, protected router: Router) {
+    @ViewChild('NgxGalleryComponent') private galleryComponent: NgxGalleryComponent;
+
+    constructor(private route: ActivatedRoute, protected exhibitService: ExhibitService, protected router: Router) {
         super(exhibitService, router);
     }
 
@@ -77,6 +80,30 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
 
     public handleImagePreviewClose(): void {
         this.prefetchImageIndex = ExhibitComponent.DefaultPrefetchImageIndex;
+
+        // The current route behavior is
+        //    - If an exhibit route matches, then scroll to it and auto-display the exhibit
+        //    - Open closing, revert to the general exhibits route
+        //        - Subsequent user-activity of displaying exhibits does not change the route (remains on exhibits) 
+        this.router.navigate(['exhibits'], { replaceUrl: true });
+        this.autoDisplayExhibitName = null;
+    }
+
+    public handleImagePreviewOpen(): void { }
+
+    public handleImagesReady(): void {
+        if (isNil(this.autoDisplayExhibitName) || isNil(this.galleryComponent)) {
+            return;
+        }
+
+        // If there's an exhibit on the route, scroll it into view and auto-display it
+        // The closure is required, since without it the gallery component preview displays without actually showing the images
+        const that = this;
+        setTimeout(function () {
+            that.scrollExhibitIntoView(that.autoDisplayExhibitName);
+
+            that.galleryComponent.openPreview(0);
+        }, 250);
     }
 
     public showWorkText(): boolean {
@@ -92,14 +119,38 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
             return;
         }
 
+        this.initializeGalleryOptions();
+
         this.exhibitService.fetchExhibit(this.exhibitSummary.id)
             .subscribe((result: IExhibit) => {
                 this.exhibit = result;
 
                 this.initializeGalleryImages(this.exhibit);
-            });
 
-        this.initializeGalleryOptions();
+                // If the exhibits route is for a specific exhibit, then trigger scrolling and conditionally auto-display
+                // Auto-display only exhibits that are not text-focused; otherwise, scroll into view only
+                this.route.params.subscribe((params) => {
+                    if (!isNil(this.exhibitSummary) && this.isGalleryExhibit()) {
+                        const exhibitSummary: IExhibitSummary = find(this.exhibitService.exhibitSummaries, ['anchor', params['exhibitIdentifier'] || '']);
+                        if (!isNil(exhibitSummary) && exhibitSummary.id === this.exhibitSummary.id) {
+                            if (this.exhibit.textIsDefault) {
+                                this.scrollExhibitIntoView(exhibitSummary.anchor);
+                            } else {
+                                this.autoDisplayExhibitName = exhibitSummary.anchor; // Deferred, until the gallery images are ready
+                            }
+                        }
+                    }
+                });
+
+                this.route.fragment.subscribe((fragment) => {
+                    if (!isNil(this.exhibitSummary) && this.isGalleryExhibit() && isNil(this.autoDisplayExhibitName)) {
+                        const exhibitSummary: IExhibitSummary = find(this.exhibitService.exhibitSummaries, ['anchor', fragment || '']);
+                        if (!isNil(exhibitSummary) && exhibitSummary.id === this.exhibitSummary.id) {
+                            this.scrollExhibitIntoView(exhibitSummary.anchor);
+                        }
+                    }
+                });
+            });
     }
 
     private initializeGalleryImages(exhibit: IExhibit): void {
@@ -163,5 +214,16 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 that.visibleTab = 'text';
             }
         }, 1000);
+    }
+
+    private scrollExhibitIntoView(exhibitAnchor: string): void {
+        if (isNil(exhibitAnchor)) {
+            return;
+        }
+
+        const elements: NodeListOf<HTMLElement> = document.getElementsByName(exhibitAnchor);
+        if (!isNil(elements) && elements.length === 1) {
+            elements[0].scrollIntoView();
+        }
     }
 }

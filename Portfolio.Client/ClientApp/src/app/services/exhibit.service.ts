@@ -49,11 +49,9 @@ export class ExhibitService implements IExhibitService {
                 observer.next(exhibit);
                 observer.complete();
             } else {
-                let url: string = AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString());
-
-                this.dataService.get(url)
+                this.exhibits = [];
+                this.dataService.get(AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString()))
                     .subscribe((result: IExhibit) => {
-                        // Exhibits are essentially static anyway, and a simple full page reload will refresh them
                         this.exhibits.push(result);
 
                         observer.next(result);

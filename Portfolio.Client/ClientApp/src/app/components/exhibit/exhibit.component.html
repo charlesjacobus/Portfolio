@@ -23,16 +23,18 @@
   <!-- Work -->
   <div class="exhibit" [style.display]="visibleTab === 'work' ? 'block' : 'none'">
     <div *ngIf="isGalleryExhibit()">
-      <ngx-gallery #NgxGalleryComponent
-                   [options]="galleryOptions"
-                   [images]="galleryImages"
-                   (previewChange)="handleImagePreviewChange($event)"
-                   (previewClose)="handleImagePreviewClose()"></ngx-gallery>
+        <ngx-gallery #NgxGalleryComponent
+                     [options]="galleryOptions"
+                     [images]="galleryImages"
+                     (imagesReady)="handleImagesReady()"
+                     (previewChange)="handleImagePreviewChange($event)"
+                     (previewClose)="handleImagePreviewClose()"
+                     (previewOpen)="handleImagePreviewOpen()"></ngx-gallery>
         <img *ngIf="prefetchImageSource" src="{{prefetchImageSource}}" style="display:none"/>
     </div>
     <div *ngIf="!isGalleryExhibit()">
-      <prose-gallery #ProseGalleryComponent
-                     [exhibitSummary]="exhibitSummary"></prose-gallery>
+        <prose-gallery #ProseGalleryComponent
+                       [exhibitSummary]="exhibitSummary"></prose-gallery>
     </div>
   </div>
   <!-- Text -->

@@ -28,19 +28,18 @@ router-outlet ~ * {
 }
 
 /* anchor */
+a {
+    text-decoration:none;
+}
 a:link {
     color: #247D3C;
 }
-
 a:visited {
     color: #247D3C;
 }
-
 a:hover {
     color: #34B255;
-    text-decoration: none;
 }
-
 a:active {
     color: #247D3C;
 }

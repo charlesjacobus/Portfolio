@@ -51,10 +51,16 @@ export function initConfig(configService: AppConfigService) {
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: '', redirectTo: '/exhibits', pathMatch: 'full' },
+            { path: 'exhibits', component: HomeComponent },
+            { path: 'exhibits/:exhibitIdentifier', component: HomeComponent },
             { path: 'leet', component: LeetsComponent },
-            { path: 'about', component: AboutComponent }
-        ], { scrollPositionRestoration: 'enabled' }),
+            { path: 'about', component: AboutComponent },
+            { path: '**', redirectTo: '/exhibits', pathMatch: 'full' }],
+            {
+                anchorScrolling: 'enabled',
+                scrollPositionRestoration: 'enabled'
+            }),
         MarkdownModule.forRoot({
             loader: HttpClient,
             markedOptions: {
