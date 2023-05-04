@@ -2,6 +2,6 @@
 
 These paintings were not meant to be seen, except in reproduction.
 
-I actually thought of these paintings as drawings.
+I thought of these paintings as drawings.
 
 All no longer exist, as the canvases were destroyed once the series was complete.
