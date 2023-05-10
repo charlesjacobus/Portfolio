@@ -40,7 +40,8 @@ namespace Portfolio.Api
                     .PersistKeysToFileSystem(new DirectoryInfo(keyStorageFolderFullName));
             }
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options => 
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
 
             services.AddCors(options =>
             {
