@@ -19,10 +19,13 @@ export class ExhibitsComponent implements AfterViewInit, OnInit {
     public ngOnInit(): void {
         this.exhibitService.fetchExhibitSummaries()
             .subscribe(
-                (result: Array<IExhibitSummary>) => {
-                    this.exhibitsLoaded = true;
-                },
-                () => { this.errorFetchingExhibitSummaries = true; });
+                {
+                    next: (result: Array<IExhibitSummary>) => {
+                        this.exhibitsLoaded = true;
+                    },
+                    error: () => { this.errorFetchingExhibitSummaries = true; },
+                    complete: () => {}
+                });
     }
 
     public getExhibitSummaries(): Array<IExhibitSummary> {

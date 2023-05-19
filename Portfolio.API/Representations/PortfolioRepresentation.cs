@@ -9,6 +9,9 @@ namespace Portfolio.Api.Representations
         [RouteMap("GetActiveExhibits")]
         public string HrefGetActiveExhibits { get; set; }
 
+        [RouteMap("GetActiveWritings")]
+        public string HrefGetActiveWritings { get; set; }
+
         [RouteMap("GetExhibit")]
         public string HrefGetExhibit { get; set; }
 

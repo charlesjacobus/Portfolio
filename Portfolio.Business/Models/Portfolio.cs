@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Portfolio.Business.Models
 {
@@ -7,6 +8,8 @@ namespace Portfolio.Business.Models
         public About About { get; set; }
 
         public IEnumerable<Exhibit> Exhibits { get; set; }
+
+        public IEnumerable<Writing> Writings { get; set; }
 
         public static Portfolio Create()
         {
@@ -21,6 +24,10 @@ namespace Portfolio.Business.Models
                 Exhibits = new List<Exhibit>
                 {
                     Exhibit.Error()
+                },
+                Writings = new List<Writing>
+                {
+                    Writing.Error()
                 }
             };
         }

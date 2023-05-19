@@ -3,4 +3,5 @@ export interface IWork {
     fileNameLarge: string;
     name: string;
     description: string;
+    anchor?: string;
 }

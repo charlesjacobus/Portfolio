@@ -17,35 +17,10 @@ namespace Portfolio.Business.Services
     }
 
     public class ExhibitService
-        : IExhibitService
+        : PortfolioItemService, IExhibitService
     {
-        private static Models.Portfolio _portfolio;
-
-        private IConfiguration _configuration;
-
         public ExhibitService(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-        public Models.Portfolio Portfolio
-        {
-            get
-            {
-                if (_portfolio == null)
-                {
-                    _portfolio = Models.Portfolio.Create();
-                    _configuration.GetSection(nameof(Models.Portfolio)).Bind(_portfolio);
-
-                    if (!_portfolio.Exhibits.Any())
-                    {
-                        _portfolio = Models.Portfolio.Error();
-                    }
-                }
-
-                return _portfolio;
-            }
-        }
+            : base(configuration) { }
 
         public Exhibit GetExhibit(int id)
         {

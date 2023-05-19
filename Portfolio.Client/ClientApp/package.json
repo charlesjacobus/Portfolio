@@ -27,6 +27,7 @@
     "@scullyio/init": "^2.1.41",
     "@scullyio/ng-lib": "^1.0.0",
     "@scullyio/scully": "^2.1.41",
+    "angular-split": "^15.0.0",
     "bootstrap": "^5.2.3",
     "core-js": "^3.27.2",
     "font-awesome": "^4.7.0",
@@ -40,6 +41,7 @@
     "ngx-markdown": "15.0.0",
     "oidc-client": "^1.11.5",
     "rxjs": "^7.2.0",
+    "tree-ngx": "^4.3.0",
     "tslib": "^2.4.0",
     "zone.js": "~0.12.0"
   },

@@ -61,6 +61,7 @@ namespace Portfolio.Api
             services.AddScoped<IHealthServices, HealthServices>();
             services.AddSingleton<ISerializer<Leet>, LeetSerializer>();
             services.AddSingleton<ISerializer<Shape>, ShapeSerializer>();
+            services.AddSingleton<IWritingService, WritingService>();
             services.AddSingleton<PortfolioRepresentationBuilder, PortfolioRepresentationBuilder>();
 
             services.AddSwaggerGen(c =>
