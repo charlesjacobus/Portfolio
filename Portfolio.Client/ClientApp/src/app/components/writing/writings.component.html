@@ -1,13 +1,14 @@
 <div class="writingsContainer">
     <div *ngIf="!errorFetchingWritingSummaries">
         <div style="width: 100%; height: 800px;">
-            <as-split direction="horizontal">
+            <as-split direction="{{getTocOrientation()}}">
                 <as-split-area [size]="30">
-                    <div><tree-ngx #toc
-                                   class="toc"
+                    <div id="toc" class="tocContainer">
+                        <tree-ngx #toc
                                    [nodeItems]="nodeItems"
                                    [options]="treeOptions"
-                                   (selectedItems)="handleSelectedTreeItems($event)"></tree-ngx></div>
+                                   (selectedItems)="handleSelectedTreeItems($event)"></tree-ngx>
+                    </div>
                 </as-split-area>
                 <as-split-area [size]="70">
                     <div class="writingContainer"

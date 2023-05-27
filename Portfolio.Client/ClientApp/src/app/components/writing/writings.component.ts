@@ -1,5 +1,5 @@
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { filter, findIndex, head, isArray, isEmpty, isNil, map } from 'lodash';
@@ -24,7 +24,7 @@ import { WritingService } from '../../services/writing.service';
             state('load', style({
                 opacity: 0
             })),
-            transition('load => unload', animate('300ms ease-out')),
+            transition('load => unload', animate('200ms ease-out')),
             transition('unload => load', animate('200ms ease-in'))
         ])
     ]
@@ -37,6 +37,8 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     public treeOptions: TreeOptions = { alwaysEmitSelected: true, checkboxes: false, mode: TreeMode.SingleSelect };
 
     private defaultTocItemId: string = null;
+    private screenHeight: number;
+    private screenWidth: number;
     private selectedWritingUrl: string = null;
 
     @ViewChild('toc') private toc: TreeNgxComponent;
@@ -44,6 +46,8 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     constructor(exhibitService: ExhibitService, private writingService: WritingService, protected router: Router)
     {
         super(exhibitService, router);
+
+        this.onResize();
     }
 
     public ngAfterViewInit(): void {
@@ -62,6 +66,12 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
         }
     }
 
+    @HostListener('window:resize', ['$event'])
+    onResize(event?) {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+    }
+
     public getAssetsFolderName(): string {
         return 'writings';
     }
@@ -76,6 +86,10 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
 
     public getSelectedWritingUrl(): string {
         return this.selectedWritingUrl;
+    }
+
+    public getTocOrientation(): string {
+        return this.screenWidth <= 800 ? 'vertical' : 'horizontal';
     }
 
     public handleSelectedTreeItems(selected: Array<IWork>): void {
@@ -171,6 +185,6 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
         const that = this;
         setTimeout(function () {
             that.selectedWritingUrl = fileName;
-        }, 250);
+        }, 200);
     }
 }
