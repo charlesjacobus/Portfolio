@@ -1,9 +1,9 @@
 Despite the wedding  
-and for a few formal  
+and for a few  
 letters and postcards  
 of monochrome flowers  
-and those last  
-awkward phone calls  
+and one last awkward  
+phone call  
 from our respective  
 monasteries,  
 it all really ended  

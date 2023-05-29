@@ -5,11 +5,11 @@ warmly illuminated
 by the sun  
 rising above  
 the Atlantic horizon,  
-fluttering,  
+a fluttering,  
 performing a shadow play  
-and disappearing  
-momentarily  
+before disappearing  
+momentarily,  
 while across the room  
-Angela enumerated  
+Angela enumerates  
 the benefits  
 of her estrogen patch.  

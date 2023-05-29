@@ -1,5 +1,4 @@
-I'm 52 years  
-old,  
+I'm 52 years old,  
 and I didn't know that  
 Joe Brainard  
 and  

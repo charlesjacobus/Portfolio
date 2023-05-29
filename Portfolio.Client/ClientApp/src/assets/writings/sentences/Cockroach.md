@@ -1,8 +1,8 @@
-There it stood  
-motionless  
+Motionless,  
+it stood  
 tucked tightly into  
 that perpendicular place  
-where wall meets ceiling  
+where wall meets ceiling,  
 waiting overhead  
 while we sat  
 in bed  
