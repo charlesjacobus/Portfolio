@@ -13,8 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { TreeNgxModule } from 'tree-ngx';
 
-import { ScullyLibModule } from '@scullyio/ng-lib';
-
 import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
 import { CopyrightComponent } from './components/copyright/copyright.component';
@@ -23,7 +21,6 @@ import { ExhibitsComponent } from './components/exhibit/exhibits.component';
 import { HomeComponent } from './components/home/home.component';
 import { LeetsComponent } from './components/exhibit/leets.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { ProseComponent } from './components/exhibit/prose.component';
 import { WritingsComponent } from './components/writing/writings.component';
 
 import { AppConfigService } from './services/config.service';
@@ -45,7 +42,6 @@ export function initConfig(configService: AppConfigService) {
         HomeComponent,
         LeetsComponent,
         NavMenuComponent,
-        ProseComponent,
         WritingsComponent
     ],
     imports: [
@@ -80,7 +76,6 @@ export function initConfig(configService: AppConfigService) {
         }),
         NgbModule,
         NgxGalleryModule,
-        ScullyLibModule,
         TreeNgxModule
     ],
     providers: [AppConfigService, DataService, ExhibitService, WritingService, {

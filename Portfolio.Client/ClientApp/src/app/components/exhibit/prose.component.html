@@ -1,8 +1,0 @@
-<div class="currentWorkName"><label>{{this.getCurrentWorkName()}}</label></div>
-<div class="currentWorkOfLabel"><label>{{this.getCurrentWorkOfLabel()}}</label></div>
-<div [ngStyle]="{'clear': 'both'}"></div>
-<div [ngClass]="{'proseContainer': true, 'clickableProseContainer': this.getExhibitWorks().length > 1}">
-  <markdown [src]="this.getCurrentWorkUrl()"
-            (click)="this.incrementCurrentWorkIndex()"
-            ngPreserveWhitespaces></markdown>
-</div>

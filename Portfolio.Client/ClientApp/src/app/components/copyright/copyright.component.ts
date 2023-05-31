@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { isNil } from 'lodash';
-import * as moment from 'moment';
 
 import { AppConfigService } from '../../services/config.service';
 
@@ -10,33 +9,32 @@ import { AppConfigService } from '../../services/config.service';
     templateUrl: './copyright.component.html',
     styleUrls: ['./copyright.component.css']
 })
-export class CopyrightComponent implements AfterViewInit, OnInit {
-    constructor() { }
+export class CopyrightComponent {
+    public static readonly DefaultPortfolioInformationalVersion: string = '1.0.0';
+    public static readonly DefaultPortfolioName: string = 'Portfolio';
+
+    private currentYearValue: string;
+
+    constructor() {
+        this.currentYearValue = new Date().getFullYear().toString();
+    }
 
     @Input()
     public aboutLinkActive: boolean = false;
 
-    public ngAfterViewInit(): void { }
-
-    public ngOnInit(): void { }
-
     public getApplicationName(): string {
-        if (!isNil(AppConfigService.portfolioInfo) && !isNil(AppConfigService.portfolioInfo.settings)) {
-            return AppConfigService.portfolioInfo.settings.applicationName;
-        }
-
-        return 'Portfolio';
+        return !isNil(AppConfigService.portfolioInfo) && !isNil(AppConfigService.portfolioInfo.settings) ?
+            AppConfigService.portfolioInfo.settings.applicationName || CopyrightComponent.DefaultPortfolioName :
+            CopyrightComponent.DefaultPortfolioName;
     }
 
     public getCurrentYear(): string {
-        return moment().format('YYYY');
+        return this.currentYearValue;
     }
 
     public getInformationalVersion(): string {
-        if (!isNil(AppConfigService.portfolioInfo) && !isNil(AppConfigService.portfolioInfo.settings)) {
-            return AppConfigService.portfolioInfo.settings.informationalVersion;
-        }
-
-        return '1.0.0';
+        return !isNil(AppConfigService.portfolioInfo) && !isNil(AppConfigService.portfolioInfo.settings) ?
+            AppConfigService.portfolioInfo.settings.informationalVersion || CopyrightComponent.DefaultPortfolioInformationalVersion :
+            CopyrightComponent.DefaultPortfolioInformationalVersion;
     }
 }

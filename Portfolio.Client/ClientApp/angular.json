@@ -15,8 +15,7 @@
           "options": {
             "allowedCommonJsDependencies": [
                 "hammerjs",
-                "lodash",
-                "moment"
+                "lodash"
             ],
             "aot": true,
             "progress": false,
