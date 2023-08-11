@@ -2,12 +2,9 @@
     <a name="me"></a>
     <div class="aboutContainer">
         <h2 class="aboutSectionTitle">Me</h2>
-        <div class="aboutParagraph">
-            <div class="aboutQuote aboutSite">Some painters, including myself, do not care what chair they are sitting on. It does not even have to be a comfortable one. They are too nervous to find out where they ought to sit. They do not want to "sit in style". Rather, they have found that painting &mdash; any kind of painting, any style of painting &mdash; to be painting at all, in fact &mdash; is a way of living today, a style of living, so to speak... It is exactly in its uselessness that it is free.</div>
-            <div class="aboutSite">&mdash; Willem de Kooning</div>
-        </div>
-        <div class="aboutParagraph">Tactility and touch; quietude, slowness, recall; tonality and atonality; permanence and impermanence; the general and the specific &mdash; all qualities that I feel define a moral basis for aesthetic and political value.</div>
-        <div class="aboutParagraph">My work is deliberately small and a project for a lifetime.</div>
+        <div class="aboutParagraph">I've spent my life as a painter privately circling ideas and feelings about the nature of perception. These ideas have centered specifically on the sense of touch and how modes of perception based on tactility and haptics have influenced visual form throughout history.</div>
+        <div class="aboutParagraph">For a master's degree from the School of the Visual Arts in New York City, my thesis explored these ideas through a "handrail project". The theoretical work and historical research formed the foundation of the handrail structure, which provided a basis (or subject) for the paintings that were the handrail itself. This provided an opportunity for deep reflection on the nature of visual expression ranging from Egyptian tomb paintings to Cubism to the art of children. Out of this came some paintings &mdash; mostly gone now &mdash; and the development of a painting practice that I continue today.</div>
+        <div class="aboutParagraph">While still filtered through this persistent lens, my more recent work takes memory as its subject. I tend to work in series, and the most recent work is part of a lifetime series called "A Death in the Family". With each painting measuring 8 feet by 5 inches, the physical form of this work is totemic. And each of the paintings is an attempt to capture some specific memory, as realized - the memory feeling more than the mental image.</div>
         <div class="aboutParagraph" *ngIf="photoIsAvailable()">
             <img src="{{getPhotoImageSource()}}" title="{{getPhotoImageTitle()}}" class="aboutPhoto" width="{{getPhotoImageWidth()}}" /><br />
             <sub><sup><span [innerHtml]="getPhotoCaptionHtml()"></span></sup></sub>
@@ -22,7 +19,7 @@
     <a name="site"></a>
     <div class-="aboutContainer">
         <h2 class="aboutSectionTitle">Site</h2>
-        <div class="aboutParagraph">Minimalist in principle, I built this site to feature a rotating selection of my work. So check back occasionally, or follow me on <a href="https://www.instagram.com/charleshenryjacobus/" target="_blank">Instagram</a>.</div>
+        <div class="aboutParagraph">Minimalist in principle, I built this site to feature a rotating selection of my work. So check back occasionally, or follow me on <a href="https://www.instagram.com/charleshenryjacobus/" target="_blank">Instagram</a> (where I'm mostly out to lunch).</div>
         <div class="aboutParagraph">The site uses these frameworks and libraries.</div>
         <ul>
             <li><a href="https://github.com/dotnet/core/" target="_blank">.NET 6</a></li>
