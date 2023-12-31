@@ -3,7 +3,7 @@ import { HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER, SecurityContext } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AngularSplitModule } from 'angular-split';
@@ -53,13 +53,13 @@ export function initConfig(configService: AppConfigService) {
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: '/exhibits', pathMatch: 'full' },
-            { path: 'exhibits', component: HomeComponent },
-            { path: 'exhibits/:exhibitIdentifier', component: HomeComponent },
+            { path: '', component: HomeComponent },
+            { path: 'exhibits', component: ExhibitsComponent },
+            { path: 'exhibits/:exhibitIdentifier', component: ExhibitsComponent },
             { path: 'leet', component: LeetsComponent },
             { path: 'about', component: AboutComponent },
             { path: 'writings', component: WritingsComponent },
-            { path: '**', redirectTo: '/exhibits', pathMatch: 'full' }],
+            { path: '**', redirectTo: '', pathMatch: 'full' }],
             {
                 anchorScrolling: 'enabled',
                 scrollPositionRestoration: 'enabled'

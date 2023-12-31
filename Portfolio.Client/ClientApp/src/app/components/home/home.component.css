@@ -1,0 +1,100 @@
+/*
+    To support CSS against the exhibit.html imported with innerHTML, the component sets encapsulation to ViewEncapsulation.None
+    So be sure not to redefine any classes that may be used elsewhere on the site!
+    Consider defining them in styles.css, if needed across the site
+*/
+
+.exhibitHtmlContainer {
+    margin: 0px 15% 3% 15%;
+}
+
+.imageWidth100 {
+    width: 100%;
+}
+
+.imageWidth90 {
+    width: 90%;
+}
+
+.imageWidth80 {
+    width: 80%;
+}
+
+.imageWidth70 {
+    width: 70%;
+}
+
+.imageWidth60 {
+    width: 60%;
+}
+
+.imageWidth50 {
+    width: 50%;
+}
+
+.label {
+    font-size: small;
+    padding-bottom: 2em;
+}
+
+.paragraph {
+    font-size: medium;
+    padding-bottom: 1em;
+    padding-top: .5em;
+}
+
+.title {
+    font-size: x-large;
+    padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 800px) {
+    .exhibitHtmlContainer {
+        margin: 0px 10% 2% 10%;
+    }
+
+    .image {
+        width: 85%;
+    }
+
+    .label {
+        font-size: x-small;
+        padding-bottom: 1em;
+    }
+
+    .paragraph {
+        font-size:small;
+        padding-bottom: .5em;
+        padding-top: 0em;
+    }
+
+    .title {
+        padding-bottom: .5em;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .exhibitHtmlContainer {
+        margin: 0px 5% 1% 5%;
+    }
+
+    .image {
+        width: 95%;
+    }
+
+    .label {
+        font-size: x-small;
+        padding-bottom: .5em;
+    }
+
+    .paragraph {
+        font-size: smaller;
+        padding-bottom: .5em;
+        padding-top: 0em;
+    }
+
+    .title {
+        font-size: larger;
+        padding-bottom: .5em;
+    }
+}

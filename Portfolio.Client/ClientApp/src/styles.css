@@ -11,7 +11,6 @@ body {
     background: #39393E;
     color: whitesmoke;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding-top: 100px; /* Required for the navbar fixed positioning */
 }
 
 router-outlet ~ * {
