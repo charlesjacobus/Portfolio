@@ -3,7 +3,7 @@ of the stairs
 beside  
 the unmistakably American  
 side table  
-with spindly legs  
+with skinny kid legs  
 made by her father  
 years earlier,  
 over which hung  

@@ -1,11 +1,6 @@
-For several summers  
-we participated,  
-reluctantly  
-owing only to  
-a shared natural timidity,  
-in the communal affair  
-of rolling  
-and securing  
+With reluctant  
+community we helped  
+unroll and secure  
 the netting  
 over the elaborate  
 wooden lattice  

@@ -71,6 +71,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\directives\" />
+    <Folder Include="ClientApp\src\assets\images\galactic\" />
   </ItemGroup>
 
   <ItemGroup>
