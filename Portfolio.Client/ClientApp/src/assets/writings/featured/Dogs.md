@@ -1,6 +1,6 @@
 <div>
     <div class="title">The Dogs in My Life</div>
-    <div class="paragraph">Throughout the years, I've found a subject in the dogs in my life. These drawings represent just a few of the many times I've faced the question of what to draw, being answered by an unsuspecting canine companion.</div>
+    <div class="paragraph">Periodically, I've found a subject in the dogs in my life. These drawings represent just a few of the many times I've faced the question of what to draw, being answered by an unsuspecting canine companion.</div>
     <img class="imageHorizontalWidth" src="/assets/images/dogs/Figures.L.1.jpg" title="Samantha" />
     <div class="label">Samantha : 1998 : pencil on paper : 6 x 8 inches</div>
     <img class="imageVerticalWidth" src="/assets/images/dogs/Figures.L.9.jpg" title="Samantha" />

@@ -42,6 +42,7 @@
     <None Remove="ClientApp\src\assets\images\highchair\highchair.md" />
     <None Remove="ClientApp\src\assets\texts\error\Error.md" />
     <None Remove="ClientApp\src\assets\writings\and\__Introduction.md" />
+    <None Remove="ClientApp\src\assets\writings\featured\__Introduction.md" />
     <None Remove="ClientApp\src\assets\writings\haiku\__Introduction.md" />
     <None Remove="ClientApp\src\assets\writings\sentences\__Introduction.md" />
     <None Remove="ClientApp\src\assets\writings\writings.ts" />
@@ -64,6 +65,7 @@
     <TypeScriptCompile Include="ClientApp\src\assets\texts\error\Error.md" />
     <TypeScriptCompile Include="ClientApp\src\assets\images\watershed\Watershed.md" />
     <TypeScriptCompile Include="ClientApp\src\assets\writings\and\__Introduction.md" />
+    <TypeScriptCompile Include="ClientApp\src\assets\writings\featured\__Introduction.md" />
     <TypeScriptCompile Include="ClientApp\src\assets\writings\haiku\__Introduction.md" />
     <TypeScriptCompile Include="ClientApp\src\assets\writings\portfolio\writings.md" />
     <TypeScriptCompile Include="ClientApp\src\assets\writings\sentences\__Introduction.md" />

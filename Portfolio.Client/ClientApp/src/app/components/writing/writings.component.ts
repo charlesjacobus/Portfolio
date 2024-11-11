@@ -59,8 +59,10 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
             setTimeout(function () {
                 that.toc.collapseAll();
 
+                console.log('ngAfterViewInit: ' + that.defaultTocItemId);
                 if (!isNil(that.defaultTocItemId)) {
-                    that.toc.expandById(that.defaultTocItemId);
+                    // that.toc.expandById(that.defaultTocItemId);
+                    // that.toc.selectById(that.defaultTocItemId);
                 }
             }, 500);
         }
