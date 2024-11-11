@@ -9,7 +9,6 @@ after acquiring
 from her cousins  
 in Ghent,  
 whose family  
-in the years  
 following the Great Crash  
 brought it back  
 from the chateau  

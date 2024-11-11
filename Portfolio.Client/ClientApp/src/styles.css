@@ -43,6 +43,84 @@ a:active {
     color: #247D3C;
 }
 
+/* exhibit */
+/* See other comments in home.component.css */
+
+.imageHorizontalWidth {
+    width: 75%;
+}
+
+.imageVerticalWidth {
+    width: 55%;
+}
+
+.label {
+    font-size: small;
+    padding-bottom: 2em;
+}
+
+.paragraph {
+    font-size: medium;
+    padding-bottom: 1em;
+    padding-top: .5em;
+}
+
+.title {
+    font-size: x-large;
+    padding-bottom: 1em;
+}
+
+@media only screen and (max-width: 900px) {
+    .imageHorizontalWidth {
+        width: 85%;
+    }
+
+    .imageVerticalWidth {
+        width: 65%;
+    }
+
+    .label {
+        font-size: x-small;
+        padding-bottom: 1em;
+    }
+
+    .paragraph {
+        font-size: small;
+        padding-bottom: .5em;
+        padding-top: 0em;
+    }
+
+    .title {
+        padding-bottom: .5em;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .imageHorizontalWidth {
+        width: 90%;
+    }
+
+    .imageVerticalWidth {
+        width: 70%;
+    }
+
+    .label {
+        font-size: x-small;
+        padding-bottom: .5em;
+    }
+
+    .paragraph {
+        font-size: smaller;
+        padding-bottom: .5em;
+        padding-top: 0em;
+    }
+
+    .title {
+        font-size: larger;
+        padding-bottom: .5em;
+    }
+}
+
 /* scrollbar */
 ::-webkit-scrollbar {
     width: 7px;

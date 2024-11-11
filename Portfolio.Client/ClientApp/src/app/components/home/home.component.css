@@ -1,92 +1,21 @@
 /*
     To support CSS against the exhibit.html imported with innerHTML, the component sets encapsulation to ViewEncapsulation.None
     So be sure not to redefine any classes that may be used elsewhere on the site!
-    Consider defining them in styles.css, if needed across the site
+    Most exhibit styles are now defined in styles.css, since the exhibits are both featured and archived, in Writings
 */
 
 .exhibitHtmlContainer {
     margin: 0px 15% 3% 15%;
 }
 
-.imageHorizontalWidth {
-    width: 75%;
-}
-
-.imageVerticalWidth {
-    width: 55%;
-}
-
-.label {
-    font-size: small;
-    padding-bottom: 2em;
-}
-
-.paragraph {
-    font-size: medium;
-    padding-bottom: 1em;
-    padding-top: .5em;
-}
-
-.title {
-    font-size: x-large;
-    padding-bottom: 1em;
-}
-
 @media only screen and (max-width: 900px) {
     .exhibitHtmlContainer {
         margin: 0px 10% 2% 10%;
-    }
-
-    .imageHorizontalWidth {
-        width: 85%;
-    }
-
-    .imageVerticalWidth {
-        width: 65%;
-    }
-
-    .label {
-        font-size: x-small;
-        padding-bottom: 1em;
-    }
-
-    .paragraph {
-        font-size:small;
-        padding-bottom: .5em;
-        padding-top: 0em;
-    }
-
-    .title {
-        padding-bottom: .5em;
     }
 }
 
 @media only screen and (max-width: 500px) {
     .exhibitHtmlContainer {
         margin: 0px 5% 1% 5%;
-    }
-
-    .imageHorizontalWidth {
-        width: 90%;
-    }
-
-    .imageVerticalWidth {
-        width: 70%;
-    }
-
-    .label {
-        font-size: x-small;
-        padding-bottom: .5em;
-    }
-
-    .paragraph {
-        font-size: smaller;
-        padding-bottom: .5em;
-        padding-top: 0em;
-    }
-
-    .title {
-        font-size: larger;
-        padding-bottom: .5em;
     }
 }
