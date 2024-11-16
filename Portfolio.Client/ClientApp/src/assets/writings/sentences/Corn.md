@@ -1,5 +1,5 @@
 On the side of the road  
-just outside Bantam  
+just outside Morris  
 the farmer's daughter  
 stood stoically  
 behind the ears  
