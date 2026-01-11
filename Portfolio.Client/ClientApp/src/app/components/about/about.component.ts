@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
 
@@ -16,7 +17,7 @@ import { DataService } from '../../services/data.service';
 export class AboutComponent {
     private photo: IPhoto;
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private metaService: Meta, private titleService: Title) {
         this.initialize();
     }
 
@@ -54,6 +55,20 @@ export class AboutComponent {
     }
 
     private initialize(): void {
+        this.initializeTitle();
+        this.initializeMeta();
         this.fetchPhoto().subscribe();
+    }
+
+    private initializeMeta(): void {
+        const metaDescription = 'Learn about the artist Charles Jacobus, including his background, artists statement, and purpose of this site';
+        this.metaService.updateTag({ name: 'description', content: metaDescription });
+        this.metaService.updateTag({ property: 'og:description', content: metaDescription });
+    }
+
+    private initializeTitle(): void {
+        const currentTitle = this.titleService.getTitle();
+        const baseName = currentTitle.split(':')[0].trim();
+        this.titleService.setTitle(`${baseName} : About`);
     }
 }

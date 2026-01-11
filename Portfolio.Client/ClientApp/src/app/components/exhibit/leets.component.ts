@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { find, isNil } from 'lodash';
@@ -23,7 +23,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
     public leet: ILeet;
     public leets: Array<ILeet>;
 
-    constructor(protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer) {
+    constructor(protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer, private metaService: Meta, private titleService: Title) {
         super(exhibitService, router);
     }
 
@@ -120,6 +120,8 @@ export class LeetsComponent extends WorkComponent implements OnInit {
     }
 
     protected initialize(): void {
+        this.initializeMeta();
+        this.initializeTitle();
         this.exhibitSummary = {
             id: 11,
             anchor: LeetsComponent.LeetName.toLowerCase(),
@@ -131,6 +133,18 @@ export class LeetsComponent extends WorkComponent implements OnInit {
             textLabel: null,
             textRoute: null
         };
+    }
+
+    private initializeMeta(): void {
+        const metaDescription = 'Generate and order an oil painting by Charles Jacobus, based on your own design choice and price point';
+        this.metaService.updateTag({ name: 'description', content: metaDescription });
+        this.metaService.updateTag({ property: 'og:description', content: metaDescription });
+    }
+
+    private initializeTitle(): void {
+        const currentTitle = this.titleService.getTitle();
+        const baseName = currentTitle.split(':')[0].trim();
+        this.titleService.setTitle(`${baseName} : Leets`);
     }
 
     private getEmailHref(): string {

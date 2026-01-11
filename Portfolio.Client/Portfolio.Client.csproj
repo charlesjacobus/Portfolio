@@ -99,7 +99,7 @@
     <Content Update="wwwroot\robots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\sitemap.txt">
+    <Content Update="wwwroot\sitemap.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

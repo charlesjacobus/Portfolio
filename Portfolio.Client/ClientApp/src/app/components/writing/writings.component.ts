@@ -1,5 +1,6 @@
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { filter, findIndex, head, isArray, isEmpty, isNil, map } from 'lodash';
@@ -43,7 +44,7 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
 
     @ViewChild('toc') private toc: TreeNgxComponent;
 
-    constructor(exhibitService: ExhibitService, private writingService: WritingService, protected router: Router)
+    constructor(exhibitService: ExhibitService, private writingService: WritingService, protected router: Router, private metaService: Meta, private titleService: Title)
     {
         super(exhibitService, router);
 
@@ -116,6 +117,8 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
 
     protected initialize(): void {
         this.initializeContent();
+        this.initializeMeta();
+        this.initializeTitle();
         this.writingService.fetchWritings()
             .subscribe({
                 next: (writings: Array<IWriting>) => {
@@ -131,6 +134,18 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
         this.selectedWork = null;
 
         this.loadWriting(this.getFileFullName('writings.md'));
+    }
+
+    private initializeMeta(): void {
+        const metaDescription = 'Read the writings of Charles Jacobus, including prose, poetry, and art criticism and theory';
+        this.metaService.updateTag({ name: 'description', content: metaDescription });
+        this.metaService.updateTag({ property: 'og:description', content: metaDescription });
+    }
+
+    private initializeTitle(): void {
+        const currentTitle = this.titleService.getTitle();
+        const baseName = currentTitle.split(':')[0].trim();
+        this.titleService.setTitle(`${baseName} : Writings`);
     }
 
     protected initializeToc(writings: Array<IWriting>): void {

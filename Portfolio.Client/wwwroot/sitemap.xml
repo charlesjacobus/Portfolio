@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://charlesjacobus.com/</loc>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-01</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://charlesjacobus.com/exhibits</loc>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://charlesjacobus.com/writings</loc>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://charlesjacobus.com/about</loc>
+    <changefreq>yearly</changefreq>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.7</priority>
+  </url>
+</urlset>
