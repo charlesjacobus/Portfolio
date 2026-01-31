@@ -44,11 +44,11 @@
 }
 
 .tabActive {
-  color: #247D3C;
+  color: #80D0E8;
 }
 
 .tabActive:hover {
-  color: #34B255;
+  color: color-mix(in srgb, currentColor 30%, #4493AB 70%);
 }
 
 .tabInactive {

@@ -13,18 +13,18 @@
     width: 100%;
 }
 .leetAction a {
-    color: #247D3C;
+    color: #80D0E8;
     cursor: pointer;
     text-decoration: none;
 }
 .leetAction a:visited {
-    color: #247D3C;
+    color: #80D0E8;
 }
 .leetAction a:hover {
-    color: #34B255;
+    color: color-mix(in srgb, currentColor 30%, #4493AB 70%);
 }
 .leetAction a:active {
-    color: #247D3C;
+    color: #80D0E8;
 }
 
 .leetActions {
@@ -69,7 +69,7 @@
 }
 
 .leetFormOptionSelected {
-    background-color: #247D3C;
+    background-color: #80D0E8;
     color: whitesmoke;
 }
 

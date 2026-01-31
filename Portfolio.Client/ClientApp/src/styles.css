@@ -3,8 +3,8 @@
   scroll: #515154
   text: whitesmoke
   text (dark): dimgray
-  link: #247D3C
-  hover: #34B255
+  link: #80D0E8
+  hover: color-mix(in srgb, currentColor 30%, #4493AB 70%);
 */
 
 body {
@@ -31,16 +31,16 @@ a {
     text-decoration:none;
 }
 a:link {
-    color: #247D3C;
+    color: #80D0E8;
 }
 a:visited {
-    color: #247D3C;
+    color: #80D0E8;
 }
 a:hover {
-    color: #34B255;
+    color: color-mix(in srgb, currentColor 30%, #4493AB 70%);
 }
 a:active {
-    color: #247D3C;
+    color: #80D0E8;
 }
 
 /* exhibit */
@@ -52,6 +52,10 @@ a:active {
 
 .imageVerticalWidth {
     width: 55%;
+}
+
+.imageNarrowWidth {
+    width: 35%;
 }
 
 .label {
@@ -79,6 +83,10 @@ a:active {
         width: 65%;
     }
 
+    .imageNarrowWidth {
+        width: 50%;
+    }
+
     .label {
         font-size: x-small;
         padding-bottom: 1em;
@@ -102,6 +110,10 @@ a:active {
 
     .imageVerticalWidth {
         width: 70%;
+    }
+
+    .imageNarrowWidth {
+        width: 55%;
     }
 
     .label {
@@ -140,7 +152,7 @@ a:active {
 
 /* ng-bootstrap style overrides */
 .btn-link, .btn-link:active, .btn-link:focus, .btn-link:hover, .btn-link:link, .btn-link:visited {
-    color: #247D3C;
+    color: #80D0E8;
     text-decoration: none;
 }
 
