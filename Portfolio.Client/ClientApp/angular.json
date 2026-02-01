@@ -42,7 +42,7 @@
                     "output": "./"
                 },
                 {
-                    "glob": "sitemap.txt",
+                    "glob": "sitemap.xml",
                     "input": "../wwwroot",
                     "output": "./"
                 }
