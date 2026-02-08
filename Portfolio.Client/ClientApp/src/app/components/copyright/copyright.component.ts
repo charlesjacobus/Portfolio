@@ -6,6 +6,7 @@ import { AppConfigService } from '../../services/config.service';
 
 @Component({
     selector: 'copyright',
+    standalone: false,
     templateUrl: './copyright.component.html',
     styleUrls: ['./copyright.component.css']
 })

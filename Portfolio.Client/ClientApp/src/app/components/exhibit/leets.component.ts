@@ -10,26 +10,27 @@ import { WorkComponent } from './work.component';
 
 @Component({
     selector: 'leet-game',
+    standalone: false,
     templateUrl: './leets.component.html',
     styleUrls: ['./leets.component.css']
 })
 export class LeetsComponent extends WorkComponent implements OnInit {
     private static readonly LeetName = 'Leet';
 
-    private clipboardContent: string;
-    private prefetch: ILeet;
+    private clipboardContent: string | null = null;
+    private prefetch: ILeet | null = null;
 
     public instructions: boolean = false;
-    public leet: ILeet;
-    public leets: Array<ILeet>;
+    public leet: ILeet | null = null;
+    public leets: Array<ILeet> = [];
 
-    constructor(protected exhibitService: ExhibitService, protected router: Router, private sanitizer: DomSanitizer, private metaService: Meta, private titleService: Title) {
+    constructor(protected override exhibitService: ExhibitService, protected override router: Router, private sanitizer: DomSanitizer, private metaService: Meta, private titleService: Title) {
         super(exhibitService, router);
     }
 
-    @ViewChild('leetsContainer') private leetsContainer: ElementRef;
+    @ViewChild('leetsContainer') private leetsContainer!: ElementRef;
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         this.leets = [];
 
         this.getLeet();
@@ -44,18 +45,18 @@ export class LeetsComponent extends WorkComponent implements OnInit {
         }
     }
 
-    public getCurrentLeet(): ILeet {
+    public getCurrentLeet(): ILeet | null {
         return this.leet;
     }
 
-    public getLeet(code: string = null): void {
+    public getLeet(code: string | null = null): void {
         // If a code is supplied, which it is as the user clicks through the list of leets already created, then the existing leet (if found) is returned
         // Leets are prefetched one at a time, to improve the UX when clicking Create Cartoon
         // This means that the prefetched leet is unshifted to the collection and a new leet is fetched in reserve
         
         // If a code is being supplied, then consider that it may be a leet we've already created
         if (!isNil(code)) {
-            let match: ILeet = find(this.leets, function (l: ILeet) { return l.code === code; });
+            let match = find<ILeet>(this.leets, function (l: ILeet) { return l.code === code; });
             if (!isNil(match)) {
                 this.leet = match;
 
@@ -91,7 +92,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
             });
     }
 
-    public getLeetCode(): string {
+    public getLeetCode(): string | null {
         return isNil(this.leet) ? null : this.leet.code;
     }
 
@@ -116,7 +117,11 @@ export class LeetsComponent extends WorkComponent implements OnInit {
     }
 
     public sendEmail(): void {
-        window.location.href = this.getEmailHref();
+        var href = this.getEmailHref();
+        if (isNil(href)) {
+            return;
+        }
+        window.location.href = href;
     }
 
     protected initialize(): void {
@@ -147,7 +152,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
         this.titleService.setTitle(`${baseName} : Leets`);
     }
 
-    private getEmailHref(): string {
+    private getEmailHref(): string | null {
         if (isNil(this.leet)) {
             return null;
         }

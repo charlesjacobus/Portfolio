@@ -10,12 +10,13 @@ import { AppConfigService } from '../../services/config.service';
 import { DataService } from '../../services/data.service';
 
 @Component({
-  selector: 'about',
+    selector: 'about',
+    standalone: false,
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
-    private photo: IPhoto;
+    private photo!: IPhoto;
 
     constructor(private dataService: DataService, private metaService: Meta, private titleService: Title) {
         this.initialize();
@@ -44,7 +45,7 @@ export class AboutComponent {
     private fetchPhoto(): Observable<IPhoto> {
         return new Observable(observer => {
             const url: string = AppConfigService.portfolioInfo.hrefGetPhoto.replace('{id}', toString(0)); // 0 ensures a random photo, for fun
-            this.dataService.get(url)
+            this.dataService.get<IPhoto>(url)
                 .subscribe((result: IPhoto) => {
                     this.photo = result;
 

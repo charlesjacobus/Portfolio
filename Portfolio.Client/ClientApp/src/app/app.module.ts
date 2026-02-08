@@ -1,16 +1,16 @@
+import { NgModule, APP_INITIALIZER, provideZoneChangeDetection, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, APP_INITIALIZER, SecurityContext } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { AngularSplitModule } from 'angular-split';
 import { ClipboardModule } from 'ngx-clipboard';
-import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS, SANITIZE } from 'ngx-markdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxGalleryModule } from 'ngx-gallery-9';
+import { NgxGalleryModule } from '@vinlos/ngx-gallery';
 import { TreeNgxModule } from 'tree-ngx';
 
 import { AboutComponent } from './components/about/about.component';
@@ -46,12 +46,11 @@ export function initConfig(configService: AppConfigService) {
     ],
     imports: [
         AngularSplitModule,
-        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+        BrowserModule,
         BrowserAnimationsModule,
         ClipboardModule,
-        HammerModule,
-        HttpClientModule,
         FormsModule,
+        HttpClientModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
             { path: 'exhibits', component: ExhibitsComponent },
@@ -59,28 +58,43 @@ export function initConfig(configService: AppConfigService) {
             { path: 'leet', component: LeetsComponent },
             { path: 'about', component: AboutComponent },
             { path: 'writings', component: WritingsComponent },
-            { path: '**', redirectTo: '', pathMatch: 'full' }],
-            {
-                anchorScrolling: 'enabled',
-                scrollPositionRestoration: 'enabled'
-            }),
+            { path: '**', redirectTo: '', pathMatch: 'full' }
+        ], {
+            anchorScrolling: 'enabled',
+            scrollPositionRestoration: 'enabled'
+        }),
         MarkdownModule.forRoot({
             loader: HttpClient,
             markedOptions: {
-                provide: MarkedOptions,
+                provide: MARKED_OPTIONS,
                 useValue: {
                     gfm: false
                 }
             },
-            sanitize: SecurityContext.NONE
+            sanitize: {
+                provide: SANITIZE,
+                useValue: SecurityContext.NONE
+            }
         }),
         NgbModule,
         NgxGalleryModule,
         TreeNgxModule
     ],
-    providers: [AppConfigService, DataService, ExhibitService, WritingService, {
-        provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfigService], multi: true
-    }],
+    providers: [
+        provideZoneChangeDetection({
+            eventCoalescing: true
+        }),
+        AppConfigService,
+        DataService,
+        ExhibitService,
+        WritingService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: initConfig,
+            deps: [AppConfigService],
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

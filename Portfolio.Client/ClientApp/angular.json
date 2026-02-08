@@ -48,10 +48,10 @@
                 }
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/tree-ngx/scss/main.scss",
-              "src/styles.css"
+                "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                "node_modules/font-awesome/css/font-awesome.css",
+                "node_modules/tree-ngx/scss/main.scss",
+                "src/styles.css"
             ],
             "scripts": []
           },
@@ -89,18 +89,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Portfolio.Client:build"
+            "buildTarget": "Portfolio.Client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Portfolio.Client:build:production"
+                "buildTarget": "Portfolio.Client:build:production"
+            },
+            "development": {
+                "buildTarget": "Portfolio.Client:build:development"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Portfolio.Client:build"
+            "buildTarget": "Portfolio.Client:build"
           }
         },
         "server": {
@@ -112,30 +115,18 @@
           },
           "configurations": {
             "dev": {
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                }
-              },
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true
+                "optimization": false,
+                "outputHashing": "all",
+                "sourceMap": false,
+                "namedChunks": false,
+                "extractLicenses": true
             },
             "production": {
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": true,
-                  "inlineCritical": false
-                }
-              },
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true
+                "optimization": true,
+                "outputHashing": "all",
+                "sourceMap": false,
+                "namedChunks": false,
+                "extractLicenses": true
             }
           }
         }

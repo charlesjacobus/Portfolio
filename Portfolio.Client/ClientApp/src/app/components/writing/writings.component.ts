@@ -16,6 +16,7 @@ import { WritingService } from '../../services/writing.service';
 @Component({
     selector: 'writings',
     templateUrl: './writings.component.html',
+    standalone: false,
     styleUrls: ['./writings.component.css'],
     animations: [
         trigger('writingLoading', [
@@ -34,24 +35,24 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     public errorFetchingWritingSummaries: boolean = false;
     public loading: boolean = true;
     public nodeItems: Array<NodeItem<IWriting>> = [];
-    public selectedWork: IWork = null;
+    public selectedWork: IWork | null = null;
     public treeOptions: TreeOptions = { alwaysEmitSelected: true, checkboxes: false, mode: TreeMode.SingleSelect };
 
-    private defaultTocItemId: string = null;
-    private screenHeight: number;
-    private screenWidth: number;
-    private selectedWritingUrl: string = null;
+    private defaultTocItemId: string | null = null;
+    private screenHeight!: number;
+    private screenWidth!: number;
+    private selectedWritingUrl: string | null = null;
 
-    @ViewChild('toc') private toc: TreeNgxComponent;
+    @ViewChild('toc') private toc!: TreeNgxComponent;
 
-    constructor(exhibitService: ExhibitService, private writingService: WritingService, protected router: Router, private metaService: Meta, private titleService: Title)
+    constructor(exhibitService: ExhibitService, private writingService: WritingService, protected override router: Router, private metaService: Meta, private titleService: Title)
     {
         super(exhibitService, router);
 
         this.onResize();
     }
 
-    public ngAfterViewInit(): void {
+    public override ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
         // Upon initialization, the TreeNgxComponent isn't accessible unless delayed
@@ -70,24 +71,24 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     }
 
     @HostListener('window:resize', ['$event'])
-    onResize(event?) {
+    onResize(event? : any) {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
     }
 
-    public getAssetsFolderName(): string {
+    public override getAssetsFolderName(): string {
         return 'writings';
     }
 
-    public getExhibitAnchor(): string {
-        return isNil(this.selectedWork) ? 'portfolio' : this.selectedWork.anchor;
+    public override getExhibitAnchor(): string {
+        return isNil(this.selectedWork?.anchor) ? 'portfolio' : this.selectedWork.anchor;
     }
 
     public getLoadingName() {
         return this.loading ? 'load' : 'unload';
     }
 
-    public getSelectedWritingUrl(): string {
+    public getSelectedWritingUrl(): string | null {
         return this.selectedWritingUrl;
     }
 
@@ -103,7 +104,10 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
         }
 
         this.loading = true;
-        this.selectedWork = head(selected);
+        this.selectedWork = head(selected) ?? null;
+        if (isNil(this.selectedWork)) {
+            return;
+        }
 
         this.loadWriting(this.getFileFullName(this.selectedWork.fileName));
 
@@ -151,7 +155,7 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     protected initializeToc(writings: Array<IWriting>): void {
         // Map writings to tree node items
         let nodeItems: Array<NodeItem<IWriting>> = map(writings, function (writing: IWriting) {
-            let children: Array<any> = map(filter(writing.works, function (w: IWork) { return !isEmpty(w.name); }), function (work: IWork) {
+            let children: Array<any> | null = map(filter(writing.works, function (w: IWork) { return !isEmpty(w.name); }), function (work: IWork) {
                 return {
                     id: (findIndex(writing.works, function (w: IWork) { return w.fileName === work.fileName; }) + 1).toString(),
                     name: work.name,
@@ -193,7 +197,7 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
         this.nodeItems = nodeItems;
     }
 
-    protected loadWriting(fileName: string): void {
+    protected loadWriting(fileName: string | null): void {
         if (isEmpty(fileName)) {
             return;
         }

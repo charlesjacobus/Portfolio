@@ -61,7 +61,7 @@ export class ExhibitService implements IExhibitService {
         });
     }
 
-    public fetchLeet(code: string): Observable<ILeet> {
+    public fetchLeet(code: string | null): Observable<ILeet> {
         let url: string = AppConfigService.portfolioInfo.hrefGetLeet;
         if (!isNil(code)) {
             url = url.concat('?code='.concat(code));

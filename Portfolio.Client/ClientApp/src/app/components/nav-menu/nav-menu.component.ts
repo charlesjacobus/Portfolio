@@ -6,6 +6,7 @@ import { AppConfigService } from '../../services/config.service';
 
 @Component({
     selector: 'app-nav-menu',
+    standalone: false,
     templateUrl: './nav-menu.component.html',
     styleUrls: ['./nav-menu.component.css']
 })

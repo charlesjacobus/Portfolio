@@ -8,23 +8,24 @@ import { IWork } from '../../models/work';
 import { ExhibitService } from '../../services/exhibit.service';
 
 @Component({
+    standalone: false,
     template: 'No UI; this component is a base class for portfolio work, including exhibits and prose'
 })
 export abstract class WorkComponent implements AfterViewInit, OnInit {
-    private summary: IExhibitSummary;
+    private summary: IExhibitSummary | null = null;
 
-    public exhibit: IExhibit;
+    public exhibit!: IExhibit;
 
     constructor(protected exhibitService: ExhibitService, protected router: Router) { }
 
-    @Input() public exhibitIndex: number; // A zero-based index for the exhibit
+    @Input() public exhibitIndex!: number; // A zero-based index for the exhibit
 
     @Input()
     set exhibitSummary(value: IExhibitSummary) {
         this.summary = value;
         this.exhibit = ExhibitService.createExhibit(value);
     }
-    get exhibitSummary() {
+    get exhibitSummary(): IExhibitSummary | null {
         return this.summary;
     }
 
@@ -38,7 +39,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return 'images';
     }
 
-    public getCurrentWorkOfLabel(): string {
+    public getCurrentWorkOfLabel(): string | null {
         // If there's only 1 work in the exhibit, the label isn't that useful
         if (this.exhibit.works.length === 1) {
             return null;
@@ -47,19 +48,19 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return isNil(this.exhibit) ? null : `1 of ${this.exhibit.works.length.toLocaleString()}`;
     }
 
-    public getExhibitAnchor(): string {
+    public getExhibitAnchor(): string | null {
         return isNil(this.exhibit) ? null : this.exhibit.anchor;
     }
 
-    public getExhibitDescription(): string {
+    public getExhibitDescription(): string | null {
         return isNil(this.exhibit) ? null : this.exhibit.description;
     }
 
-    public getExhibitDescriptionUrl(): string {
+    public getExhibitDescriptionUrl(): string | null {
         return isNil(this.exhibit) || isNil(this.exhibit.descriptionFileName) ? null : this.getFileFullName(this.exhibit.descriptionFileName);
     }
 
-    public getExhibitName(): string {
+    public getExhibitName(): string | null {
         return isNil(this.exhibit) ? null : this.exhibit.name;
     }
 
@@ -67,7 +68,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return isNil(this.exhibit) || isNil(this.exhibit.textLabel) ? 'Text' : this.exhibit.textLabel;
     }
 
-    public getExhibitTextRoute(): string {
+    public getExhibitTextRoute(): string | null {
         return isNil(this.exhibit) || isNil(this.exhibit.textRoute) ? null : this.exhibit.textRoute;
     }
 
@@ -76,7 +77,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
     }
 
     public isGalleryExhibit(): boolean {
-        return !isNil(this.exhibit) && !endsWith(this.exhibit.promo.fileName, '.md');
+        return !isNil(this.exhibit?.promo) && !endsWith(this.exhibit.promo.fileName, '.md');
     }
 
     public visitExhibitTextRoute(): void {
@@ -92,7 +93,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         this.router.navigateByUrl(textRoute);
     }
 
-    protected getExhibitWorkPropertyValue(index: number, propertyName: string): string {
+    protected getExhibitWorkPropertyValue(index: number, propertyName: string): string | null {
         let works: Array<IWork> = this.getExhibitWorks();
         if (!isArray(works)) {
             return null;
@@ -106,7 +107,7 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return work[propertyName];
     }
 
-    protected getFileFullName(fileName: string): string {
+    protected getFileFullName(fileName: string): string | null {
         if (isNil(fileName)) {
             return null;
         }

@@ -26,6 +26,7 @@
         <ngx-gallery #NgxGalleryComponent
                      [options]="galleryOptions"
                      [images]="galleryImages"
+                     class="ngx-gallery"
                      (imagesReady)="handleImagesReady()"
                      (previewChange)="handleImagePreviewChange($event)"
                      (previewClose)="handleImagePreviewClose()"

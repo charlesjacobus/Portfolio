@@ -6,6 +6,7 @@ import { ExhibitService } from '../../services/exhibit.service';
 
 @Component({
     selector: 'exhibits',
+    standalone: false,
     templateUrl: './exhibits.component.html',
     styleUrls: ['./exhibits.component.css']
 })

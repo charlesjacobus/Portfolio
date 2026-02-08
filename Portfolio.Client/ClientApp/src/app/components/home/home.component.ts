@@ -3,13 +3,14 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-home',
-  styleUrls: ['./home.component.css'],
-  templateUrl: './home.component.html',
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-home',
+    standalone: false,
+    styleUrls: ['./home.component.css'],
+    templateUrl: './home.component.html',
+    encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
-    exhibitHtml: string;
+    exhibitHtml!: string;
 
     constructor(private http: HttpClient, private metaService: Meta, private titleService: Title) { }
 

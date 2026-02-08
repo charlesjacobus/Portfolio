@@ -8,7 +8,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "emitDecoratorMetadata": true,
     "target": "es2015",
     "typeRoots": [

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { find, isArray, isEmpty, isNil, split } from 'lodash';
 
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery-9';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryComponent } from '@vinlos/ngx-gallery';
 
 import { IExhibit, IExhibitSummary } from '../../models/exhibit';
 import { IWork } from '../../models/work';
@@ -12,27 +12,28 @@ import { WorkComponent } from './work.component';
 
 @Component({
     selector: 'exhibit',
+    standalone: false,
     templateUrl: './exhibit.component.html',
     styleUrls: ['./exhibit.component.css']
 })
 export class ExhibitComponent extends WorkComponent implements AfterViewInit, OnInit {
     private static readonly DefaultPrefetchImageIndex: number = -1;
 
-    public galleryOptions: NgxGalleryOptions[];
-    public galleryImages: NgxGalleryImage[];
-    public prefetchImageSource: string;
+    public galleryOptions!: NgxGalleryOptions[];
+    public galleryImages!: NgxGalleryImage[];
+    public prefetchImageSource!: string;
     public visibleTab: string = 'work';
 
-    private autoDisplayExhibitName: string = null;
+    private autoDisplayExhibitName: string | null = null;
     private prefetchImageIndex: number = ExhibitComponent.DefaultPrefetchImageIndex;
 
-    @ViewChild('NgxGalleryComponent') private galleryComponent: NgxGalleryComponent;
+    @ViewChild('NgxGalleryComponent') private galleryComponent!: NgxGalleryComponent;
 
-    constructor(private route: ActivatedRoute, protected exhibitService: ExhibitService, protected router: Router) {
+    constructor(private route: ActivatedRoute, protected override exhibitService: ExhibitService, protected override router: Router) {
         super(exhibitService, router);
     }
 
-    public ngAfterViewInit(): void {
+    public override ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
         this.initializeTabOptions();
@@ -53,7 +54,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         }
 
         this.exhibitService.fetchExhibitSummaries().subscribe((exhibitSummaries: Array<IExhibitSummary>) => {
-            const exhibitSummary: IExhibitSummary = find(exhibitSummaries, ['anchor', imagePathParts[2]]);
+            const exhibitSummary = find<IExhibitSummary>(exhibitSummaries, ['anchor', imagePathParts[2]]);
             if (!isNil(exhibitSummary)) {
                 this.exhibitService.fetchExhibit(exhibitSummary.id).subscribe((exhibit: IExhibit) => {
                     if (!isNil(exhibit) && isArray(exhibit.works)) {
@@ -131,7 +132,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 // Auto-display only exhibits that are not text-focused; otherwise, scroll into view only
                 this.route.params.subscribe((params) => {
                     if (!isNil(this.exhibitSummary) && this.isGalleryExhibit()) {
-                        const exhibitSummary: IExhibitSummary = find(this.exhibitService.exhibitSummaries, ['anchor', params['exhibitIdentifier'] || '']);
+                        const exhibitSummary = find <IExhibitSummary>(this.exhibitService.exhibitSummaries, ['anchor', params['exhibitIdentifier'] || '']);
                         if (!isNil(exhibitSummary) && exhibitSummary.id === this.exhibitSummary.id) {
                             if (this.exhibit.textIsDefault) {
                                 this.scrollExhibitIntoView(exhibitSummary.anchor);
@@ -144,7 +145,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
 
                 this.route.fragment.subscribe((fragment) => {
                     if (!isNil(this.exhibitSummary) && this.isGalleryExhibit() && isNil(this.autoDisplayExhibitName)) {
-                        const exhibitSummary: IExhibitSummary = find(this.exhibitService.exhibitSummaries, ['anchor', fragment || '']);
+                        const exhibitSummary = find<IExhibitSummary>(this.exhibitService.exhibitSummaries, ['anchor', fragment || '']);
                         if (!isNil(exhibitSummary) && exhibitSummary.id === this.exhibitSummary.id) {
                             this.scrollExhibitIntoView(exhibitSummary.anchor);
                         }
@@ -216,7 +217,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         }, 1000);
     }
 
-    private scrollExhibitIntoView(exhibitAnchor: string): void {
+    private scrollExhibitIntoView(exhibitAnchor: string | null): void {
         if (isNil(exhibitAnchor)) {
             return;
         }
