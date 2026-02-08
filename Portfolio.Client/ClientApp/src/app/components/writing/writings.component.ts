@@ -32,6 +32,8 @@ import { WritingService } from '../../services/writing.service';
     ]
 })
 export class WritingsComponent extends WorkComponent implements AfterViewInit, OnInit {
+    private pageTitle: string = 'Writings';
+
     public errorFetchingWritingSummaries: boolean = false;
     public loading: boolean = true;
     public nodeItems: Array<NodeItem<IWriting>> = [];
@@ -149,7 +151,7 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     private initializeTitle(): void {
         const currentTitle = this.titleService.getTitle();
         const baseName = currentTitle.split(':')[0].trim();
-        this.titleService.setTitle(`${baseName} : Writings`);
+        this.titleService.setTitle(`${baseName} : ${this.pageTitle}`);
     }
 
     protected initializeToc(writings: Array<IWriting>): void {

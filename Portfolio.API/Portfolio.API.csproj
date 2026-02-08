@@ -6,14 +6,14 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Projects\Scratch\Portfolio\Portfolio.API\Portfolio.API.xml</DocumentationFile>
+    <DocumentationFile>Portfolio.API.xml</DocumentationFile>
     <NoWarn>1591;1701;1702</NoWarn>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <NoWarn>1591;1701;1702</NoWarn>
-    <DocumentationFile>C:\Projects\Scratch\Portfolio\Portfolio.API\Portfolio.API.xml</DocumentationFile>
+    <DocumentationFile>Portfolio.API.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

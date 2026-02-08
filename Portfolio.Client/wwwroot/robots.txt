@@ -3,4 +3,5 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /*?id=
 Sitemap: https://charlesjacobus.com/sitemap.xml

@@ -4,6 +4,11 @@
         <name>Portfolio.API</name>
     </assembly>
     <members>
+        <member name="T:Portfolio.Api.Controllers.HealthController">
+            <summary>
+            Supports operations related to portfolio health checks
+            </summary>
+        </member>
         <member name="M:Portfolio.Api.Controllers.HealthController.Health">
             <summary>
             Returns a result indicating the health status of basic API connectivity
@@ -16,11 +21,52 @@
             </summary>
             <returns>A result status</returns>
         </member>
+        <member name="T:Portfolio.Api.Controllers.LeetsController">
+            <summary>
+            Supports operations related to leets
+            </summary>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.LeetsController.GetLeet(System.String)">
+            <summary>
+            Creates a new leet
+            </summary>
+            <param name = "code">The leet code</param>
+            <returns>A leet</returns>
+            <remarks>
+            <para>If <paramref name="code"/> is supplied, then the leet is created using the supplied code.</para>
+            <para>Otherwise, a new leet is created.</para>
+            <para>In either case, the leet code is returned as an ETag in the response.</para>
+            </remarks>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.LeetsController.GetLeetFile(System.String)">
+            <summary>
+            Creates a new leet file
+            </summary>
+            <param name = "code">The leet code</param>
+            <returns>A leet file</returns>
+            <remarks>
+            <para>This endpoint is an alias for the primary GET endpoint, although this endpoint returns a leet file.</para>
+            <para>The leet code is returned as an ETag value.</para>
+            </remarks>
+        </member>
+        <member name="T:Portfolio.Api.Controllers.PortfolioController">
+            <summary>
+            Supports operations related to the portfolio
+            </summary>
+        </member>
         <member name="M:Portfolio.Api.Controllers.PortfolioController.Get">
             <summary>
             Gets information about the API, including documentation sources and navigable routes (synonym: Info)
             </summary>
             <returns>An API summary</returns>
+        </member>
+        <member name="M:Portfolio.Api.Controllers.PortfolioController.GetPhoto(System.Int32)">
+            <summary>
+            Gets information about a photo of the artist
+            </summary>
+            <param name="id">The ID that uniquely identifies the photo</param>
+            <returns>Photo information</returns>
+            <remarks>If the identifier is out of range, then information for a random photo is returned</remarks>
         </member>
         <member name="M:Portfolio.Api.Controllers.PortfolioController.GetInfo">
             <summary>
@@ -28,11 +74,34 @@
             </summary>
             <returns>An API summary</returns>
         </member>
+        <member name="T:Portfolio.API.Controllers.v1.ExhibitsController">
+            <summary>
+            Supports operations related to portfolio exhibits
+            </summary>
+        </member>
         <member name="M:Portfolio.API.Controllers.v1.ExhibitsController.Get">
             <summary>
-            Gets a list of active exhibits
+            Gets a list of active exhibits 
             </summary>
-            <returns>A list of exhibits</returns>
+            <returns>A list of exhibit summaries</returns>
+        </member>
+        <member name="M:Portfolio.API.Controllers.v1.ExhibitsController.Get(System.Int32)">
+            <summary>
+            Gets details for a specified exhibit
+            </summary>
+            <param name="id">The ID that uniquely identifies the exhibit</param>
+            <returns>An exhibit</returns>
+        </member>
+        <member name="T:Portfolio.API.Controllers.v1.WritingsController">
+            <summary>
+            Supports operations related to portfolio writings, including prose and poetry
+            </summary>
+        </member>
+        <member name="M:Portfolio.API.Controllers.v1.WritingsController.Get">
+            <summary>
+            Gets a list of active writings 
+            </summary>
+            <returns>A list of writing summaries</returns>
         </member>
     </members>
 </doc>

@@ -16,6 +16,8 @@ import { DataService } from '../../services/data.service';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
+    private pageTitle: string = 'About';
+
     private photo!: IPhoto;
 
     constructor(private dataService: DataService, private metaService: Meta, private titleService: Title) {
@@ -70,6 +72,6 @@ export class AboutComponent {
     private initializeTitle(): void {
         const currentTitle = this.titleService.getTitle();
         const baseName = currentTitle.split(':')[0].trim();
-        this.titleService.setTitle(`${baseName} : About`);
+        this.titleService.setTitle(`${baseName} : ${this.pageTitle}`);
     }
 }

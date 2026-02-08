@@ -11,6 +11,8 @@ import { ExhibitService } from '../../services/exhibit.service';
     styleUrls: ['./exhibits.component.css']
 })
 export class ExhibitsComponent implements AfterViewInit, OnInit {
+    private pageTitle: string = 'Exhibits';
+
     public errorFetchingExhibitSummaries: boolean = false;
     public exhibitsLoaded: boolean = false;
 
@@ -45,6 +47,6 @@ export class ExhibitsComponent implements AfterViewInit, OnInit {
     private initializeTitle(): void {
         const currentTitle = this.titleService.getTitle();
         const baseName = currentTitle.split(':')[0].trim();
-        this.titleService.setTitle(`${baseName} : Exhibits`);
+        this.titleService.setTitle(`${baseName} : ${this.pageTitle}`);
     }
 }

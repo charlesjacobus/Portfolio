@@ -14,7 +14,7 @@ export interface IWritingService {
 
 @Injectable()
 export class WritingService implements IWritingService {
-    public writings: Array<IWriting>;
+    public writings: Array<IWriting> | null = null;
 
     constructor(private dataService: DataService) { }
 
@@ -26,7 +26,7 @@ export class WritingService implements IWritingService {
             } else {
                 let url: string = AppConfigService.portfolioInfo.hrefGetActiveWritings;
 
-                this.dataService.get(url)
+                this.dataService.get<Array<IWriting>>(url)
                     .subscribe((result: Array<IWriting>) => {
                         this.writings = result;
 

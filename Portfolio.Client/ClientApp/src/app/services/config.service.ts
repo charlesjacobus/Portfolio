@@ -73,7 +73,7 @@ export class AppConfigService implements IAppConfigService {
                 `Backend returned code ${error.status}, ` +
                 `body was: ${error.error}`);
         }
-        return throwError(
+        return throwError(() =>
             'Could not load config file; please try again later.');
     }
 }

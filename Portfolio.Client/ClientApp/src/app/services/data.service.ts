@@ -25,7 +25,7 @@ export class DataService implements IDataService {
         return this.http.get<T>(url, DataService.httpOptions)
             .pipe(
                 catchError((err: any) => {
-                    return throwError(err);
+                    return throwError(() => err);
                 })
             );
     }
@@ -34,7 +34,7 @@ export class DataService implements IDataService {
         return this.http.get(url, { headers: DataService.httpOptions.headers, responseType: 'blob', withCredentials: DataService.httpOptions.withCredentials })
             .pipe(
                 catchError((err: any) => {
-                    return throwError(err);
+                    return throwError(() => err);
                 })
             );
     }
@@ -43,7 +43,7 @@ export class DataService implements IDataService {
         return this.http.post<T>(url, object, DataService.httpOptions)
             .pipe(
                 catchError((err: any) => {
-                    return throwError(err);
+                    return throwError(() => err);
                 })
             );
     }

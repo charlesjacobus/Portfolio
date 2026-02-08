@@ -19,7 +19,7 @@ export interface IExhibitService {
 export class ExhibitService implements IExhibitService {
     private exhibits: Array<IExhibit> = [];
 
-    public exhibitSummaries: Array<IExhibitSummary>;
+    public exhibitSummaries: Array<IExhibitSummary> | null = null;
 
     constructor(private dataService: DataService) { }
 
@@ -31,7 +31,7 @@ export class ExhibitService implements IExhibitService {
             } else {
                 let url: string = AppConfigService.portfolioInfo.hrefGetActiveExhibits;
 
-                this.dataService.get(url)
+                this.dataService.get<Array<IExhibitSummary>>(url)
                     .subscribe((result: Array<IExhibitSummary>) => {
                         this.exhibitSummaries = result;
 
@@ -44,13 +44,13 @@ export class ExhibitService implements IExhibitService {
 
     public fetchExhibit(id: number): Observable<IExhibit> {
         return new Observable(observer => {
-            let exhibit: IExhibit = find(this.exhibits, ['id', id]);
+            let exhibit = find<IExhibit>(this.exhibits, ['id', id]);
             if (!isNil(exhibit)) {
                 observer.next(exhibit);
                 observer.complete();
             } else {
                 this.exhibits = [];
-                this.dataService.get(AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString()))
+                this.dataService.get<IExhibit>(AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString()))
                     .subscribe((result: IExhibit) => {
                         this.exhibits.push(result);
 
@@ -76,7 +76,7 @@ export class ExhibitService implements IExhibitService {
         });
     }
 
-    public static createExhibit(exhibitSummary: IExhibitSummary): IExhibit {
+    public static createExhibit(exhibitSummary: IExhibitSummary): IExhibit | null {
         if (isNil(exhibitSummary)) {
             return null;
         }
@@ -88,7 +88,7 @@ export class ExhibitService implements IExhibitService {
             descriptionFileName: exhibitSummary.descriptionFileName,
             anchor: exhibitSummary.anchor,
             promo: exhibitSummary.promo,
-            works: [exhibitSummary.promo],
+            works: !isNil(exhibitSummary.promo) ? [exhibitSummary.promo] : [],
             textIsDefault: exhibitSummary.textIsDefault,
             textLabel: exhibitSummary.textLabel,
             textRoute: exhibitSummary.textRoute
