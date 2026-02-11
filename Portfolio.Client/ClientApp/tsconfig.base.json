@@ -4,19 +4,34 @@
     "experimentalDecorators": true,
     "allowJs": true,
     "baseUrl": "./",
-    "module": "es2020",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "inlineSources": true,
+    "sourceRoot": "src",
     "declaration": false,
-    "moduleResolution": "bundler",
+    "downlevelIteration": true,
     "emitDecoratorMetadata": true,
-    "target": "es2015",
+    "importHelpers": true,
+    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2017",
-      "dom"
-    ]
+      "ES2022",
+      "dom",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   }
 }

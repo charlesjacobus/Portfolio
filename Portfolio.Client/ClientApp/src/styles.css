@@ -64,7 +64,7 @@ a:active {
 }
 
 .ngx-gallery {
-    display: inline-block;
+    display: block;
     margin-bottom: 20px;
 }
 
