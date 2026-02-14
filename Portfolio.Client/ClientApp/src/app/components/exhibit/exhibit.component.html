@@ -29,8 +29,7 @@
                      class="ngx-gallery"
                      (imagesReady)="handleImagesReady()"
                      (previewChange)="handleImagePreviewChange($event)"
-                     (previewClose)="handleImagePreviewClose()"
-                     (previewOpen)="handleImagePreviewOpen()"></ngx-gallery>
+                     (previewClose)="handleImagePreviewClose()"></ngx-gallery>
         <img *ngIf="prefetchImageSource" src="{{prefetchImageSource}}" style="display:none"/>
     </div>
   </div>

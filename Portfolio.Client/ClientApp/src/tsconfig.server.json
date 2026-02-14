@@ -1,12 +1,13 @@
 {
-  "extends": "../tsconfig.base.json",
-  "angularCompilerOptions": {
-    "entryModule": "app/app.server.module#AppServerModule"
-  },
-  "files": [
-    "main.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {},
+    "angularCompilerOptions": {
+        "entryModule": "app/app.server.module#AppServerModule"
+    },
+    "files": [
+        "main.ts"
+    ],
+    "include": [
+        "src/**/*.d.ts"
+    ]
 }

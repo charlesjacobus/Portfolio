@@ -90,8 +90,6 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         this.autoDisplayExhibitName = null;
     }
 
-    public handleImagePreviewOpen(): void { }
-
     public handleImagesReady(): void {
         if (isNil(this.autoDisplayExhibitName) || isNil(this.galleryComponent)) {
             return;
