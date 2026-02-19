@@ -34,6 +34,22 @@
     </div>
     <!-- Text -->
     <div class="exhibitDescriptionContainer" [style.display]="visibleTab === 'text' ? 'block' : 'none'">
+        <!-- Work : Text tabs -->
+        <div class="exhibitHeader">
+            <div class="exhibitTabs">
+                <div *ngIf="showWorkText()">
+                    <label (click)="visibleTab = 'work'"
+                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
+                    &nbsp;<label class="tabSpacer">:</label>&nbsp;
+                    <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
+                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                    <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
+                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                </div>
+                <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
+            </div>
+            <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
+        </div>
         <markdown *ngIf="!!getExhibitDescription() && !getExhibitDescriptionUrl()"
                   ngPreserveWhitespaces>
             {{getExhibitDescription()}}
