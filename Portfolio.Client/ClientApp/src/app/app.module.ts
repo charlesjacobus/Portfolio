@@ -10,7 +10,6 @@ import { AngularSplitModule } from 'angular-split';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule, MARKED_OPTIONS, SANITIZE } from 'ngx-markdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxGalleryModule } from '@vinlos/ngx-gallery';
 import { TreeNgxModule } from 'tree-ngx';
 
 import { AboutComponent } from './components/about/about.component';
@@ -77,7 +76,6 @@ export function initConfig(configService: AppConfigService) {
             }
         }),
         NgbModule,
-        NgxGalleryModule,
         TreeNgxModule
     ],
     providers: [

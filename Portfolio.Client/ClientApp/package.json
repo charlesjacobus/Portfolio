@@ -22,7 +22,6 @@
     "@angular/router": "^21.0.0",
     "@ng-bootstrap/ng-bootstrap": "^20.0.0",
     "@popperjs/core": "^2.11.8",
-    "@vinlos/ngx-gallery": "^20.0.1",
     "angular-split": "^20.0.0",
     "bootstrap": "^5.3.3",
     "core-js": "^3.38.1",
