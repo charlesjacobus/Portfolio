@@ -1,105 +1,319 @@
 .currentWorkOfLabel {
-  color: dimgray;
-  float: right;
-  font-size: small;
-  margin: 0px;
-  padding: 0px;
+    color: dimgray;
+    font-size: small;
+    margin: 0px;
+    padding: 0px;
 }
 
-.exhibit {}
+.exhibit { }
 
 .exhibitContainer {
-  display: block;
-  margin-top: 75px;
-  min-height: 200px;
+    display: block;
+    margin-top: 75px;
+    min-height: 200px;
 }
 
 .exhibitDescriptionContainer {
-  display: block;
-  height: 405px;
-  padding-right: 5px;
-  text-align: left;
-  overflow: hidden scroll;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+    display: block;
+    height: 405px;
+    padding-right: 5px;
+    text-align: left;
+    overflow: hidden scroll;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.exhibitHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.exhibitImageWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .exhibitTabs {
-  float: left;
-  font-size: small;
+    font-size: small;
 }
 
 .exhibitTitle {
-  font-size: x-large;
+    font-size: x-large;
 }
 
 .firstExhibit {
-  margin-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .noScrollContainer {
-  overflow: hidden hidden;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: auto;
+    overflow: hidden hidden;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: auto;
 }
 
 .tabActive {
-  color: #80D0E8;
+    color: #80D0E8;
 }
 
-.tabActive:hover {
-  color: color-mix(in srgb, currentColor 30%, #4493AB 70%);
-}
+    .tabActive:hover {
+        color: color-mix(in srgb, currentColor 30%, #4493AB 70%);
+    }
 
 .tabInactive {
-  color: whitesmoke;
+    color: whitesmoke;
 }
 
 .tabSpacer {
-  color: whitesmoke;
-  font-size: small;
+    color: whitesmoke;
+    font-size: small;
 }
 
 .tabPointer {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-/* For exhibitDescriptionContainer size properties, see also ngx-gallery configuration in exhibit.component.ts, with slight height adjustment of 5px for Chrome bug (?) */
+.promo-image-container {
+    width: 100%;
+    height: 400px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.promo-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill container, cropping if needed */
+    transition: opacity 0.2s ease;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.promo-image-container:hover .promo-image {
+    opacity: 0.85;
+}
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    z-index: 10002;
+    padding: 8px 12px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+    .lightbox-close:hover {
+        opacity: 1;
+    }
+
+.lightbox-toolbar {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10002;
+}
+
+.lightbox-tool-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.15rem;
+    cursor: pointer;
+    padding: 8px 10px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+    .lightbox-tool-btn:hover {
+        opacity: 1;
+    }
+
+.lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 20px;
+    z-index: 10001;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+    .lightbox-arrow:hover {
+        opacity: 1;
+    }
+
+.lightbox-arrow-left {
+    left: 8px;
+}
+
+.lightbox-arrow-right {
+    right: 8px;
+}
+
+.lightbox-arrows-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lightbox-image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+    padding: 50px 60px 70px;
+    position: relative;
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.lightbox-image-loading {
+    opacity: 0;
+}
+
+.lightbox-spinner {
+    position: absolute;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-description {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.85rem;
+    text-align: center;
+    max-width: 80%;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.85);
+    z-index: 10001;
+    pointer-events: none;
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    z-index: 10001;
+    pointer-events: none;
+}
+
+/* For exhibitDescriptionContainer size properties, see also promo-image-container configuration above, with slight height adjustment of 5px for Chrome bug (?) */
 
 @media only screen and (max-width: 800px) {
-  .exhibitDescriptionContainer {
-    font-size: smaller;
-    height: 255px;
-  }
+    .exhibitDescriptionContainer {
+        font-size: smaller;
+        height: 255px;
+    }
 
-  .exhibitTitle {
-    font-size: large;
-  }
+    .exhibitTitle {
+        font-size: large;
+    }
+
+    .promo-image-container {
+        height: 250px;
+    }
+
+    .lightbox-image-wrapper {
+        padding: 45px 50px 65px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
-  .exhibitContainer {
-    margin-top:50px;
-  }
+    .exhibitContainer {
+        margin-top: 50px;
+    }
 
-  .exhibitDescriptionContainer {
-    font-size: small;
-    height: 125px;
-  }
+    .exhibitDescriptionContainer {
+        font-size: small;
+        height: 125px;
+    }
 
-  .exhibitTitle {
-    font-size: small;
-  }
+    .exhibitTitle {
+        font-size: small;
+    }
 
-  .tabActive {
-    font-size: smaller;
-  }
+    .tabActive {
+        font-size: smaller;
+    }
 
-  .tabInactive {
-    font-size: smaller;
-  }
+    .tabInactive {
+        font-size: smaller;
+    }
 
-  .tabSpacer {
-    font-size: smaller;
-  }
+    .tabSpacer {
+        font-size: smaller;
+    }
+
+    .promo-image-container {
+        height: 125px;
+    }
+
+    .lightbox-arrow {
+        font-size: 1.4rem;
+        padding: 14px;
+    }
+
+    .lightbox-image-wrapper {
+        padding: 45px 40px 60px;
+    }
+
+    .lightbox-description {
+        font-size: 0.8rem;
+        bottom: 32px;
+    }
 }

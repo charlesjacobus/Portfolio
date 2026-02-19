@@ -1,48 +1,107 @@
 <a name="{{getExhibitAnchor()}}"></a>
 <div [ngClass]="{'exhibitContainer': true, 'firstExhibit': exhibitIndex === 0}">
-  <h2 class="exhibitTitle">{{getExhibitName()}}</h2>
-  <!-- Work : Text tabs -->
-  <div>
-    <div class="exhibitTabs">
-        <div *ngIf="showWorkText()">
-            <label (click)="visibleTab = 'work'"
-                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
-            &nbsp;<label class="tabSpacer">:</label>&nbsp;
-            <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
-                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-            <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
-                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+    <h2 class="exhibitTitle">{{getExhibitName()}}</h2>
+    <!-- Work : Text views -->
+    <!-- Work -->
+    <div class="exhibit" [style.display]="visibleTab === 'work' ? 'block' : 'none'">
+        <div *ngIf="isGalleryExhibit()">
+            <!-- Wrapper to align header and image -->
+            <div class="exhibitImageWrapper">
+                <!-- Work : Text tabs -->
+                <div class="exhibitHeader">
+                    <div class="exhibitTabs">
+                        <div *ngIf="showWorkText()">
+                            <label (click)="visibleTab = 'work'"
+                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
+                            &nbsp;<label class="tabSpacer">:</label>&nbsp;
+                            <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
+                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                            <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
+                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                        </div>
+                        <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
+                        <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
+                    </div>
+                    <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
+                </div>
+                <!-- Image -->
+                <div class="promo-image-container" (click)="openLightbox(0)">
+                    <img *ngIf="getPromoImageSrc()" [src]="getPromoImageSrc()" class="promo-image" [alt]="getExhibitName()" />
+                </div>
+            </div>
+            <img *ngIf="prefetchImageSource" [src]="prefetchImageSource" style="display:none" />
         </div>
-        <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
-        <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
     </div>
-    <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
-    <div [ngStyle]="{'clear': 'both'}"></div>
-  </div>
-  <!-- Work : Text views -->
-  <!-- Work -->
-  <div class="exhibit" [style.display]="visibleTab === 'work' ? 'block' : 'none'">
-    <div *ngIf="isGalleryExhibit()">
-        <ngx-gallery #NgxGalleryComponent
-                     [options]="galleryOptions"
-                     [images]="galleryImages"
-                     class="ngx-gallery"
-                     (imagesReady)="handleImagesReady()"
-                     (previewChange)="handleImagePreviewChange($event)"
-                     (previewClose)="handleImagePreviewClose()"></ngx-gallery>
-        <img *ngIf="prefetchImageSource" src="{{prefetchImageSource}}" style="display:none"/>
+    <!-- Text -->
+    <div class="exhibitDescriptionContainer" [style.display]="visibleTab === 'text' ? 'block' : 'none'">
+        <markdown *ngIf="!!getExhibitDescription() && !getExhibitDescriptionUrl()"
+                  ngPreserveWhitespaces>
+            {{getExhibitDescription()}}
+        </markdown>
+        <markdown *ngIf="!getExhibitDescription() && !!getExhibitDescriptionUrl()"
+                  [src]="getExhibitDescriptionUrl()"
+                  ngPreserveWhitespaces>
+            {{getExhibitDescription()}}
+        </markdown>
     </div>
-  </div>
-  <!-- Text -->
-  <div class="exhibitDescriptionContainer" [style.display]="visibleTab === 'text' ? 'block' : 'none'">
-    <markdown *ngIf="!!getExhibitDescription() && !getExhibitDescriptionUrl()"
-              ngPreserveWhitespaces>
-      {{getExhibitDescription()}}
-    </markdown>
-    <markdown *ngIf="!getExhibitDescription() && !!getExhibitDescriptionUrl()"
-              [src]="getExhibitDescriptionUrl()"
-              ngPreserveWhitespaces>
-      {{getExhibitDescription()}}
-    </markdown>
-  </div>
+</div>
+
+<!-- Lightbox -->
+<div *ngIf="lightboxOpen" class="lightbox-overlay"
+     (click)="onBackdropClick($event)"
+     (mousemove)="onLightboxMouseMove()"
+     (wheel)="onLightboxWheel($event)"
+     (touchstart)="onTouchStart($event)"
+     (touchend)="onTouchEnd($event)">
+    <!-- Close -->
+    <button class="lightbox-close" (click)="closeLightbox()" title="Close">&#x2715;</button>
+    <!-- Toolbar -->
+    <div class="lightbox-toolbar">
+        <button class="lightbox-tool-btn" (click)="lightboxZoomIn(); $event.stopPropagation()" title="Zoom in">
+            <i class="fa fa-search-plus"></i>
+        </button>
+        <button class="lightbox-tool-btn" (click)="lightboxZoomOut(); $event.stopPropagation()" title="Zoom out">
+            <i class="fa fa-search-minus"></i>
+        </button>
+        <button class="lightbox-tool-btn" (click)="lightboxResetZoom(); $event.stopPropagation()" title="Reset zoom">
+            <i class="fa fa-compress"></i>
+        </button>
+        <button class="lightbox-tool-btn" (click)="toggleFullscreen(); $event.stopPropagation()" title="Fullscreen">
+            <i class="fa fa-arrows-alt"></i>
+        </button>
+    </div>
+    <!-- Navigation arrows -->
+    <button *ngIf="lightboxImages.length > 1"
+            class="lightbox-arrow lightbox-arrow-left"
+            [class.lightbox-arrows-hidden]="!arrowsVisible"
+            (click)="lightboxPrev(); $event.stopPropagation()" title="Previous">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+    <button *ngIf="lightboxImages.length > 1"
+            class="lightbox-arrow lightbox-arrow-right"
+            [class.lightbox-arrows-hidden]="!arrowsVisible"
+            (click)="lightboxNext(); $event.stopPropagation()" title="Next">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+    <!-- Image -->
+    <div class="lightbox-image-wrapper" (click)="$event.stopPropagation()">
+        <img *ngIf="getCurrentLightboxImage()"
+             class="lightbox-image"
+             [src]="getCurrentLightboxImage()?.src"
+             [alt]="getCurrentLightboxImage()?.label"
+             [style.transform]="'scale(' + lightboxZoom + ')'"
+             [class.lightbox-image-loading]="!lightboxImageLoaded"
+             (load)="onLightboxImageLoad()" />
+        <div *ngIf="!lightboxImageLoaded" class="lightbox-spinner">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
+    </div>
+    <!-- Description -->
+    <div *ngIf="getCurrentLightboxImage()?.description" class="lightbox-description">
+        {{getCurrentLightboxImage()?.description}}
+    </div>
+    <!-- Counter -->
+    <div *ngIf="lightboxImages.length > 1" class="lightbox-counter">
+        {{lightboxIndex + 1}} / {{lightboxImages.length}}
+    </div>
 </div>
