@@ -1,29 +1,27 @@
 <a name="{{getExhibitAnchor()}}"></a>
 <div [ngClass]="{'exhibitContainer': true, 'firstExhibit': exhibitIndex === 0}">
     <h2 class="exhibitTitle">{{getExhibitName()}}</h2>
-    <!-- Work : Text views -->
-    <!-- Work -->
+    <!-- Work : Text tabs (shared, always visible regardless of active view) -->
+    <div class="exhibitHeader">
+        <div class="exhibitTabs">
+            <div *ngIf="showWorkText()">
+                <label (click)="visibleTab = 'work'"
+                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
+                &nbsp;<label class="tabSpacer">:</label>&nbsp;
+                <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
+                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
+                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+            </div>
+            <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
+            <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
+        </div>
+        <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
+    </div>
+    <!-- Work view -->
     <div class="exhibit" [style.display]="visibleTab === 'work' ? 'block' : 'none'">
         <div *ngIf="isGalleryExhibit()">
-            <!-- Wrapper to align header and image -->
             <div class="exhibitImageWrapper">
-                <!-- Work : Text tabs -->
-                <div class="exhibitHeader">
-                    <div class="exhibitTabs">
-                        <div *ngIf="showWorkText()">
-                            <label (click)="visibleTab = 'work'"
-                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
-                            &nbsp;<label class="tabSpacer">:</label>&nbsp;
-                            <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
-                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-                            <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
-                                   [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-                        </div>
-                        <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
-                        <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
-                    </div>
-                    <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
-                </div>
                 <!-- Image -->
                 <div class="promo-image-container" (click)="openLightbox(0)">
                     <img *ngIf="getPromoImageSrc()" [src]="getPromoImageSrc()" class="promo-image" [alt]="getExhibitName()" />
@@ -32,24 +30,8 @@
             <img *ngIf="prefetchImageSource" [src]="prefetchImageSource" style="display:none" />
         </div>
     </div>
-    <!-- Text -->
+    <!-- Text view -->
     <div class="exhibitDescriptionContainer" [style.display]="visibleTab === 'text' ? 'block' : 'none'">
-        <!-- Work : Text tabs -->
-        <div class="exhibitHeader">
-            <div class="exhibitTabs">
-                <div *ngIf="showWorkText()">
-                    <label (click)="visibleTab = 'work'"
-                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
-                    &nbsp;<label class="tabSpacer">:</label>&nbsp;
-                    <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
-                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-                    <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
-                           [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-                </div>
-                <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
-            </div>
-            <label class="currentWorkOfLabel">{{getCurrentWorkOfLabel()}}</label>
-        </div>
         <markdown *ngIf="!!getExhibitDescription() && !getExhibitDescriptionUrl()"
                   ngPreserveWhitespaces>
             {{getExhibitDescription()}}

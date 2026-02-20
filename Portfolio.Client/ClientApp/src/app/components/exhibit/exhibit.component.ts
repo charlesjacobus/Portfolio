@@ -135,6 +135,8 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
                 } else {
                     this.lightboxPrev();
                 }
+            } else if (deltaY > 80 && Math.abs(deltaY) > Math.abs(deltaX)) {
+                this.closeLightbox();
             }
         }
     }
