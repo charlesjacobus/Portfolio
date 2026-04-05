@@ -1,6 +1,5 @@
 # Generated/Packaged Code Folder/File Exclusions
 /.vs
-/.vscode
 /node_modules
 /packages
 /package-lock.json
