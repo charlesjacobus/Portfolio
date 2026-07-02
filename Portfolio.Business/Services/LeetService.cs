@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Drawing;
@@ -21,18 +22,13 @@ namespace Portfolio.Business.Services
         LeetStream CreateLeetStream(Leet leet);
     }
 
-    public class LeetService
-        : ILeetService
+    public class LeetService(ISerializer<Shape> shapeSerializer)
+                : ILeetService
     {
-        private readonly ISerializer<Shape> _shapeSerializer;
+        private readonly ISerializer<Shape> _shapeSerializer = shapeSerializer;
 
-        private static readonly Random random = new Random();
-        private static readonly object syncLock = new object();
-
-        public LeetService(ISerializer<Shape> shapeSerializer)
-        {
-            _shapeSerializer = shapeSerializer;
-        }
+        private static readonly Random random = new();
+        private static readonly Lock syncLock = new();
 
         public LeetStream CreateLeetStream()
         {
@@ -94,7 +90,7 @@ namespace Portfolio.Business.Services
 
             var configuration = Shape.GetConfiguration(leet);
             var shape = _shapeSerializer.Deserialize(configuration);
-            if (shape.Points.Count() != patches.Count())
+            if (shape.Points.Count != patches.Count())
             {
                 return null;
             }
@@ -119,7 +115,7 @@ namespace Portfolio.Business.Services
         protected virtual Leets CreateRandomLeet()
         {
             const int multiple = 25;
-            var r = CreateRandomByte(1, Enum.GetNames(typeof(Leets)).Length * multiple);
+            var r = CreateRandomByte(1, Enum.GetNames<Leets>().Length * multiple);
 
             // Adding a multiple seemed to result in a better distribution
             var leet = r >= 1 && r <= multiple ? Leets.M : r >= multiple + 1 && r <= multiple * 2 ? Leets.G : Leets.F;
@@ -135,7 +131,7 @@ namespace Portfolio.Business.Services
 
             var segments = new List<ILineSegment>
             {
-                new LinearLineSegment(points.ToArray())
+                new LinearLineSegment([.. points])
             };
 
             var polygon = new Polygon(segments);
@@ -151,7 +147,7 @@ namespace Portfolio.Business.Services
 
             var patches = new List<Patch>();
 
-            for (int i = 0; i < shape.Points.Count(); i++)
+            for (int i = 0; i < shape.Points.Count; i++)
             {
                 var points = shape.Points.ElementAt(i);
 
