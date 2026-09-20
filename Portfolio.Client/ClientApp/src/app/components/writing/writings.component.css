@@ -12,6 +12,12 @@
 .writingContainer {
     padding: 25px 75px;
     text-align: justify;
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+}
+
+.writingContainer.is-loading {
+    opacity: 0;
 }
 
 .writingsContainer {

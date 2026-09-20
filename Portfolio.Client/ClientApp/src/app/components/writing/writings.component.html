@@ -1,4 +1,4 @@
-<div class="writingsContainer">
+<div class="writingsContainer" animate.enter="route-fade-in" animate.leave="route-fade-out">
     <div *ngIf="!errorFetchingWritingSummaries">
         <div style="width: 100%; height: 800px;">
             <as-split direction="{{getTocOrientation()}}">
@@ -12,7 +12,7 @@
                 </as-split-area>
                 <as-split-area [size]="70">
                     <div class="writingContainer"
-                         [@writingLoading]="getLoadingName()">
+                         [class.is-loading]="loading">
                          <div><markdown #content
                                        ngPreserveWhitespaces
                                        [src]="getSelectedWritingUrl()"

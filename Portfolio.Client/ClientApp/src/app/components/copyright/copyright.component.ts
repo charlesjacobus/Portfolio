@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { isNil } from 'lodash';
 
@@ -8,6 +8,7 @@ import { AppConfigService } from '../../services/config.service';
     selector: 'copyright',
     standalone: false,
     templateUrl: './copyright.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./copyright.component.css']
 })
 export class CopyrightComponent {

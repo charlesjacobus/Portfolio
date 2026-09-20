@@ -1,6 +1,5 @@
 import { NgModule, APP_INITIALIZER, provideZoneChangeDetection, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -46,7 +45,6 @@ export function initConfig(configService: AppConfigService) {
     imports: [
         AngularSplitModule,
         BrowserModule,
-        BrowserAnimationsModule,
         ClipboardModule,
         FormsModule,
         HttpClientModule,

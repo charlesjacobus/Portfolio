@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -12,6 +12,7 @@ import { WorkComponent } from './work.component';
     selector: 'leet-game',
     standalone: false,
     templateUrl: './leets.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./leets.component.css']
 })
 export class LeetsComponent extends WorkComponent implements OnInit {

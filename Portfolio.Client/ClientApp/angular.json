@@ -30,27 +30,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-                "src/assets",
-                {
-                    "glob": "web.config",
-                    "input": "../",
-                    "output": "./"
-                },
-                {
-                    "glob": "favicon.ico",
-                    "input": "../wwwroot",
-                    "output": "./"
-                },
-                {
-                    "glob": "robots.txt",
-                    "input": "../wwwroot",
-                    "output": "./"
-                },
-                {
-                    "glob": "sitemap.xml",
-                    "input": "../wwwroot",
-                    "output": "./"
-                }
+                "src/assets"
             ],
             "styles": [
                 "node_modules/bootstrap/dist/css/bootstrap.min.css",

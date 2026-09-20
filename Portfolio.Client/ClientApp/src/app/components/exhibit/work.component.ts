@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { endsWith, isArray, isNil, startsWith } from 'lodash';
@@ -9,6 +9,7 @@ import { ExhibitService } from '../../services/exhibit.service';
 
 @Component({
     standalone: false,
+    changeDetection: ChangeDetectionStrategy.Eager,
     template: 'No UI; this component is a base class for portfolio work, including exhibits and prose'
 })
 export abstract class WorkComponent implements AfterViewInit, OnInit {

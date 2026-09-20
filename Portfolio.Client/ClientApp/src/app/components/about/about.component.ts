@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { DataService } from '../../services/data.service';
     selector: 'about',
     standalone: false,
     templateUrl: './about.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent {

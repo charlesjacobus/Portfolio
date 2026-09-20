@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { find, isArray, isEmpty, isNil, split } from 'lodash';
@@ -18,6 +18,7 @@ interface LightboxImage {
     selector: 'exhibit',
     standalone: false,
     templateUrl: './exhibit.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./exhibit.component.css']
 })
 export class ExhibitComponent extends WorkComponent implements AfterViewInit, OnInit {

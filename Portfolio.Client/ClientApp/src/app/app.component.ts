@@ -1,9 +1,8 @@
-import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy, PLATFORM_ID, ChangeDetectionStrategy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 
-import { fadeAnimation } from './animations';
 import { AppConfigService } from './services/config.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { AppConfigService } from './services/config.service';
     standalone: false,
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
-    animations: [fadeAnimation]
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AppComponent implements OnInit, OnDestroy {
     private routerSub?: Subscription;

@@ -85,8 +85,8 @@
     <div class="lightbox-image-wrapper" (click)="$event.stopPropagation()">
         <img *ngIf="getCurrentLightboxImage()"
              class="lightbox-image"
-             [src]="getCurrentLightboxImage()?.src"
-             [alt]="getCurrentLightboxImage()?.label"
+             [src]="$safeNavigationMigration(getCurrentLightboxImage()?.src)"
+             [alt]="$safeNavigationMigration(getCurrentLightboxImage()?.label)"
              [style.transform]="'scale(' + lightboxZoom + ')'"
              [class.lightbox-image-loading]="!lightboxImageLoaded"
              (load)="onLightboxImageLoad()" />

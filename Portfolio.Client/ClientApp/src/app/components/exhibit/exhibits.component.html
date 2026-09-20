@@ -1,4 +1,4 @@
-<div class="exhibitsContainer">
+<div class="exhibitsContainer" animate.enter="route-fade-in" animate.leave="route-fade-out">
     <!-- When hosted, exhibit resources and thumbnails load more slowly (too slow?) so provide a simple hint of progress -->
     <div *ngIf="!exhibitsLoaded && !errorFetchingExhibitSummaries">
         <div class="exhibitsLoadingContainer">Loading exhibits...</div>

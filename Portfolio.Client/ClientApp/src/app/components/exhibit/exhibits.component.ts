@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
 import { IExhibitSummary } from '../../models/exhibit';
@@ -8,6 +8,7 @@ import { ExhibitService } from '../../services/exhibit.service';
     selector: 'exhibits',
     standalone: false,
     templateUrl: './exhibits.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrls: ['./exhibits.component.css']
 })
 export class ExhibitsComponent implements AfterViewInit, OnInit {

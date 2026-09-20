@@ -1,5 +1,4 @@
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AfterViewInit, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
@@ -18,18 +17,7 @@ import { WritingService } from '../../services/writing.service';
     templateUrl: './writings.component.html',
     standalone: false,
     styleUrls: ['./writings.component.css'],
-    animations: [
-        trigger('writingLoading', [
-            state('unload', style({
-                opacity: 1
-            })),
-            state('load', style({
-                opacity: 0
-            })),
-            transition('load => unload', animate('200ms ease-out')),
-            transition('unload => load', animate('200ms ease-in'))
-        ])
-    ]
+    changeDetection: ChangeDetectionStrategy.Eager
 })
 export class WritingsComponent extends WorkComponent implements AfterViewInit, OnInit {
     private pageTitle: string = 'Writings';
@@ -84,10 +72,6 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
 
     public override getExhibitAnchor(): string {
         return isNil(this.selectedWork?.anchor) ? 'portfolio' : this.selectedWork.anchor;
-    }
-
-    public getLoadingName() {
-        return this.loading ? 'load' : 'unload';
     }
 
     public getSelectedWritingUrl(): string | null {
