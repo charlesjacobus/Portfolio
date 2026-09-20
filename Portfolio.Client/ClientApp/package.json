@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve --verbose",
     "build": "ng build",
-    "build:ssr": "ng run Portfolio.Client:server:dev",
     "lint": "ng lint"
   },
   "private": true,
@@ -39,7 +38,7 @@
     "zone.js": "~0.16.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^22.1.8",
+    "@angular/build": "^22.1.8",
     "@angular/cli": "^22.1.8",
     "@angular/compiler-cli": "^22.1.7",
     "@angular/language-service": "^22.1.7",
