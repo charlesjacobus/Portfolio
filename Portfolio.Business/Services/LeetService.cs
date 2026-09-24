@@ -32,7 +32,7 @@ namespace Portfolio.Business.Services
 
         public LeetStream CreateLeetStream()
         {
-            var image = new Image<Rgba32>(Leet.Width, Leet.Height);
+            using var image = new Image<Rgba32>(Leet.Width, Leet.Height);
 
             var identifier = CreateRandomLeet();
 
@@ -57,9 +57,13 @@ namespace Portfolio.Business.Services
                 return null;
             }
 
-            Image image = new Image<Rgba32>(Leet.Width, Leet.Height);
-
             var patches = DeserializePatches(leet.Identifier, leet.Geometries);
+            if (patches == null)
+            {
+                return null;
+            }
+
+            using var image = new Image<Rgba32>(Leet.Width, Leet.Height);
 
             patches.ForEach(p => image.Mutate(i => i
                 .Draw(p.Pen, p.Polygon)
@@ -145,6 +149,13 @@ namespace Portfolio.Business.Services
 
             var shape = _shapeSerializer.Deserialize(configuration);
 
+            // Supplied geometries (e.g., from a user-supplied leet code) must provide exactly one color per patch
+            var geometryList = geometries?.ToList();
+            if (geometryList != null && geometryList.Count != shape.Points.Count)
+            {
+                return null;
+            }
+
             var patches = new List<Patch>();
 
             for (int i = 0; i < shape.Points.Count; i++)
@@ -157,8 +168,17 @@ namespace Portfolio.Business.Services
                     p.Add(new PointF(point.X, point.Y));
                 }
 
-                var colorHex = geometries?.ElementAt(i)?.ColorHex;
-                var color = !string.IsNullOrWhiteSpace(colorHex) ? Color.ParseHex(colorHex) : CreateColor();
+                var colorHex = geometryList?[i]?.ColorHex;
+
+                Color color;
+                if (string.IsNullOrWhiteSpace(colorHex))
+                {
+                    color = CreateColor();
+                }
+                else if (!Color.TryParseHex(colorHex, out color))
+                {
+                    return null;
+                }
 
                 patches.Add(CreatePatch(color, p));
             }

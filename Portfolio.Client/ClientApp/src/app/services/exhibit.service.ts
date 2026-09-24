@@ -31,14 +31,19 @@ export class ExhibitService implements IExhibitService {
             } else {
                 let url: string = AppConfigService.portfolioInfo.hrefGetActiveExhibits;
 
-                this.dataService.get<Array<IExhibitSummary>>(url)
-                    .subscribe((result: Array<IExhibitSummary>) => {
-                        this.exhibitSummaries = result;
+                return this.dataService.get<Array<IExhibitSummary>>(url)
+                    .subscribe({
+                        next: (result: Array<IExhibitSummary>) => {
+                            this.exhibitSummaries = result;
 
-                        observer.next(result);
-                        observer.complete();
+                            observer.next(result);
+                            observer.complete();
+                        },
+                        error: (err: any) => observer.error(err)
                     });
             }
+
+            return;
         });
     }
 
@@ -50,14 +55,19 @@ export class ExhibitService implements IExhibitService {
                 observer.complete();
             } else {
                 this.exhibits = [];
-                this.dataService.get<IExhibit>(AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString()))
-                    .subscribe((result: IExhibit) => {
-                        this.exhibits.push(result);
+                return this.dataService.get<IExhibit>(AppConfigService.portfolioInfo.hrefGetExhibit.replace('{id}', id.toString()))
+                    .subscribe({
+                        next: (result: IExhibit) => {
+                            this.exhibits.push(result);
 
-                        observer.next(result);
-                        observer.complete();
+                            observer.next(result);
+                            observer.complete();
+                        },
+                        error: (err: any) => observer.error(err)
                     });
             }
+
+            return;
         });
     }
 
@@ -69,9 +79,12 @@ export class ExhibitService implements IExhibitService {
 
         return new Observable(observer => {
             return this.dataService.get<ILeet>(url)
-                .subscribe((response: ILeet) => {
-                    observer.next(response);
-                    observer.complete();
+                .subscribe({
+                    next: (response: ILeet) => {
+                        observer.next(response);
+                        observer.complete();
+                    },
+                    error: (err: any) => observer.error(err)
                 });
         });
     }

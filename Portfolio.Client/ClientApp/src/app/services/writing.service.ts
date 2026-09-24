@@ -26,14 +26,19 @@ export class WritingService implements IWritingService {
             } else {
                 let url: string = AppConfigService.portfolioInfo.hrefGetActiveWritings;
 
-                this.dataService.get<Array<IWriting>>(url)
-                    .subscribe((result: Array<IWriting>) => {
-                        this.writings = result;
+                return this.dataService.get<Array<IWriting>>(url)
+                    .subscribe({
+                        next: (result: Array<IWriting>) => {
+                            this.writings = result;
 
-                        observer.next(result);
-                        observer.complete();
+                            observer.next(result);
+                            observer.complete();
+                        },
+                        error: (err: any) => observer.error(err)
                     });
             }
+
+            return;
         });
     }
 }

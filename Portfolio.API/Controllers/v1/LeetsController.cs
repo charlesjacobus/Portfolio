@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 
@@ -18,6 +19,9 @@ namespace Portfolio.Api.Controllers
     public class LeetsController
         : ControllerBase
     {
+        // An identifier character plus one 8-character hex color per patch, with headroom
+        private const int MaxCodeLength = 256;
+
         private readonly ILeetService _leetService;
         private readonly ISerializer<Leet> _leetSerializer;
 
@@ -39,30 +43,23 @@ namespace Portfolio.Api.Controllers
         /// </remarks>
         [HttpGet]
         [Route("", Name = "GetLeet")]
-        public LeetRepresentation GetLeet(string code)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<LeetRepresentation> GetLeet(string code)
         {
-            LeetStream stream;
-
-            if (string.IsNullOrWhiteSpace(code))
+            var stream = CreateLeetStream(code);
+            if (stream == null)
             {
-                stream = _leetService.CreateLeetStream();
-
-                code = stream.Code;
-            }
-            else
-            { 
-                var leet = _leetSerializer.Deserialize(code);
-
-                stream = _leetService.CreateLeetStream(leet);
+                return BadRequest();
             }
 
             var file = CreateActionResult(stream);
             if (file == null)
             {
-                return null;
+                return BadRequest();
             }
 
-            var result = LeetRepresentation.Create(code, file);
+            var result = LeetRepresentation.Create(stream.Code, file);
 
             return result;
         }
@@ -78,28 +75,35 @@ namespace Portfolio.Api.Controllers
         /// </remarks>
         [HttpGet]
         [Route("Files", Name = "GetLeetFile")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult GetLeetFile(string code)
         {
-            LeetStream stream;
+            var file = CreateActionResult(CreateLeetStream(code));
+            if (file == null)
+            {
+                return BadRequest();
+            }
 
+            return file;
+        }
+
+        private LeetStream CreateLeetStream(string code)
+        {
             if (string.IsNullOrWhiteSpace(code))
             {
-                stream = _leetService.CreateLeetStream();
-            }
-            else
-            {
-                var leet = _leetSerializer.Deserialize(code);
-
-                stream = _leetService.CreateLeetStream(leet);
+                return _leetService.CreateLeetStream();
             }
 
-            var file = CreateActionResult(stream);
-            if (file == null)
+            // Reject malformed codes up front (IsValid round-trips the code, so partial or non-canonical codes fail)
+            if (code.Length > MaxCodeLength || !_leetSerializer.IsValid(code))
             {
                 return null;
             }
 
-            return file;
+            var leet = _leetSerializer.Deserialize(code);
+
+            return _leetService.CreateLeetStream(leet);
         }
 
         private FileContentResult CreateActionResult(LeetStream leetStream)

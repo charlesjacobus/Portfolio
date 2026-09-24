@@ -49,7 +49,7 @@ namespace Portfolio.Business.Models
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(Code) && Geometries == null || !Geometries.Any())
+                if (string.IsNullOrWhiteSpace(base.Code) && Geometries != null && Geometries.Any())
                 {
                     base.Code = new LeetSerializer().Serialize(this);
                 }

@@ -36,7 +36,8 @@ namespace Portfolio.Business.Serializers
 
                         if (!identified)
                         {
-                            if (!Enum.TryParse(c.ToString(), out Leets result))
+                            // Enum.TryParse also accepts numeric strings (e.g., "1" or "9"), so require a defined letter
+                            if (!char.IsLetter(c) || !Enum.TryParse(c.ToString(), out Leets result) || !Enum.IsDefined(result))
                             {
                                 return null;
                             }
