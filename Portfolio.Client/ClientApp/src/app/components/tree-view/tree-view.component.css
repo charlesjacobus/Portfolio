@@ -1,0 +1,109 @@
+/* Ported from tree-ngx's tree.scss / animations.scss / defaulticons.scss to preserve the exact
+   look and behavior of the tree this component replaces. */
+
+.tree-view {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.node {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+}
+
+.node-name {
+    display: inline-block;
+    padding: 5px 0px 5px 7px;
+    cursor: pointer;
+}
+
+.node-name.markSelected {
+    padding: 5px 0px 5px 2px;
+    border-left: 5px #226699 solid;
+}
+
+.node-offset {
+    display: flex;
+    margin-left: 20px;
+}
+
+.node-icon-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 17px;
+    top: 1px;
+    left: 6px;
+}
+
+.node-icon-wrapper.disabled {
+    cursor: default;
+}
+
+.node-icon-wrapper.collapsable {
+    cursor: pointer;
+}
+
+.node-container {
+    display: inline-block;
+}
+
+/* Collapse/expand animation */
+
+.collapsible-wrapper {
+    display: flex;
+    overflow: hidden;
+}
+
+.collapsible-wrapper:after {
+    content: '';
+    height: 25px;
+    transition: height 0.3s linear, max-height 0s 0.3s linear;
+    max-height: 0px;
+}
+
+.collapsible {
+    transition: margin-bottom 0.3s cubic-bezier(0, 0, 0, 1);
+    margin-bottom: 0;
+    max-height: 1000000px;
+}
+
+.collapsible-wrapper.collapsed > .collapsible {
+    margin-bottom: -20000px;
+    transition: margin-bottom 0.3s cubic-bezier(1, 0, 1, 1), visibility 0s 0.3s, max-height 0s 0.3s;
+    visibility: hidden;
+    max-height: 0;
+}
+
+.collapsible-wrapper.collapsed:after {
+    height: 0;
+    transition: height 0.3s linear;
+    max-height: 25px;
+}
+
+/* Expand/collapse arrow icons */
+
+.arrow-down {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 3px;
+    top: 6px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #455A64;
+}
+
+.arrow-right {
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 8px;
+    top: 3px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid #455A64;
+}

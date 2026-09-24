@@ -9,7 +9,6 @@ import { AngularSplitModule } from 'angular-split';
 import { ClipboardModule } from 'ngx-clipboard';
 import { MarkdownModule, MARKED_OPTIONS, SANITIZE } from 'ngx-markdown';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TreeNgxModule } from 'tree-ngx';
 
 import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
@@ -19,6 +18,8 @@ import { ExhibitsComponent } from './components/exhibit/exhibits.component';
 import { HomeComponent } from './components/home/home.component';
 import { LeetsComponent } from './components/exhibit/leets.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { TreeViewComponent } from './components/tree-view/tree-view.component';
+import { TreeViewNodeComponent } from './components/tree-view/tree-view-node.component';
 import { WritingsComponent } from './components/writing/writings.component';
 
 import { AppConfigService } from './services/config.service';
@@ -40,6 +41,8 @@ export function initConfig(configService: AppConfigService) {
         HomeComponent,
         LeetsComponent,
         NavMenuComponent,
+        TreeViewComponent,
+        TreeViewNodeComponent,
         WritingsComponent
     ],
     imports: [
@@ -73,8 +76,7 @@ export function initConfig(configService: AppConfigService) {
                 useValue: SecurityContext.NONE
             }
         }),
-        NgbModule,
-        TreeNgxModule
+        NgbModule
     ],
     providers: [
         provideZoneChangeDetection({

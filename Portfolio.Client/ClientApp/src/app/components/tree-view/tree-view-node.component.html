@@ -1,0 +1,19 @@
+<div class="node">
+    <div class="node-container">
+        <div class="node-icon-wrapper"
+             [class.disabled]="!hasChildren"
+             [class.collapsable]="hasChildren"
+             (click)="toggleExpand()">
+            <i *ngIf="hasChildren && !state.expanded" class="arrow-right"></i>
+            <i *ngIf="hasChildren && state.expanded" class="arrow-down"></i>
+        </div>
+        <div class="node-name" [class.markSelected]="state.selected" (click)="nameClick()">
+            <span>{{ state.nodeItem.name }}</span>
+        </div>
+    </div>
+    <div *ngIf="hasChildren" class="collapsible-wrapper" [class.collapsed]="!state.expanded">
+        <div class="collapsible">
+            <tree-view-node class="node-offset" *ngFor="let child of state.children" [state]="child" [tree]="tree"></tree-view-node>
+        </div>
+    </div>
+</div>

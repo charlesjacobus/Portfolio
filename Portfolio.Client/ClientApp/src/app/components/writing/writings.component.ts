@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 import { filter, findIndex, head, isArray, isEmpty, isNil, map } from 'lodash';
 
-import { NodeItem, TreeMode, TreeNgxComponent, TreeOptions } from 'tree-ngx';
+import { NodeItem } from '../tree-view/node-item';
+import { TreeViewComponent } from '../tree-view/tree-view.component';
 
 import { IWork } from '../../models/work';
 import { IWriting } from '../../models/writing';
@@ -26,14 +27,13 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     public loading: boolean = true;
     public nodeItems: Array<NodeItem<IWriting>> = [];
     public selectedWork: IWork | null = null;
-    public treeOptions: TreeOptions = { alwaysEmitSelected: true, checkboxes: false, mode: TreeMode.SingleSelect };
 
     private defaultTocItemId: string | null = null;
     private screenHeight!: number;
     private screenWidth!: number;
     private selectedWritingUrl: string | null = null;
 
-    @ViewChild('toc') private toc!: TreeNgxComponent;
+    @ViewChild('toc') private toc!: TreeViewComponent;
 
     constructor(exhibitService: ExhibitService, private writingService: WritingService, protected override router: Router, private metaService: Meta, private titleService: Title)
     {

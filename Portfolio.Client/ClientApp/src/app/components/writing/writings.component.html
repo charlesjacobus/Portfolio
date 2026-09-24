@@ -4,10 +4,9 @@
             <as-split direction="{{getTocOrientation()}}">
                 <as-split-area [size]="30">
                     <div id="toc" class="tocContainer">
-                        <tree-ngx #toc
+                        <tree-view #toc
                                    [nodeItems]="nodeItems"
-                                   [options]="treeOptions"
-                                   (selectedItems)="handleSelectedTreeItems($event)"></tree-ngx>
+                                   (selectedItems)="handleSelectedTreeItems($event)"></tree-view>
                     </div>
                 </as-split-area>
                 <as-split-area [size]="70">
