@@ -8,9 +8,6 @@
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <TypeScriptExperimentalDecorators>true</TypeScriptExperimentalDecorators>
-    
-    <!-- Set this to true if you enable server-side prerendering -->
-    <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
 
   <ItemGroup>
@@ -89,7 +86,6 @@
     <Content Include="ClientApp\tsconfig.json" />
     <Content Include="ClientApp\src\tsconfig.app.json" />
     <Content Include="ClientApp\tsconfig.base.json" />
-    <Content Include="ClientApp\src\tsconfig.server.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -117,13 +113,16 @@
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
+
+    <!-- Angular's build system can no longer copy files from outside its own workspace (ClientApp),
+         so web.config - produced alongside it by the PostBuild target below - is copied into the
+         Angular output here instead, once dist exists -->
+    <Copy SourceFiles="$(ProjectDir)web.config" DestinationFolder="$(SpaRoot)dist\ng" Condition="Exists('$(ProjectDir)web.config') And Exists('$(SpaRoot)dist\ng')" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
-      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <DistFiles Include="$(SpaRoot)dist\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -134,6 +133,10 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="copy /Y web.$(ConfigurationName).config $(ProjectDir)\web.config" />
+
+    <!-- Keep the Angular dist output's web.config in sync whenever it already exists, e.g. after
+         running an "ng build" for production and then a Release build in Visual Studio -->
+    <Copy SourceFiles="$(ProjectDir)web.config" DestinationFolder="$(SpaRoot)dist\ng" Condition="Exists('$(SpaRoot)dist\ng')" />
   </Target>
 
 </Project>
