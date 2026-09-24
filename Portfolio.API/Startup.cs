@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 using Portfolio.Api.Builders;
 using Portfolio.Business.Models;
@@ -22,12 +23,15 @@ namespace Portfolio.Api
     {
         const string AllowCrossProjectOrigins = "_allowCrossProjectOrigins";
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+
+        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -43,13 +47,17 @@ namespace Portfolio.Api
             services.AddControllers().AddJsonOptions(options => 
                 options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
 
+            // Browsers may call the API only from the configured site hosts, plus any localhost port while debugging
+            var allowedOriginHosts = Configuration.GetSection("Cors:AllowedOriginHosts").Get<string[]>() ?? [];
+            var allowLocalhost = Environment.IsDevelopment();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(AllowCrossProjectOrigins,
                     builder =>
                     {
                         builder
-                            .AllowAnyOrigin()
+                            .SetIsOriginAllowed(origin => IsOriginAllowed(origin, allowedOriginHosts, allowLocalhost))
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     });
@@ -116,6 +124,22 @@ namespace Portfolio.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Portfolio API");
                 c.RoutePrefix = string.Empty;
             });
+        }
+
+        private static bool IsOriginAllowed(string origin, string[] allowedOriginHosts, bool allowLocalhost)
+        {
+            if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+            {
+                return false;
+            }
+
+            // Loopback covers localhost and 127.0.0.1 on any port (e.g., the web host and the Angular dev server)
+            if (allowLocalhost && uri.IsLoopback)
+            {
+                return true;
+            }
+
+            return allowedOriginHosts.Any(host => string.Equals(uri.Host, host, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

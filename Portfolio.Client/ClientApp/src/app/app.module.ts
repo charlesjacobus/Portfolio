@@ -1,9 +1,8 @@
-import { NgModule, APP_INITIALIZER, provideZoneChangeDetection, SecurityContext } from '@angular/core';
+import { NgModule, inject, provideAppInitializer, provideZoneChangeDetection, SecurityContext } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AngularSplitModule } from 'angular-split';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -27,10 +26,6 @@ import { DataService } from './services/data.service';
 import { ExhibitService } from './services/exhibit.service';
 import { WritingService } from './services/writing.service';
 
-export function initConfig(configService: AppConfigService) {
-    return () => configService.load();
-}
-
 @NgModule({
     declarations: [
         AboutComponent,
@@ -50,7 +45,6 @@ export function initConfig(configService: AppConfigService) {
         BrowserModule,
         ClipboardModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent },
             { path: 'exhibits', component: ExhibitsComponent },
@@ -79,6 +73,7 @@ export function initConfig(configService: AppConfigService) {
         NgbModule
     ],
     providers: [
+        provideHttpClient(withInterceptorsFromDi()),
         provideZoneChangeDetection({
             eventCoalescing: true
         }),
@@ -86,12 +81,7 @@ export function initConfig(configService: AppConfigService) {
         DataService,
         ExhibitService,
         WritingService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: initConfig,
-            deps: [AppConfigService],
-            multi: true
-        }
+        provideAppInitializer(() => inject(AppConfigService).load())
     ],
     bootstrap: [AppComponent]
 })

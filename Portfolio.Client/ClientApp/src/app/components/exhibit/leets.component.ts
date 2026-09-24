@@ -135,9 +135,7 @@ export class LeetsComponent extends WorkComponent implements OnInit {
             descriptionFileName: LeetsComponent.LeetName.concat('.md'),
             name: LeetsComponent.LeetName,
             promo: null,
-            textIsDefault: false,
-            textLabel: null,
-            textRoute: null
+            textIsDefault: false
         };
     }
 

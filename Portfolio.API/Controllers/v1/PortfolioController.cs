@@ -49,8 +49,6 @@ namespace Portfolio.Api.Controllers
         {
             var photo = _portfolioService.GetPhoto(id);
 
-            var context = HttpContext.Request.Path.Value;
-
             var representation = PhotoRepresentation.Create(photo);
 
             return representation;

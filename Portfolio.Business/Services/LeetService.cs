@@ -40,9 +40,7 @@ namespace Portfolio.Business.Services
 
             var leet = CreateLeet(identifier, patches);
 
-            patches.ForEach(p => image.Mutate(i => i
-                .Draw(p.Pen, p.Polygon)
-                .Fill(p.Brush, p.Polygon)));
+            DrawPatches(image, patches);
 
             var stream = new MemoryStream();
             image.SaveAsJpeg(stream);
@@ -65,14 +63,24 @@ namespace Portfolio.Business.Services
 
             using var image = new Image<Rgba32>(Leet.Width, Leet.Height);
 
-            patches.ForEach(p => image.Mutate(i => i
-                .Draw(p.Pen, p.Polygon)
-                .Fill(p.Brush, p.Polygon)));
+            DrawPatches(image, patches);
 
             var stream = new MemoryStream();
             image.SaveAsJpeg(stream);
 
             return LeetStream.Create(leet.Identifier, leet.ToString(), stream);
+        }
+
+        protected virtual void DrawPatches(Image image, IEnumerable<Patch> patches)
+        {
+            image.Mutate(i => i.Paint(canvas =>
+            {
+                foreach (var p in patches)
+                {
+                    canvas.Draw(p.Pen, p.Polygon);
+                    canvas.Fill(p.Brush, p.Polygon);
+                }
+            }));
         }
 
         protected virtual Color CreateColor()
@@ -82,7 +90,7 @@ namespace Portfolio.Business.Services
             var b = CreateRandomByte();
             var a = CreateRandomByte();
 
-            return Color.FromRgba(r, g, b, a);
+            return Color.FromPixel(new Rgba32(r, g, b, a));
         }
 
         protected virtual Leet CreateLeet(Leets leet, IEnumerable<Patch> patches)
@@ -175,7 +183,7 @@ namespace Portfolio.Business.Services
                 {
                     color = CreateColor();
                 }
-                else if (!Color.TryParseHex(colorHex, out color))
+                else if (!Color.TryParseHex(colorHex, out color, ColorHexFormat.Rgba))
                 {
                     return null;
                 }
@@ -193,18 +201,18 @@ namespace Portfolio.Business.Services
                 return null;
             }
 
-            return ((SolidBrush)patch.Brush).Color.ToHex();
+            return ((SolidBrush)patch.Brush).Color.ToHex(ColorHexFormat.Rgba);
         }
 
         protected class Patch
         {
-            public IPen Pen { get; set; }
+            public Pen Pen { get; set; }
 
-            public IBrush Brush { get; set; }
+            public Brush Brush { get; set; }
 
             public Polygon Polygon { get; set; }
 
-            public static Patch Create(IPen pen, IBrush brush, Polygon polygon)
+            public static Patch Create(Pen pen, Brush brush, Polygon polygon)
             {
                 return new Patch
                 {

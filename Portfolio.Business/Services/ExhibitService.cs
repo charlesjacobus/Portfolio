@@ -41,7 +41,7 @@ namespace Portfolio.Business.Services
 
             return Portfolio.Exhibits
                 .Where(e => string.Equals(e.Status, "Active", System.StringComparison.OrdinalIgnoreCase))
-                .Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Order, e.Anchor, e.Promo ?? e.Works.First(), e.TextIsDefault, e.TextLabel, e.TextRoute))
+                .Select(e => ExhibitSummary.Create(e.ID, e.Name, e.Description, e.DescriptionFileName, e.Order, e.Anchor, e.Promo ?? e.Works.First(), e.TextIsDefault))
                 .OrderBy(e => e.Order).ThenBy(e => e.Name);
         }
     }

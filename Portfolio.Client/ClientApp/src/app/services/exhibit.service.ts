@@ -102,9 +102,7 @@ export class ExhibitService implements IExhibitService {
             anchor: exhibitSummary.anchor,
             promo: exhibitSummary.promo,
             works: !isNil(exhibitSummary.promo) ? [exhibitSummary.promo] : [],
-            textIsDefault: exhibitSummary.textIsDefault,
-            textLabel: exhibitSummary.textLabel,
-            textRoute: exhibitSummary.textRoute
+            textIsDefault: exhibitSummary.textIsDefault
         };
 
         return exhibit;

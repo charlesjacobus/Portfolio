@@ -28,7 +28,6 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     public nodeItems: Array<NodeItem<IWriting>> = [];
     public selectedWork: IWork | null = null;
 
-    private defaultTocItemId: string | null = null;
     private screenHeight!: number;
     private screenWidth!: number;
     private selectedWritingUrl: string | null = null;
@@ -45,17 +44,11 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
     public override ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        // Upon initialization, the TreeNgxComponent isn't accessible unless delayed
+        // Upon initialization, the TreeViewComponent isn't accessible unless delayed
         if (!isNil(this.toc)) {
             const that = this;
             setTimeout(function () {
                 that.toc.collapseAll();
-
-                console.log('ngAfterViewInit: ' + that.defaultTocItemId);
-                if (!isNil(that.defaultTocItemId)) {
-                    // that.toc.expandById(that.defaultTocItemId);
-                    // that.toc.selectById(that.defaultTocItemId);
-                }
             }, 500);
         }
     }
@@ -172,13 +165,6 @@ export class WritingsComponent extends WorkComponent implements AfterViewInit, O
                 children: children
             };
         });
-
-        // If there are any node items, then the default item ID is the first/top item
-        // This may not always be item #1 (tree node IDs are expected to be string values)
-        // And it will ensure that the first/top item is auto-expanded upon initialization
-        if (isArray(nodeItems) && nodeItems.length > 0) {
-            // this.defaultTocItemId = head(nodeItems).id.toString();
-        }
 
         this.nodeItems = nodeItems;
     }

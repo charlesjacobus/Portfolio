@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
+import { firstValueFrom, Observable, throwError } from 'rxjs';
 
 import { IConfig } from '../models/config';
 import { IPortfolioInfo } from '../models/portfolioInfo';
@@ -26,8 +26,7 @@ export class AppConfigService implements IAppConfigService {
     public load(): Promise<void | Observable<never>> {
         const rootConfigurationFile = `assets/config.json`;
 
-        return this.http.get<IConfig>(rootConfigurationFile)
-            .toPromise()
+        return firstValueFrom(this.http.get<IConfig>(rootConfigurationFile))
             .then((response) => {
                 AppConfigService.configuration = response;
 
@@ -37,8 +36,7 @@ export class AppConfigService implements IAppConfigService {
                 return AppConfigService.configuration;
             })
             .then(() => {
-                return this.dataService.get<IPortfolioInfo>(AppConfigService.apiInfo)
-                    .toPromise()
+                return firstValueFrom(this.dataService.get<IPortfolioInfo>(AppConfigService.apiInfo))
                     .then((info) => {
                         AppConfigService.portfolioInfo = info;
                     });

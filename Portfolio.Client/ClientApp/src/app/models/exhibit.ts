@@ -8,8 +8,6 @@ export interface IExhibitSummary {
     anchor: string;
     promo: IWork | null;
     textIsDefault: boolean;
-    textLabel: string | null;
-    textRoute: string | null;
 }
 
 export interface IExhibit extends IExhibitSummary {

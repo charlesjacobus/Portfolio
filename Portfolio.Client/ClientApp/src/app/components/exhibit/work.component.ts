@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { endsWith, isArray, isNil, startsWith } from 'lodash';
+import { endsWith, isArray, isNil } from 'lodash';
 
 import { IExhibit, IExhibitSummary } from '../../models/exhibit';
 import { IWork } from '../../models/work';
@@ -65,33 +65,12 @@ export abstract class WorkComponent implements AfterViewInit, OnInit {
         return isNil(this.exhibit) ? null : this.exhibit.name;
     }
 
-    public getExhibitTextLabel(): string {
-        return isNil(this.exhibit) || isNil(this.exhibit.textLabel) ? 'Text' : this.exhibit.textLabel;
-    }
-
-    public getExhibitTextRoute(): string | null {
-        return isNil(this.exhibit) || isNil(this.exhibit.textRoute) ? null : this.exhibit.textRoute;
-    }
-
     public getExhibitWorks(): Array<IWork> {
         return isNil(this.exhibit) ? [] : this.exhibit.works;
     }
 
     public isGalleryExhibit(): boolean {
         return !isNil(this.exhibit?.promo) && !endsWith(this.exhibit.promo.fileName, '.md');
-    }
-
-    public visitExhibitTextRoute(): void {
-        if (isNil(this.exhibit) || isNil(this.exhibit.textRoute)) {
-            return;
-        }
-
-        let textRoute: string = this.exhibit.textRoute;
-        if (!startsWith(textRoute, '/')) {
-            textRoute = '/'.concat(textRoute);
-        }
-
-        this.router.navigateByUrl(textRoute);
     }
 
     protected getExhibitWorkPropertyValue(index: number, propertyName: string): string | null {

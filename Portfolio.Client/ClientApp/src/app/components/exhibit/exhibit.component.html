@@ -8,10 +8,8 @@
                 <label (click)="visibleTab = 'work'"
                        [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'work', 'tabInactive': visibleTab === 'work'}">Work</label>
                 &nbsp;<label class="tabSpacer">:</label>&nbsp;
-                <label *ngIf="getExhibitTextRoute()" (click)="visitExhibitTextRoute()"
-                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
-                <label *ngIf="!getExhibitTextRoute()" (click)="visibleTab = 'text'"
-                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">{{getExhibitTextLabel()}}</label>
+                <label (click)="visibleTab = 'text'"
+                       [ngClass]="{'tabPointer': true, 'tabActive': visibleTab !== 'text', 'tabInactive': visibleTab === 'text'}">Text</label>
             </div>
             <!-- The equivalent structure when no work text tabs, to ensure the position and layout matches between exhibits that do and don't have a description -->
             <div *ngIf="showNoWorkText()"><label>&nbsp;</label></div>
