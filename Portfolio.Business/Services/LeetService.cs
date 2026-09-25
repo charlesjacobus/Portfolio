@@ -4,14 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Drawing;
-using SixLabors.ImageSharp.Drawing.Processing;
-using SixLabors.ImageSharp.PixelFormats;
-using SixLabors.ImageSharp.Processing;
-
 using Portfolio.Business.Models;
+using Portfolio.Business.Providers.Imaging;
 using Portfolio.Business.Serializers;
+
+using Color = System.Drawing.Color;
+using PointF = System.Drawing.PointF;
 
 namespace Portfolio.Business.Services
 {
@@ -32,7 +30,7 @@ namespace Portfolio.Business.Services
 
         public LeetStream CreateLeetStream()
         {
-            using var image = new Image<Rgba32>(Leet.Width, Leet.Height);
+            var image = new RasterImage(Leet.Width, Leet.Height);
 
             var identifier = CreateRandomLeet();
 
@@ -61,7 +59,7 @@ namespace Portfolio.Business.Services
                 return null;
             }
 
-            using var image = new Image<Rgba32>(Leet.Width, Leet.Height);
+            var image = new RasterImage(Leet.Width, Leet.Height);
 
             DrawPatches(image, patches);
 
@@ -71,16 +69,12 @@ namespace Portfolio.Business.Services
             return LeetStream.Create(leet.Identifier, leet.ToString(), stream);
         }
 
-        protected virtual void DrawPatches(Image image, IEnumerable<Patch> patches)
+        protected virtual void DrawPatches(RasterImage image, IEnumerable<Patch> patches)
         {
-            image.Mutate(i => i.Paint(canvas =>
+            foreach (var p in patches)
             {
-                foreach (var p in patches)
-                {
-                    canvas.Draw(p.Pen, p.Polygon);
-                    canvas.Fill(p.Brush, p.Polygon);
-                }
-            }));
+                image.FillPolygon(p.Color, p.Polygon);
+            }
         }
 
         protected virtual Color CreateColor()
@@ -90,7 +84,7 @@ namespace Portfolio.Business.Services
             var b = CreateRandomByte();
             var a = CreateRandomByte();
 
-            return Color.FromPixel(new Rgba32(r, g, b, a));
+            return Color.FromArgb(a, r, g, b);
         }
 
         protected virtual Leet CreateLeet(Leets leet, IEnumerable<Patch> patches)
@@ -137,18 +131,7 @@ namespace Portfolio.Business.Services
 
         protected virtual Patch CreatePatch(Color color, List<PointF> points)
         {
-            var brush = Brushes.Solid(color);
-
-            var pen = Pens.Solid(color, (float).00001);
-
-            var segments = new List<ILineSegment>
-            {
-                new LinearLineSegment([.. points])
-            };
-
-            var polygon = new Polygon(segments);
-
-            return Patch.Create(pen, brush, polygon);
+            return Patch.Create(color, points);
         }
 
         protected virtual List<Patch> DeserializePatches(Leets leet, IEnumerable<Geometry> geometries = null)
@@ -183,7 +166,7 @@ namespace Portfolio.Business.Services
                 {
                     color = CreateColor();
                 }
-                else if (!Color.TryParseHex(colorHex, out color, ColorHexFormat.Rgba))
+                else if (!ColorHex.TryParse(colorHex, out color))
                 {
                     return null;
                 }
@@ -196,28 +179,25 @@ namespace Portfolio.Business.Services
 
         protected virtual string GetPatchColorHex(Patch patch)
         {
-            if (patch?.Brush == null)
+            if (patch == null)
             {
                 return null;
             }
 
-            return ((SolidBrush)patch.Brush).Color.ToHex(ColorHexFormat.Rgba);
+            return ColorHex.ToHex(patch.Color);
         }
 
         protected class Patch
         {
-            public Pen Pen { get; set; }
+            public Color Color { get; set; }
 
-            public Brush Brush { get; set; }
+            public IReadOnlyList<PointF> Polygon { get; set; }
 
-            public Polygon Polygon { get; set; }
-
-            public static Patch Create(Pen pen, Brush brush, Polygon polygon)
+            public static Patch Create(Color color, IReadOnlyList<PointF> polygon)
             {
                 return new Patch
                 {
-                    Pen = pen,
-                    Brush = brush,
+                    Color = color,
                     Polygon = polygon
                 };
             }
