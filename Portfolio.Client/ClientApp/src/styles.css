@@ -64,6 +64,32 @@ a:active {
 /* exhibit */
 /* See other comments in home.component.css */
 
+.callout {
+    border-bottom: 1px solid #515154;
+    border-top: 1px solid #515154;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: large;
+    margin: 1em auto 1.5em;
+    padding: 1em 0;
+    text-align: center;
+    width: 75%;
+}
+
+.calloutLine {
+    padding-bottom: .75em;
+}
+
+.calloutSource {
+    color: dimgray;
+    font-size: small;
+    font-style: normal;
+    padding-top: .5em;
+}
+
+.calloutSpeaker {
+    font-style: italic;
+}
+
 .imageHorizontalWidth {
     width: 75%;
 }
@@ -74,6 +100,10 @@ a:active {
 
 .imageNarrowWidth {
     width: 35%;
+}
+
+.imageReallyNarrowWidth {
+    width: 15%;
 }
 
 .label {
@@ -97,6 +127,21 @@ a:active {
 }
 
 @media only screen and (max-width: 900px) {
+    .callout {
+        font-size: medium;
+        margin: .5em auto 1em;
+        padding: .75em 0;
+        width: 85%;
+    }
+
+    .calloutLine {
+        padding-bottom: .5em;
+    }
+
+    .calloutSource {
+        font-size: x-small;
+    }
+
     .imageHorizontalWidth {
         width: 85%;
     }
@@ -107,6 +152,10 @@ a:active {
 
     .imageNarrowWidth {
         width: 50%;
+    }
+
+    .imageReallyNarrowWidth {
+        width: 35%;
     }
 
     .label {
@@ -126,6 +175,15 @@ a:active {
 }
 
 @media only screen and (max-width: 500px) {
+    .callout {
+        font-size: small;
+        width: 90%;
+    }
+
+    .calloutLine {
+        padding-bottom: .4em;
+    }
+
     .imageHorizontalWidth {
         width: 90%;
     }
@@ -136,6 +194,10 @@ a:active {
 
     .imageNarrowWidth {
         width: 55%;
+    }
+
+    .imageReallyNarrowWidth {
+        width: 40%;
     }
 
     .label {

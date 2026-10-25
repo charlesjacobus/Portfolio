@@ -1,3 +1,8 @@
 {
-    "dotnet.defaultSolution": "Portfolio.sln"
+    "dotnet.defaultSolution": "Portfolio.sln",
+    "cSpell.words": [
+        "definitionally",
+        "descension",
+        "ekphrasis"
+    ]
 }

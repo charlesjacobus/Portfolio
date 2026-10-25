@@ -1,0 +1,5 @@
+With a persistent focus on tactile modes, I've returned throughout my painting practice to monochrome form. How I arrived at my first monochrome painting, I cannot say now for certain. First the bounded line and then the pentimento. Then the push and pull, with an emerging revelation of the distinction between color and light and in how a field condition collapses the pictorial spatial plane. A tension between painting as visual and plastic medium.  
+
+This was first felt viscerally, relatively early, before a rigorous investigation that got me through graduate school. The Cubists; the Egyptians; the medievalists; the children. After which I was left with little more than a sense that what I was doing had precedent and that it probably wasn't completely misguided. I believe it reinforced some confidence in a particular way of seeing.  
+
+This work, presented in chronological order, highlights monochrome examples across series, like private milestones &mdash; the way music returns to a tonal center. Each of these works means something to me and, as I see it, contributes to a common thread expressing what I've long felt but never quite realized.  

@@ -70,12 +70,14 @@
     <button *ngIf="lightboxImages.length > 1"
             class="lightbox-arrow lightbox-arrow-left"
             [class.lightbox-arrows-hidden]="!arrowsVisible"
+            (pointerenter)="onArrowHover($event, true)" (pointerleave)="onArrowHover($event, false)"
             (click)="lightboxPrev(); $event.stopPropagation()" title="Previous">
         <i class="fa fa-chevron-left"></i>
     </button>
     <button *ngIf="lightboxImages.length > 1"
             class="lightbox-arrow lightbox-arrow-right"
             [class.lightbox-arrows-hidden]="!arrowsVisible"
+            (pointerenter)="onArrowHover($event, true)" (pointerleave)="onArrowHover($event, false)"
             (click)="lightboxNext(); $event.stopPropagation()" title="Next">
         <i class="fa fa-chevron-right"></i>
     </button>

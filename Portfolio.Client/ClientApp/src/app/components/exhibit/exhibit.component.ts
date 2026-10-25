@@ -38,6 +38,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
     private touchStartX: number = 0;
     private touchStartY: number = 0;
     private arrowsTimeout: any;
+    private arrowHovered: boolean = false;
 
     constructor(private route: ActivatedRoute, protected override exhibitService: ExhibitService, protected override router: Router, private cdr: ChangeDetectorRef) {
         super(exhibitService, router);
@@ -54,6 +55,7 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         this.lightboxZoom = 1;
         this.lightboxImageLoaded = false;
         this.lightboxOpen = true;
+        this.arrowHovered = false; // The arrows are recreated on open, so no leave event arrives for a stale hover
         this.prefetchImageIndex = ExhibitComponent.DefaultPrefetchImageIndex;
         this.resetArrowsAutoHide();
         this.emitPreviewChange();
@@ -144,6 +146,12 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
 
     public onLightboxMouseMove(): void {
         this.arrowsVisible = true;
+        this.resetArrowsAutoHide();
+    }
+
+    public onArrowHover(event: PointerEvent, hovered: boolean): void {
+        // Touch has no real hover (no leave event after a tap), so only a mouse pointer holds the arrows open
+        this.arrowHovered = hovered && event.pointerType === 'mouse';
         this.resetArrowsAutoHide();
     }
 
@@ -323,7 +331,8 @@ export class ExhibitComponent extends WorkComponent implements AfterViewInit, On
         }
         this.arrowsVisible = true;
         this.arrowsTimeout = setTimeout(() => {
-            this.arrowsVisible = false;
+            // Hiding disables pointer events, so keep the arrows while the pointer rests on one
+            this.arrowsVisible = this.arrowHovered;
         }, 3000);
     }
 
