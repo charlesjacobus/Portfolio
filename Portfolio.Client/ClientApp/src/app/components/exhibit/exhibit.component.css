@@ -207,6 +207,7 @@
 .lightbox-image {
     max-width: 100%;
     max-height: calc(100vh - 175px); /* Prevent overlap with image caption */
+    max-height: calc(100dvh - 175px); /* Mobile browsers: 100vh includes the area under the collapsing address bar */
     object-fit: contain;
     transition: transform 1.0s ease, opacity 1.0s ease;
     user-select: none;
@@ -302,6 +303,15 @@
     .lightbox-arrow {
         font-size: 1.4rem;
         padding: 14px;
+    }
+
+    /* On the narrowest phones (320px), the centered toolbar otherwise overlaps the close button */
+    .lightbox-close {
+        right: 8px;
+    }
+
+    .lightbox-toolbar {
+        gap: 4px;
     }
 
     .lightbox-image-wrapper {
