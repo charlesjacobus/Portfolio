@@ -176,9 +176,12 @@
     transition: opacity 1.0s ease;
 }
 
+/* Touch browsers leave :hover stuck on a tapped element, which would outrank .lightbox-arrows-hidden */
+@media (hover: hover) {
     .lightbox-arrow:hover {
         opacity: 1;
     }
+}
 
 .lightbox-arrow-left {
     left: 8px;

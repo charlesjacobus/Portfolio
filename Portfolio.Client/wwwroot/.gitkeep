@@ -1,0 +1,1 @@
+# Intentionally empty: ASP.NET (Development) requires wwwroot to exist, but static files like robots.txt, sitemap.xml and favicon.ico live in ClientApp/src.
